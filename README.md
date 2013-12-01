@@ -1,7 +1,7 @@
 Knwl.js
 =======
 
-Find dates, times, emails, phone numbers, links, reading time, and even the emotion hidden in text. Knwl.js makes it possible to scan through large amounts of text for data that may be of interest.
+Find dates, times, emails, phone numbers, links, reading time, even the emotion of the text, or check if it's spam. Knwl.js makes it possible to scan through large amounts of text for data that may be of interest.
 
 ###Demo: http://byteaspect.com/knwlDemo
 
