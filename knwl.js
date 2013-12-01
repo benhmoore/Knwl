@@ -534,8 +534,10 @@ function Knwl() {
         }
         
         var giveortake = conCount / 7;
-        if (vowelCount + giveortake >= (conCount / 1.8) && vowelCount - giveortake <= (conCount / 1.8)) {} else {
+        if (words.length < 2) { //this currently is only stable on strings with more than two words.
+        if (vowelCount + giveortake >= (conCount / 1.9) && vowelCount - giveortake <= (conCount / 1.9)) {} else {
             spam = true;   
+        }
         }
         
         
