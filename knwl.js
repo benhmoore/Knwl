@@ -539,14 +539,7 @@ function Knwl() {
             spam = true;   
         }
         }
-        
-        
-        console.log("vowels  " + vowelCount);
-         console.log(vowelCount + giveortake);
-        console.log(vowelCount - giveortake);
-         console.log("XXX  " + conCount / 2);
-        console.log("cons  " + conCount);
-        console.log("give or take  " + giveortake);
+
         return spam;
     
     };
