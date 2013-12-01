@@ -530,6 +530,8 @@ function Knwl() {
             spam = true; 
         } else if (specCount > vowelCount) {
             spam = true; 
+        } else if (vowelCount === 0 && conCount !== 0) {
+            spam = true;
         }
         
         return spam;
