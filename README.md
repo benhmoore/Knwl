@@ -36,7 +36,7 @@ x.get('dates'); //returns array of dates found: [month,day,year, string snippet]
 
 ```"readingTime"``` - estimated reading time of string.
 
-```"emotion"``` - estimated emotion, works best with shorter strings.
+```"emotion"``` - estimated emotion, works best with shorter strings (comments, etc).
 
 
 
