@@ -157,7 +157,7 @@ function Knwl() {
             if (words[i + 1] === "of") {
                 if (words[i + 2] !== undefined) {
                 var day = that.date.getDay(words[i]);
-                console.log(words[i + 2]);
+                
                 var month = that.date.getMonth(words[i + 2]); 
                 var year = that.date.dateObj.getFullYear();
                 if (month !== undefined && day !== undefined) {//make sure month and day defined
@@ -176,7 +176,7 @@ function Knwl() {
                         }
                     } else {
                         for (var v = i; v > 0; v--) {
-                            console.log(wordsWithPunc[v] + " XX");
+                            
                             if (!isNaN(words[v])) {
                                 if (words[v] > 32 && words[v] < 10000) {
                                     year = parseInt(words[v]);
@@ -189,7 +189,7 @@ function Knwl() {
                     }
                 } else {
                     for (var v = i; v > 0; v--) {
-                        console.log(wordsWithPunc[v] + " XX");
+                        
                         if (!isNaN(words[v])) {
                             if (words[v] > 32 && words[v] < 10000) {
                                 year = parseInt(words[v]);
@@ -401,7 +401,7 @@ function Knwl() {
                 
                 if (trueCount === lengthX) {
                     negative++;   
-                    console.log("XXX");
+                    
                 }
             }
         }
@@ -428,7 +428,7 @@ function Knwl() {
                 
                 if (trueCount === lengthX) {
                     positive++;   
-                    console.log("XXX");
+                    
                 }
             }
         }
@@ -535,10 +535,9 @@ function Knwl() {
     this.email = {};
     this.email.findEmails = function(words) {
         var emails = [];
-        console.log("X");
         
         for (var i = 0; i < words.length; i++) {
-            console.log(words[i]);
+            
             //clean up
             words[i] = words[i].replace("(","");
             words[i] = words[i].replace(")","");
@@ -548,9 +547,7 @@ function Knwl() {
             
             var word = words[i];
             var testEmail = word.split("@");
-            console.log(testEmail);
             if (testEmail.length === 2) {
-                console.log("X2");
                 var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm;
                 if (word !== '' && re.test(word)){
                     var namespace = testEmail[1].split("."); //get ending (.com,.net,etc)
