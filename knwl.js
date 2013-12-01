@@ -29,6 +29,8 @@ function Knwl() {
                 return that.text.data.readingTime;
             } else if (label === "emails") {
                 return that.text.data.emails;
+            } else if (label === "spam") {
+                return that.text.data.spam;
             } else {
                 alert("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails'");  
             }
@@ -485,12 +487,61 @@ function Knwl() {
         return phones;
     };
     
+    //****************************************************************************************************************************************
+    //***************************************************SPAM CHECKER*************************************************************************
+    //****************************************************************************************************************************************
+    this.spam = {};
+    this.spam.vowCount = function(str) {
+        var matches = str.match(/[aeiou]/gi);
+        var count = matches ? matches.length : 0;
+        return count;
+    };
+    this.spam.conCount = function(str) {
+        var matches = str.match(/[bcdfghjklmnpqrstvwxyz]/gi);
+        var count = matches ? matches.length : 0;
+        return count;
+    };
+    this.spam.specCount = function(str) {
+        var matches = str.match(/[1234567890@#$%^&*();]/gi);
+        var count = matches ? matches.length : 0;
+        return count;
+    };
+    this.spam.isSpam = function(words) {
+        var spam = false;
+    	//average word length
+    	var totalL = 0;
+    	for (var i = 0; i < words.length; i++) {
+    		totalL+=words[i].length;
+    	}
+        var avg = (totalL/words.length);
+        if (avg + 15 >= 5.1 && avg - 15 <= 5.1) {} else {
+            spam = true; 
+        }
+        
+        var vowelCount = 0;
+        var conCount = 0;
+        var specCount = 0;
+        for (var i = 0; i < words.length; i++) {
+    		vowelCount += that.spam.vowCount(words[i]);
+            conCount += that.spam.conCount(words[i]);
+            specCount += that.spam.specCount(words[i]);
+    	}
+        if (vowelCount >= conCount) {
+            spam = true; 
+        } else if (specCount > vowelCount) {
+            spam = true; 
+        }
+        
+        return spam;
+    
+    };
     
     //****************************************************************************************************************************************
     //***************************************************LINKS********************************************************************************
     //****************************************************************************************************************************************
     
     this.link = {};
+    
     
     this.link.findLinks = function(words) {
         var links = [];
@@ -619,6 +670,10 @@ function Knwl() {
         if (emails !== []) {
             that.addToObj(emails,"emails");   
         }
+        
+        var spam = that.spam.isSpam(words);
+        that.addToObj(spam,"spam");   
+        
         
         var readingTime = that.text.readingTime(that.text.wordCount);
         if (readingTime !== []) {
