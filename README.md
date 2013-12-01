@@ -45,7 +45,7 @@ x.get('dates'); //returns array of dates found: [month,day,year, string snippet]
 
 *Please note that Knwl.js is still in early development, and can yield varying results.*
 
-If you want a real-time, plug 'n play backend to store all the data you find, you might like Cenny.js: http://github.com/loadfive/cenny.js
+**If you want a real-time, plug 'n play backend to store all the data you find, you might like Cenny.js: http://github.com/loadfive/cenny.js**
 
 
 
