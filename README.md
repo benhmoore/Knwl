@@ -24,13 +24,19 @@ x.get('dates'); //returns array of dates found: [month,day,year, string snippet]
 
 **Types of data that can grabbed:**
 
-"dates" - dates found in string.
-"times" - times found in string.
-"links" - links found in string.
-"emails" - emails found in string.
-"phones" - phone numbers found in string.
-"readingTime" - estimated reading time of string.
-"emotion" - estimated emotion, works best with shorter strings.
+```"dates"``` - dates found in string.
+
+```"times"``` - times found in string.
+
+```"links"``` - links found in string.
+
+```"emails"``` - emails found in string.
+
+```"phones"``` - phone numbers found in string.
+
+```"readingTime"``` - estimated reading time of string.
+
+```"emotion"``` - estimated emotion, works best with shorter strings.
 
 
 
