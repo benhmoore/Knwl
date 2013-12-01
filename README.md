@@ -40,7 +40,7 @@ x.get('dates'); //returns array of dates found: [month,day,year, string snippet]
 
 ```"emotion"``` - estimated emotion, works best with shorter strings (comments, etc).
 
-```"true"``` - checks if text is possibly spam. Returns true or false.
+```"spam"``` - checks if text is possibly spam. Returns true or false.
 
 
 *Please note that Knwl.js is still in early development, and can yield varying results.*
