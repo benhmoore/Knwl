@@ -1,0 +1,140 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,700,300italic,400italic,500|Roboto+Condensed);
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.wrapper {
+    width:100%;
+    height:100%;
+}
+a {
+    color:rgba(255,255,255,0.5);   
+}
+
+.partOne {
+    width:50%;
+    height:100%;
+    float:left;
+    position:relative;
+    background-color:rgba(0,0,0,0.5);    
+}.partTwo {
+    width:50%;
+    height:100%;
+    float:left;
+    position:relative;
+    text-align:center;
+    background-color:#5d5d5e;   
+    overflow-y:scroll;
+}
+
+.input {
+    
+    height:260px;
+    width:100%;
+    resize:none;
+    font-size:1em;
+    font-weight:100;
+    padding:20px;
+    
+    
+}.scanBtn {
+    padding:20px;
+    background-color:rgba(255,255,255,0.5);
+    font-size:1em;
+    border:0px;
+    margin:20px;
+    color:white;
+    cursor:pointer;
+    transition:0.2s;
+}.scanBtn:hover {
+    background-color:rgba(255,255,255,1);
+    color:rgba(0,0,0,0.5);
+}
+
+.output {
+    margin-top:40px;
+    border:1px solid rgba(0,0,0,0.1);
+    height:50px;
+    font-size:1em;
+    padding:20px;
+    width:90%;    
+}
+
+.section { 
+    width:100%;
+    padding-top:40px;
+    padding-bottom:40px;
+    border-bottom:1px solid rgba(0,0,0,0.2);
+}.sectionTitle {
+    font-family:'Roboto Condensed', sans-serif;
+    color:rgba(255,255,255,0.5);
+    font-size:1.5em;
+    padding-left:40px;
+    padding-bottom:20px;
+    text-align:left;
+}.sectionItem {
+    font-family:'Roboto Condensed', sans-serif;
+    color:rgba(255,255,255,0.5);
+    font-size:1em;
+    line-height:1.2;
+    padding-left:60px;
+    text-align:left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
