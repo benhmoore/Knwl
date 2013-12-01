@@ -95,7 +95,6 @@ function Knwl() {
     };
     
     this.date.findDates = function(words,wordsWithPunc) { //returns "july 16th 1999" as "[7,16,1999, "preview"]"
-        console.log("Running");//debugging
         var dates = [];
         
         for (var i = 0; i < words.length; i++) {//cleanup
@@ -115,10 +114,10 @@ function Knwl() {
                         if (!isNaN(words[i + 2]) && words[i + 2] !== "") {
                             var year = parseInt(words[i + 2]);
                             if (year > 32 && year < 10000) {
-                                date = [month,day,year, "one",that.preview(i,words)];
+                                date = [month,day,year,that.preview(i,words)];
                             }
                         } else {
-                            date = [month,day,that.date.dateObj.getFullYear(), "one",that.preview(i,words)];
+                            date = [month,day,that.date.dateObj.getFullYear(),that.preview(i,words)];
                         }
                     }
                     dates.push(date);
@@ -145,7 +144,7 @@ function Knwl() {
                     var month = that.date.getMonth(testDate[0],'mdy');
                     var day = that.date.getDay(testDate[1]);
                     var year = parseInt(testDate[2]);
-                    date = [month,day,year,"two",that.preview(i,words)];
+                    date = [month,day,year,that.preview(i,words)];
                     dates.push(date);
                 }
             }
@@ -201,7 +200,7 @@ function Knwl() {
                         }
                     }
                 }
-                date = [month,day,year,"three",that.preview(i,words)];
+                date = [month,day,year,that.preview(i,words)];
                 dates.push(date);
                 }
                 }//finish check if month and day defined
