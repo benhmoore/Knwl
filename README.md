@@ -39,6 +39,8 @@ x.get('dates'); //returns array of dates found: [month,day,year, string snippet]
 ```"emotion"``` - estimated emotion, works best with shorter strings (comments, etc).
 
 
+*Please note that Knwl.js is still in early development, and can yield varying results.*
+
 
 
 
