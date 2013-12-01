@@ -521,6 +521,7 @@ function Knwl() {
         var vowelCount = 0;
         var conCount = 0;
         var specCount = 0;
+        
         for (var i = 0; i < words.length; i++) {
     		vowelCount += that.spam.vowCount(words[i]);
             conCount += that.spam.conCount(words[i]);
@@ -530,10 +531,20 @@ function Knwl() {
             spam = true; 
         } else if (specCount > vowelCount) {
             spam = true; 
-        } else if (vowelCount === 0 && conCount !== 0) {
-            spam = true;
         }
         
+        var giveortake = conCount / 7;
+        if (vowelCount + giveortake >= (conCount / 1.8) && vowelCount - giveortake <= (conCount / 1.8)) {} else {
+            spam = true;   
+        }
+        
+        
+        console.log("vowels  " + vowelCount);
+         console.log(vowelCount + giveortake);
+        console.log(vowelCount - giveortake);
+         console.log("XXX  " + conCount / 2);
+        console.log("cons  " + conCount);
+        console.log("give or take  " + giveortake);
         return spam;
     
     };
