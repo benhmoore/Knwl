@@ -534,13 +534,83 @@ function Knwl() {
         }
         
         var giveortake = conCount / 7;
+        if (words.length > 3) {
         if (vowelCount + giveortake >= (conCount / 1.9) && vowelCount - giveortake <= (conCount / 1.9)) {} else {
             spam = true;   
         }
-
+        } else if (words.length > 2) {
+        if (vowelCount + giveortake >= (conCount / 1.4) && vowelCount - giveortake <= (conCount / 1.4)) {} else {
+            spam = true;   
+        }
+        } else {
+        giveortake = conCount / 3;
+        if (vowelCount + giveortake >= (conCount) && vowelCount - giveortake <= (conCount)) {} else {
+            spam = true;   
+        }
+        }
+        var chars = [];
+        for (var i = 0; i < words.length; i++) {
+      		var word = words[i];
+      		for (var e = 0; e < word.length; e++) {
+      			var isThere = false;
+      			for (var z = 0; z < chars.length; z++) {
+      				if (chars[z] === word[e]) {
+      					isThere = true;
+      				}
+      			}
+      			
+      			if (isThere === false) {
+      				chars.push(word[e]);
+      			}
+      			
+      		} 
+      	
+        }
+        
+        var uniquechars = chars.length;
+        
+        if (uniquechars + (words.length / 7) < (words.length)) {
+        	spam = true;
+        }
+        var useablechars = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+        for (var i = 0; i < words.length; i++) {
+        	var word = words[i];
+        	word = word.split(/[.?! ]+/);
+        	word = word[0];
+        	var currentLoc = 0;
+        	while(currentLoc < word.length - 2) {
+        	for (var e = currentLoc + 1; e < word.length; e++) {
+        		var isunuseable = true;
+        		for (var a = 0; a < useablechars.length; a++) {
+        		if (word[currentLoc] === useablechars[a]) {
+        			isunuseable = false;
+        		}
+        		}
+        		
+        		if (isunuseable === false) {
+        		if (word[e] === word[currentLoc]) {
+        			if (word[e + 1] === word[currentLoc + 1]) {
+        				if (word[e + 2] === word[currentLoc + 2]) {
+        					spam = true;
+        				}
+        			}
+        		}
+        		} else {
+        			break;
+        		}
+        	
+        	}
+        	currentLoc++;
+        	}
+        
+        
+        }
+        
+        
         return spam;
     
     };
+    
     
     //****************************************************************************************************************************************
     //***************************************************LINKS********************************************************************************
