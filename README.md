@@ -3,6 +3,9 @@ Knwl.js
 
 Find dates, times, emails, phone numbers, links, reading time, even the emotion of the text, or check if it's spam. Knwl.js makes it possible to scan through large amounts of text for data that may be of interest.
 
+####Cenny.js Plugin
+For those interested in version of Knwl.js that has basic Cenny.js functionality (early development), look here: https://github.com/loadfive/cenny.js/tree/master/plugins
+
 ###Demo: http://byteaspect.com/knwlDemo
 
 ##How to use
