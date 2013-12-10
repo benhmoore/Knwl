@@ -258,7 +258,7 @@ function Knwl() {
             if (testTime.length === 2) {
                 if (!isNaN(testTime[0]) && !isNaN(testTime[1])) {
                     if (testTime[0] > 0 && testTime[0] < 13) {
-                        if (testTime[1] > 0 && testTime[1] < 61) {
+                        if (testTime[1] >= 0 && testTime[1] < 61) {
                             if (words[i + 1] === "pm") {
                                 time = [testTime[0],testTime[1], "PM",that.preview(i,words)];
                                 times.push(time);
