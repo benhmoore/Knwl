@@ -632,10 +632,14 @@ function Knwl() {
             //end clean up
             
             var word = words[i];
-            if (braid.search("http://",word,false,false) !== false) {
-                links.push([word,that.preview(i,words)]);
-            } else if (braid.search("https://",word,false,false) !== false) {
-                links.push([word,that.preview(i,words)]);
+            var protocols = new Array("http", "https", "ftp");  // You can add as many protocols as you want without changing the code below
+            var protocolsLength = protocols.length;
+            
+            for (var index = 0; index < protocolsLength; index++) {
+                if ( braid.search(protocols[index] + "://", word, false, false) !== false ) {
+                    links.push([word, that.preview(i,words)]);
+                    break;
+                }
             }
         }
         
