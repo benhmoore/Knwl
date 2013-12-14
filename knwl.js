@@ -700,8 +700,7 @@ function Knwl() {
         //turn into array of words
         var lowercaseData = data.toLowerCase();
         
-        that.text.wordCount = lowercaseData.split(/[ ]+/);
-        that.text.wordCount = that.text.wordCount.length - 1;
+        that.text.wordCount = lowercaseData.split(/[ ]+/).length - 1;
         
         var linkWords = lowercaseData.split(/[ \n]+/);//for link finding and (third part of date)
         
