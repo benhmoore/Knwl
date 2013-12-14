@@ -280,7 +280,7 @@ function Knwl() {
     //****************************************************************************************************************************************
     this.emotion = {};
     
-    this.emotion.negativeWords = ['terrible','horrible','evil','die','noob','dick','bitch','fucked','stupid','idiot','dumb','noob','shit','vain','n00b','dickhead','cocksucker','disgusting','slut'];
+    this.emotion.negativeWords = ['terrible','horrible','evil','die','dick','bitch','fucked','stupid','idiot','dumb','noob','shit','vain','n00b','dickhead','cocksucker','disgusting','slut'];
      this.emotion.negativeWordsB = ['fuck','shit','kill','rape','hate','hating'];
     this.emotion.positiveWords = ['happy','good','great','amazing','awesome','wonderful','brilliant','smart'];
     this.emotion.positiveWordsB = ['love','like','want',"<3",'kiss'];
