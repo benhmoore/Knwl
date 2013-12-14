@@ -51,5 +51,5 @@ x.get('dates'); //returns array of dates found: [month,day,year, string snippet]
 **If you want a real-time, plug 'n play backend to store all the data you find, you might like Cenny.js: http://github.com/loadfive/cenny.js**
 
 
-
+Project released under an MIT license.
 
