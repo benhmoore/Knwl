@@ -1,0 +1,24 @@
+{
+  "name": "knwl.js",
+  "description": "Scan through text for data that may be of interest.",
+  "version": "0.1",
+  "keywords": [
+    "data",
+    "tagging"
+  ],
+  "repository" : {
+    "type": "git",
+    "url": "https://github.com/loadfive/Knwl.js.git"
+  },
+  "main": "knwl.js",
+  "author": {
+    "name": "loadfive",
+    "email": "contact@loadfive.com"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "build": "uglifyjs -o ./knwl.min.js ./knwl.js"
+  }
+}
