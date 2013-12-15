@@ -683,7 +683,7 @@ function Knwl() {
                 if (word !== '' && re.test(word)){
                     var namespace = testEmail[1].split("."); //get ending (.com,.net,etc)
                     namespace = namespace[1];
-                    if (namespace.length < 4) { //only add to emails if ending (.com,.net,etc) length is less than 4
+                    if (namespace.length <= 4) { //only add to emails if ending (.com,.net,etc) length is less than 4
                         
                         var matches = namespace.match(/\d+/g);//make sure ending does not contain a number
                         if (matches === null) {
