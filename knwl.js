@@ -705,7 +705,7 @@ function Knwl() {
             if (words[i] === "at" || words[i] === "in") {
                 var word = [];
                 var j = 1;
-                while(words[i + j] !== 'at' && words[i + j] !== 'in' && !/^.*(\.|\,)+$/.test(words[i + j -1])) {
+                while(words[i + j] !== 'at' && words[i + j] !== 'in' && !/^.*(\.|\,)+$/.test(words[i + j -1]) && i + j < words.length) {
                     var temp = words[i + j].replace(/[\,\.]/,'');
                     if (/^[A-Z](.*)$/.test(temp)) {
                         word.push(temp);
@@ -715,6 +715,7 @@ function Knwl() {
                 if (word.length > 0) {
                     places.push([word.join(' '),that.preview(i,words)]);
                 }
+                i += j - 1;
             }
         }
         
