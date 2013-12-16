@@ -6,6 +6,7 @@ var scan = function() {
     document.getElementById('sectionContainer4').innerHTML = ""; //links
     document.getElementById('sectionContainer5').innerHTML = ""; //emails
     document.getElementById('sectionContainer6').innerHTML = ""; //emotion
+    document.getElementById('sectionContainer7').innerHTML = ""; //places
     
     var input = document.getElementById('input').value;
     x.init(input); //initiate knwl on string
@@ -38,6 +39,11 @@ var scan = function() {
     }
     var emotion = x.get('emotion');
     document.getElementById('sectionContainer6').innerHTML+="<p class = 'sectionItem'>" + emotion + "</p>";
+    
+    var places = x.get('places');
+    for (var i = 0; i < places.length; i++) {
+        document.getElementById('sectionContainer7').innerHTML+="<p class = 'sectionItem'>" + places[i][0] + "</p>";
+    }
     
     
 }

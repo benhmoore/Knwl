@@ -29,13 +29,15 @@ function Knwl() {
                 return that.text.data.readingTime;
             } else if (label === "emails") {
                 return that.text.data.emails;
+            } else if (label === "places") {
+                return that.text.data.places;
             } else if (label === "spam") {
                 return that.text.data.spam;
             } else {
-                alert("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails'");  
+                alert("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails','places'");  
             }
         } else {
-            alert("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails'"); 
+            alert("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails','places'"); 
         }
         
     };
@@ -508,11 +510,11 @@ function Knwl() {
     };
     this.spam.isSpam = function(words) {
         var spam = false;
-    	//average word length
-    	var totalL = 0;
-    	for (var i = 0; i < words.length; i++) {
-    		totalL+=words[i].length;
-    	}
+        //average word length
+        var totalL = 0;
+        for (var i = 0; i < words.length; i++) {
+            totalL+=words[i].length;
+        }
         var avg = (totalL/words.length);
         if (avg + 15 >= 5.1 && avg - 15 <= 5.1) {} else {
             spam = true; 
@@ -523,10 +525,10 @@ function Knwl() {
         var specCount = 0;
         
         for (var i = 0; i < words.length; i++) {
-    		vowelCount += that.spam.vowCount(words[i]);
+            vowelCount += that.spam.vowCount(words[i]);
             conCount += that.spam.conCount(words[i]);
             specCount += that.spam.specCount(words[i]);
-    	}
+        }
         if (vowelCount >= conCount) {
             spam = true; 
         } else if (specCount > vowelCount) {
@@ -550,58 +552,58 @@ function Knwl() {
         }
         var chars = [];
         for (var i = 0; i < words.length; i++) {
-      		var word = words[i];
-      		for (var e = 0; e < word.length; e++) {
-      			var isThere = false;
-      			for (var z = 0; z < chars.length; z++) {
-      				if (chars[z] === word[e]) {
-      					isThere = true;
-      				}
-      			}
-      			
-      			if (isThere === false) {
-      				chars.push(word[e]);
-      			}
-      			
-      		} 
-      	
+            var word = words[i];
+            for (var e = 0; e < word.length; e++) {
+                var isThere = false;
+                for (var z = 0; z < chars.length; z++) {
+                    if (chars[z] === word[e]) {
+                        isThere = true;
+                    }
+                }
+                
+                if (isThere === false) {
+                    chars.push(word[e]);
+                }
+                
+            } 
+        
         }
         
         var uniquechars = chars.length;
         
         if (uniquechars + (words.length / 7) < (words.length)) {
-        	spam = true;
+            spam = true;
         }
         var useablechars = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
         for (var i = 0; i < words.length; i++) {
-        	var word = words[i];
-        	word = word.split(/[.?! ]+/);
-        	word = word[0];
-        	var currentLoc = 0;
-        	while(currentLoc < word.length - 2) {
-        	for (var e = currentLoc + 1; e < word.length; e++) {
-        		var isunuseable = true;
-        		for (var a = 0; a < useablechars.length; a++) {
-        		if (word[currentLoc] === useablechars[a]) {
-        			isunuseable = false;
-        		}
-        		}
-        		
-        		if (isunuseable === false) {
-        		if (word[e] === word[currentLoc]) {
-        			if (word[e + 1] === word[currentLoc + 1]) {
-        				if (word[e + 2] === word[currentLoc + 2]) {
-        					spam = true;
-        				}
-        			}
-        		}
-        		} else {
-        			break;
-        		}
-        	
-        	}
-        	currentLoc++;
-        	}
+            var word = words[i];
+            word = word.split(/[.?! ]+/);
+            word = word[0];
+            var currentLoc = 0;
+            while(currentLoc < word.length - 2) {
+            for (var e = currentLoc + 1; e < word.length; e++) {
+                var isunuseable = true;
+                for (var a = 0; a < useablechars.length; a++) {
+                if (word[currentLoc] === useablechars[a]) {
+                    isunuseable = false;
+                }
+                }
+                
+                if (isunuseable === false) {
+                if (word[e] === word[currentLoc]) {
+                    if (word[e + 1] === word[currentLoc + 1]) {
+                        if (word[e + 2] === word[currentLoc + 2]) {
+                            spam = true;
+                        }
+                    }
+                }
+                } else {
+                    break;
+                }
+            
+            }
+            currentLoc++;
+            }
         
         
         }
@@ -681,6 +683,46 @@ function Knwl() {
     };
     
     
+    //****************************************************************************************************************************************
+    //***************************************************EMAILS*******************************************************************************
+    //****************************************************************************************************************************************
+
+    
+    
+    this.places = {};
+    this.places.findPlaces = function(words) {
+        var places = [];
+        
+        for (var i = 0; i < words.length; i++) {
+            
+            //clean up
+            words[i] = words[i].replace("(","");
+            words[i] = words[i].replace(")","");
+            words[i] = words[i].replace("!","");
+            words[i] = braid.replace(words[i],",@wa@");
+            //end clean up
+
+            if (words[i] === "at" || words[i] === "in") {
+                var word = [];
+                var j = 1;
+                while(words[i + j] !== 'at' && words[i + j] !== 'in' && !/^.*(\.|\,)+$/.test(words[i + j -1]) && i + j < words.length) {
+                    var temp = words[i + j].replace(/[\,\.]/,'');
+                    if (/^[A-Z](.*)$/.test(temp)) {
+                        word.push(temp);
+                    }
+                    j++;
+                }
+                if (word.length > 0) {
+                    places.push([word.join(' '),that.preview(i,words)]);
+                }
+                i += j - 1;
+            }
+        }
+        
+        return places;
+        
+    };
+    
     
     this.init = function(data) {
         //turn into array of words
@@ -689,6 +731,7 @@ function Knwl() {
         that.text.wordCount = lowercaseData.split(/[ ]+/).length - 1;
         
         var linkWords = lowercaseData.split(/[ \n]+/);//for link finding and (third part of date)
+        var linkWordsCasesensitive = data.split(/[ \n]+/);
         
         lowercaseData = lowercaseData.split(/[\n ]+/);
         
@@ -731,9 +774,14 @@ function Knwl() {
         if (emails !== []) {
             that.addToObj(emails,"emails");   
         }
+
+        var places = that.places.findPlaces(linkWordsCasesensitive);
+        if (places !== []) {
+            that.addToObj(places,"places");   
+        }
         
         var spam = that.spam.isSpam(words);
-        that.addToObj(spam,"spam");   
+        that.addToObj(spam,"spam");
         
         
         var readingTime = that.text.readingTime(that.text.wordCount);
