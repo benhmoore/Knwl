@@ -110,12 +110,6 @@ describe("dates", function () {
     expect(output[0]).toBe(9);
   });
 
-  it("should detect worded sep", function () {
-    x.init(" the 28th of sep.");
-    var output = x.get("dates")[0]
-    expect(output[0]).toBe(9);
-  });
-
   it("should detect worded sept", function () {
     x.init(" the 28th of sept.");
     var output = x.get("dates")[0]
