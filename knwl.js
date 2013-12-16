@@ -702,20 +702,18 @@ function Knwl() {
             words[i] = braid.replace(words[i],",@wa@");
             //end clean up
 
-            if (words[i] === "at" || words[i] === "in") {
+            if (words[i] === "at" || words[i] === "in" || words[i] === "near") {
                 var word = [];
                 var j = 1;
-                while(words[i + j] !== 'at' && words[i + j] !== 'in' && !/^.*(\.|\,)+$/.test(words[i + j -1]) && i + j < words.length) {
+                while(words[i + j] !== 'at' && words[i + j] !== 'in' && words[i + j] !== 'near' && !/^.*(\.|\,)+$/.test(words[i + j -1]) && i + j < words.length) {
                     var temp = words[i + j].replace(/[\,\.]/,'');
                     if (/^[A-Z](.*)$/.test(temp)) {
                         word.push(temp);
                     }
                     j++;
                 }
-                if (word.length > 0) {
-                	if (word.length < 3) { 
-                    	places.push([word.join(' '),that.preview(i,words)]);
-                    }
+                if (word.length > 0 && word.length < 3) {
+                    places.push([word.join(' '),that.preview(i,words)]);
                 }
                 i += j - 1;
             }
