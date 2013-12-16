@@ -713,7 +713,9 @@ function Knwl() {
                     j++;
                 }
                 if (word.length > 0) {
-                    places.push([word.join(' '),that.preview(i,words)]);
+                	if (word.length < 3) { 
+                    	places.push([word.join(' '),that.preview(i,words)]);
+                    }
                 }
                 i += j - 1;
             }
