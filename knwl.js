@@ -712,7 +712,7 @@ function Knwl() {
                     }
                     j++;
                 }
-                if (word !== undefined) {
+                if (word.length > 0) {
                     places.push([word.join(' '),that.preview(i,words)]);
                 }
             }
