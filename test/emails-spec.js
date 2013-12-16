@@ -28,10 +28,10 @@ describe("email", function () {
     expect(output[0][0]).toBe("test+test@test.co.uk");
   });
 
-  it("should not detect emails with IP's as host names", function () {
+  it("should detect emails with IP's as host names", function () {
     x.init("You can reach me on test@192.168.0.1");
     var output = x.get("emails")
-    expect(output.length).toBe(0);
+    expect(output[0][0]).toBe("test@192.168.0.1");
   });
 
   it("should detect more than one email", function () {
