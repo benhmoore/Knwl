@@ -1,7 +1,7 @@
 {
   "name": "knwl.js",
   "description": "Scan through text for data that may be of interest.",
-  "version": "0.1",
+  "version": "0.0.1",
   "keywords": [
     "data",
     "tagging"
