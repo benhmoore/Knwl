@@ -664,17 +664,17 @@ function Knwl() {
         var emails = [];
         
         for (var i = 0; i < words.length; i++) {
-            
-            //clean up
-            words[i] = words[i].replace("(","");
-            words[i] = words[i].replace(")","");
-            words[i] = words[i].replace("!","");
-            words[i] = braid.replace(words[i],",@wa@");
-            //end clean up
-            
-            var word = words[i];
-            if (/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/.test(word)) {
-                emails.push([word,that.preview(i,words)]);
+        	console.log(words[i]);
+            var word = words[i].split(/[\,\|\(\)]/g);
+            for (var j = 0; j < word.length; j++) {
+            	var temp = word[j];
+	            temp = temp.replace("(","");
+	            temp = temp.replace(")","");
+	            temp = temp.replace("!","");
+	            temp = braid.replace(temp,",@wa@");
+	            if (/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/.test(temp)) {
+	                emails.push([temp,that.preview(i,words)]);
+	            }
             }
         }
         
@@ -770,7 +770,7 @@ function Knwl() {
             that.addToObj(links,"links");   
         }
         
-        var emails = that.email.findEmails(linkWords);
+        var emails = that.email.findEmails(linkWordsCasesensitive);
         if (emails !== []) {
             that.addToObj(emails,"emails");   
         }
