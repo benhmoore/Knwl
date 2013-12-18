@@ -39,7 +39,7 @@ x.get('dates'); //returns array of dates found: [month,day,year, string snippet]
 
 ```"phones"``` - phone numbers found in string.
 
-```"places"``` - places found in string.
+```"places"``` - locations found in string.
 
 ```"readingTime"``` - estimated reading time of string.
 
