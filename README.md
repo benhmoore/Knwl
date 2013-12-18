@@ -1,5 +1,6 @@
 Knwl.js
 =======
+[![Build Status](https://api.travis-ci.org/loadfive/Knwl.js.png)](https://api.travis-ci.org/loadfive/Knwl.js.png)
 
 Find dates, times, emails, phone numbers, links, reading time, even the emotion of the text, or check if it's spam. Knwl.js makes it possible to scan through large amounts of text for data that may be of interest.
 
