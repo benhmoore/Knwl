@@ -678,22 +678,20 @@ function Knwl() {
     
     
     this.places = {};
+    this.places.falsePlaces = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     this.places.findPlaces = function(words) {
         var places = [];
         
         for (var i = 0; i < words.length; i++) {
             
             //clean up
-            words[i] = words[i].replace("(","");
-            words[i] = words[i].replace(")","");
-            words[i] = words[i].replace("!","");
-            words[i] = braid.replace(words[i],",@wa@");
+            words[i] = words[i].replace(new RegExp(/[()!,]/g), "");
             //end clean up
 
-            if (words[i] === "at" || words[i] === "in" || words[i] === "near") {
+            if (words[i] === "at" || words[i] === "in" || words[i] === "near" || (words[i] === "close" && words[i + 1] === "to")) {
                 var word = [];
                 var j = 1;
-                while(words[i + j] !== 'at' && words[i + j] !== 'in' && words[i + j] !== 'near' && !/^.*(\.|\,)+$/.test(words[i + j -1]) && i + j < words.length) {
+                while(words[i + j] !== 'at' && words[i + j] !== 'in' && words[i + j] !== 'near' && !/^.*(\.|\,|\?|\!)+$/.test(words[i + j -1]) && i + j < words.length) {
                     var temp = words[i + j].replace(/[\,\.]/,'');
                     if (/^[A-Z](.*)$/.test(temp)) {
                         word.push(temp);
@@ -701,7 +699,22 @@ function Knwl() {
                     j++;
                 }
                 if (word.length > 0 && word.length < 3) {
-                    places.push([word.join(' '),that.preview(i,words)]);
+                    var isFalsePlace = false;
+                    console.log(word);
+                    
+                    //make sure place is not an invalid location
+                    for (var y = 0; y < word.length; y++) {
+                    for (var x = 0; x < that.places.falsePlaces.length; x++) {
+                        if (word[y] === that.places.falsePlaces[x]) {
+                            isFalsePlace = true;    
+                        } else if (word[y].length < 2) {
+                            isFalsePlace = true;
+                        }
+                    }
+                    }
+                    if (isFalsePlace === false) {
+                        places.push([word.join(' '),that.preview(i,words)]);
+                    }
                 }
                 i += j - 1;
             }
