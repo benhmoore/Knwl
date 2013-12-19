@@ -40,5 +40,10 @@ describe("email", function () {
     expect(output[0][0]).toBe("ftp://test:test@ftp.debian.org/debian/");
   });
 
+  it("should not detect very strange URI's", function () {
+    x.init("Take a look at this link goqsdttg://www.facebook.com");
+    var output = x.get("links")
+    expect(output.length).toBe(0);
+  });
 
 });
