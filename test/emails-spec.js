@@ -88,4 +88,10 @@ describe("email", function () {
     expect(output.length).toBe(0);
   });
 
+  it("should detect if there are two emails seperated by commas", function () {
+    x.init("-David (david32@gmail.com),Wilson(example@gmail.com)");
+    var output = x.get("emails")
+    expect(output.length).toBe(2);
+  });
+
 });
