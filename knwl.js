@@ -42,6 +42,33 @@ function Knwl() {
         
     };
     
+    /**
+     * In order to remove all characters during the invocation of the removeCharacters function,
+     * a Regular Expression is used to find all instances of the character to remove. We need 
+     * to escape any special characters that Regular Expression would otherwise use.
+     * 
+     * @param  {[string]} str [the string to esacpe]
+     * @return {[string]}     [the escaped string]
+     */
+    this.escapeRegExp = function(str) {
+        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+    };
+
+    /**
+     * This helper function can be used to remove all characters in the character array
+     * provided (charArray) from the specified string (str)
+     * 
+     * @param  {[array]} charArray [an array of characters to remove from the word]
+     * @param  {[string]} str  [the string the characters should be removed from]
+     * @return {[string]}       [the str without the specified characters]
+     */
+    this.removeCharacters = function(charArray, str) {
+        for (var i = 0; i < charArray.length; i++) {
+            str = str.replace(new RegExp(that.escapeRegExp(charArray[i]), "g"), "");
+        }
+        return str;
+    };
+    
     //****************************************************************************************************************************************
     //***************************************************READING TIME*************************************************************************
     //****************************************************************************************************************************************
@@ -500,23 +527,79 @@ function Knwl() {
     //***************************************************PHONE NUMS***************************************************************************
     //****************************************************************************************************************************************
     this.phone = {};
+    
+    this.phone.areaCodeLength = 3; // Hard code this assumption for now
+
+    // IMPORTANT: This function makes the assumption that there is always 3 digits in an area code
+    this.phone.formatPhoneNumber = function(number) {
+        var formattedNumber = number.slice(number.length - 7, number.length - 4) + "-" +
+                                number.slice(number.length - 4, number.length);
+
+        formattedNumber = "(" + number.slice(number.length - (that.phone.areaCodeLength + 7), number.length - 7) + ") " + 
+                                formattedNumber;
+
+        if (number.length > (that.phone.areaCodeLength + 7)) {
+            formattedNumber = "+" + number.slice(0, number.length - (that.phone.areaCodeLength + 7)) +
+                                " " + formattedNumber;
+        }
+        return formattedNumber;
+    };
+
     this.phone.findPhones = function(words) {
-        var phones = [];
-        
-        var regexp = /^\d{10}$/;
+        var phones = [],
+            currWord = null;
+
+        /* Phone Numbers can be as little as 7 digits per word, 
+           and as large as 13 if the word contains country code & area code & phone number
+           note: this applies to North American area codes assuming 3 digits 
+           and is not applicable globally */
+        var phoneRegexp = /^\d{7,13}$/;
+        // North American Area Code's always have 3 digits
+        // To make this universal, could use a dictionary keyed on Country
+        var areaCodeRegExp = /^\d{3}$/;
+        // Country Code's vary from 1 to 3 digits
+        var countryCodeRegExp = /^\d{1,3}$/;
+
         for (var i = 0; i < words.length; i++) {
-            words[i] = braid.replace(words[i], "-@w@");
-            words[i] = words[i].replace("(","");
-            words[i] = words[i].replace(")","");
-            if (regexp.test(words[i])) {
-                phones.push([words[i],that.preview(i,words)]);    
-            } else if (words[i].length === 11) {
-                var testPhone = words[i].slice(1,words[i].length);
-                if (regexp.test(testPhone)) {
-                    phones.push([words[i],that.preview(i,words)]);
+            currWord = that.removeCharacters(["-","(",")"], words[i]);
+
+            if (phoneRegexp.test(currWord)) {
+                /* At this point the word is thought to be a phone number.
+                   If the current word is only of length 7 it's required that the previous word 
+                   is the area code, assuming there is a previous word. */
+                if (i > 0 && currWord.length === 7) {
+                    var areaCode = that.removeCharacters(["(",")"], words[i-1]);
+                    if (areaCodeRegExp.test(areaCode)) {
+                        currWord = areaCode + currWord;
+
+                        /* At this point the current word and previous word make up the area code
+                           and phone number.
+                           Check whether the 2 words back represents the country code */
+                        if (i > 1) {
+                            var countryCode = that.removeCharacters("+", words[i-2]);
+                            if (countryCodeRegExp.test(countryCode)) {
+                                currWord = countryCode + currWord;
+                            }
+                        }
+                    }
+                /* If the current word is not length 7, it's possible that the current word contains
+                   both the phone number and area code and the previous word is the country code.
+                   Once again, this is assuming that the areaCode length is 3 */
+                } else if (i > 0 && currWord.length === (that.phone.areaCodeLength + 7)) {
+                    var countryCode = that.removeCharacters("+", words[i-1]);
+                    if (countryCodeRegExp.test(countryCode)) {
+                        currWord = countryCode + currWord;
+                    }
+                }
+
+                /* We needed the phoneRegex to accept a minimum of 7 digits in case the preceding words
+                   made up the area code and possibly the country code, but if at this point there is
+                   not at least 7 digits plus the areaCodeLength in the currWord then it is not likely 
+                   a phone number */
+                if (currWord.length >= (7 + that.phone.areaCodeLength)) {
+                    phones.push([that.phone.formatPhoneNumber(currWord),that.preview(i,words)]);    
                 }
             }
-            
         }
         return phones;
     };
