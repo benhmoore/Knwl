@@ -1,7 +1,6 @@
-##Knwl.js
+Knwl.js [![Build Status](https://travis-ci.org/loadfive/Knwl.js.png?branch=master)](https://travis-ci.org/loadfive/Knwl.js)
 ====
 
-[![Build Status](https://api.travis-ci.org/loadfive/Knwl.js.png)](https://api.travis-ci.org/loadfive/Knwl.js.png)
 
 Knwl.js is a Natural Language Processor built with JavaScript, put simply, **Knwl.js scans through text, user data, or just about anything for data of interest**, phone numbers, dates, locations, emails, times, and more. Even check if the string may be spam, or get the overall emotion. 
 
