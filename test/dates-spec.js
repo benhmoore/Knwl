@@ -152,4 +152,17 @@ describe("dates", function () {
     expect(output[0]).toBe(12);
   });
 
+  it("should detect dates formatted like 2013-12-15", function () {
+    x.init("I will see you on 2013-12-15");
+    var output = x.get("dates")[0]
+    expect(output[0] + "/" + output[1] + "/" + output[2]).toBe("12/15/2013");
+  });
+
+  // it("should detect dates formatted like 2014-12-15", function () {
+  //   x.init("I will see you on 2013-12-15");
+  //   var output = x.get("dates")[0]
+  //   expect(output[0] + "/" + output[1] + "/" + output[2]).toBe("12/15/2014");
+  // });
+  // This does not work Needs fixing
+
 });
