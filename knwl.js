@@ -213,9 +213,9 @@ function Knwl() {
         
         
         
-        
+        //for dates like "thanksgiving", "chirstmas", or "new years"
         var date = [];
-        for (var i = 0; i < words.length; i++) {//for dates like "thanksgiving", "chirstmas", or "new years"
+        for (var i = 0; i < words.length; i++) {
             for (var e = 0; e < that.date.holidays.length; e++) {
                 var curHol = that.date.holidays[e];
                 var pos = i;
@@ -234,6 +234,38 @@ function Knwl() {
                 }
                 pos++;
                 }
+                }
+                
+            }
+        }
+        
+        //for dates like "2013-12-15" (YMD)
+        var date = [];
+        for (var i = 0; i < words.length; i++) {
+            var temp = words[i].split(/[-]+/);
+            if (temp.length === 3) {
+                var numSets = 0;
+                for (var x = 0; x < temp.length; x++) {
+                    if (isNaN(temp[x])===false) {
+                        numSets++;
+                       
+                    }
+                }
+                if (numSets === 3) { 
+                    if (temp[0].length === 4 && (temp[1].length === 2 || temp[1].length === 1) && (temp[2].length === 2 || temp[2].length === 1)) {
+                        for (var x = 0; x < temp.length; x++) {
+                            temp[x] = parseInt(temp[x]);
+                        }
+                        if (temp[1] > 0 && temp[1] < 13) {
+                            if (temp[2] > 0 && temp[2] < 32) {
+                                if (temp[0] > 0) {
+                                    date = [temp[1],temp[2], temp[0],that.preview(i,words)];
+                                    dates.push(date);
+                                }
+                            }
+                        }
+                        
+                    }
                 }
                 
             }
@@ -656,7 +688,7 @@ function Knwl() {
         var emails = [];
         
         for (var i = 0; i < words.length; i++) {
-            var word = words[i].split(/[\,\|\(\)]/g);
+            var word = words[i].split(/[\,\|\(\)\?]/g);
             for (var j = 0; j < word.length; j++) {
             	var temp = word[j].replace(new RegExp(/[()!]/g), ""); // replaces every bracket ')' or '(' and every '!' with an empty character 
 	            temp = braid.replace(temp,",@wa@");
