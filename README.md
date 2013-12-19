@@ -1,35 +1,25 @@
-Knwl.js
-=======
-[![Build Status](https://api.travis-ci.org/loadfive/Knwl.js.png)](https://api.travis-ci.org/loadfive/Knwl.js.png)
+Knwl.js is a Natural Language Processor built with JavaScript, put simply, **Knwl.js scans through text, user data, or just about anything for data of interest**, phone numbers, dates, locations, emails, times, and more. Even check if the string may be spam, or get the overall emotion. 
 
-Find dates, times, emails, phone numbers, links, reading time, even the emotion of the text, or check if it's spam. Knwl.js makes it possible to scan through large amounts of text for data that may be of interest.
+###Use It
+Knwl.js was built to be simple, for normal use, **all you need is one file**, ```knwl.js```. Just include this file in the ```<head>``` of a page.
 
-####Cenny.js Plugin
-For those interested in version of Knwl.js that has basic Cenny.js functionality (early development), look here: https://github.com/loadfive/cenny.js/tree/master/plugins
-
-###Demo: http://byteaspect.com/knwlDemo
-
-##How to use
-
-Add **Knwl.js** to the ```<head>```
-
-Create a new instance of the Knwl object:
+First, create a new instance of the ```Knwl()``` object:
 ```javascript
-var x = new Knwl();
+var hal = new Knwl();
 ```
 
-Initiate crawling of a string:
+Now, initiate Knwl.js on a string:
 ```javascript
-x.init( string );
+hal.init("This is a string with information.");
 ```
 
-Get data:
+Finally, use ```.get()``` to scan the string for certain data:
 ```javascript
-x.get('dates'); //returns array of dates found: [month,day,year, string snippet]
+var locsFound = hal.get("places");
+var datesFound = hal.get("dates");
 ```
 
-**Types of data that can grabbed:**
-
+####.get() Data Types
 ```"dates"``` - dates found in string.
 
 ```"times"``` - times found in string.
@@ -51,8 +41,6 @@ x.get('dates'); //returns array of dates found: [month,day,year, string snippet]
 
 *Please note that Knwl.js is still in early development, and can yield varying results.*
 
-**If you want a real-time, plug 'n play backend to store all the data you find, you might like Cenny.js: http://github.com/loadfive/cenny.js**
-
 
 ###Building
 
@@ -66,4 +54,10 @@ will create *knwl.min.js*.
 ###Licence
 
 Project released under an MIT license.
+
+
+
+
+
+
 
