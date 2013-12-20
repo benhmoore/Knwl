@@ -37,6 +37,16 @@ describe("email", function() {
         });
     };
 
+    // Uncomment me when issue #35 is solved
+    // for (var i = ValidEmails.length - 1; i >= 0; i--) {
+    //     var ve = ValidEmails[i];
+    //     it("should detect the valid email of " + ve + " that ends in a full stop", function() {
+    //         x.init("You can reach me on " + ve + ".");
+    //         var output = x.get("emails")
+    //         expect(output[0][0]).toBe(ve);
+    //     });
+    // };
+
     for (var i = InvalidEmails.length - 1; i >= 0; i--) {
         var ie = InvalidEmails[i];
         it("should not detect the email of " + ie, function() {
