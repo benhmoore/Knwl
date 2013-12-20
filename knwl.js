@@ -815,7 +815,7 @@ function Knwl() {
                 }
                 if (word.length > 0 && word.length < 3) {
                     var isFalsePlace = false;
-                    console.log(word);
+                    // console.log(word);
                     
                     //make sure place is not an invalid location
                     for (var y = 0; y < word.length; y++) {
