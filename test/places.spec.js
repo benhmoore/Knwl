@@ -28,6 +28,16 @@ describe("places", function () {
     expect(output[0][0]).toBe("Los Angeles");
   });
 
-  
+  it("should detect places formatted like 'near .'", function () {
+    x.init("They live near Tesco");
+    var output = x.get("places")
+    expect(output[0][0]).toBe("Tesco");
+  });
+
+  it("should detect places formatted like 'near .' with a full stop", function () {
+    x.init("They live near Tesco.");
+    var output = x.get("places")
+    expect(output[0][0]).toBe("Tesco");
+  });
 
 });
