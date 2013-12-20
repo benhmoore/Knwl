@@ -18,6 +18,10 @@
   "engines": {
     "node": "*"
   },
+  "dependencies": {
+    "jasmine-node": "*",
+    "uglify-js": "*"
+  },
   "scripts": {
     "build": "uglifyjs -o ./knwl.min.js ./knwl.js"
   }
