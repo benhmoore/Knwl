@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   width="100px"
+   height="100px"
+   viewBox="-0.999 -1 100 100"
+   overflow="visible"
+   enable-background="new -0.999 -1 100 100"
+   xml:space="preserve"
+   id="svg2"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="clock.svg"><metadata
+   id="metadata12"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="480"
+   id="namedview10"
+   showgrid="false"
+   inkscape:zoom="2.36"
+   inkscape:cx="50"
+   inkscape:cy="50"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="svg2" />
+<defs
+   id="defs4">
+</defs>
+<path
+   d="M48.999,98C21.98,98,0,76.019,0,49C0,21.982,21.98,0,48.999,0C76.02,0,98.002,21.982,98.002,49  C98.002,76.019,76.02,98,48.999,98L48.999,98z M48.999,10.187c-21.402,0-38.813,17.412-38.813,38.813s17.412,38.813,38.813,38.813  c21.405,0,38.817-17.412,38.817-38.813S70.403,10.187,48.999,10.187L48.999,10.187z"
+   id="path6"
+   style="fill:#adadae;fill-opacity:1" />
+<path
+   d="M73.023,59.016H39.812v-31.39c0-3.383,2.743-6.125,6.125-6.125s6.127,2.742,6.127,6.125v19.141h20.959  c3.382,0,6.125,2.743,6.125,6.125C79.148,56.273,76.405,59.016,73.023,59.016z"
+   id="path8"
+   style="fill:#adadae;fill-opacity:1" />
+</svg>
