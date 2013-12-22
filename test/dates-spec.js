@@ -84,6 +84,13 @@ describe("dates", function () {
     expect(output[0]).toBe(6);
   });
 
+
+  it("should detect worded jun", function () {
+    x.init(" the 28th of jun.");
+    var output = x.get("dates")[0]
+    expect(output[0]).toBe(6);
+  });
+
   
   it("should detect worded july", function () {
     x.init(" the 28th of july.");
@@ -91,7 +98,12 @@ describe("dates", function () {
     expect(output[0]).toBe(7);
   });
 
-  
+  it("should detect worded jul", function () {
+    x.init(" the 28th of jul.");
+    var output = x.get("dates")[0]
+    expect(output[0]).toBe(7);
+  });
+
   it("should detect worded august", function () {
     x.init(" the 28th of august.");
     var output = x.get("dates")[0]
