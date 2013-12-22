@@ -25,7 +25,7 @@ describe("dates", function () {
   });
 
   it("should detect worded january", function () {
-    x.init(" the 28th of jan.");
+    x.init(" the 28th of january.");
     var output = x.get("dates")[0]
     expect(output[0]).toBe(1);
   });
