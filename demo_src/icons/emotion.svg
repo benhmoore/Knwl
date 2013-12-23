@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   width="100px"
+   height="100px"
+   viewBox="0 0 100 100"
+   enable-background="new 0 0 100 100"
+   xml:space="preserve"
+   id="svg2"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="emotion.svg"><metadata
+   id="metadata128"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs126" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="480"
+   id="namedview124"
+   showgrid="false"
+   inkscape:zoom="1.18"
+   inkscape:cx="-91.673332"
+   inkscape:cy="55.703415"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="svg2" />
+<g
+   id="Captions">
+	
+	
+	
+	
+	
+	<line
+   fill="#000000"
+   stroke="#FFFFFF"
+   stroke-miterlimit="10"
+   x1="8"
+   y1="-14.5"
+   x2="18"
+   y2="-14.5"
+   id="line19" />
+	
+	<g
+   id="g23">
+		<g
+   id="g25">
+			<g
+   id="g27">
+				
+				
+				
+			</g>
+		</g>
+	</g>
+	<rect
+   x="-179"
+   y="58"
+   fill="none"
+   width="35"
+   height="32.5"
+   id="rect35" />
+	
+	<rect
+   x="-136.5"
+   y="58"
+   fill="none"
+   width="35"
+   height="32.5"
+   id="rect53" />
+	
+	<rect
+   x="-94"
+   y="58"
+   fill="none"
+   width="35"
+   height="32.5"
+   id="rect67" />
+	
+	<rect
+   x="-50"
+   y="58"
+   fill="none"
+   width="35"
+   height="32.5"
+   id="rect77" />
+	
+	
+	
+	
+	
+	
+	
+	<g
+   id="g99">
+		
+		
+	</g>
+	
+	
+	
+	
+</g>
+<g
+   id="Your_Icon">
+	<path
+   d="M49.792,98.91c-26.937,0-48.852-21.913-48.852-48.85c0-26.936,21.915-48.852,48.852-48.852   c26.933,0,48.849,21.916,48.849,48.852C98.642,76.997,76.726,98.91,49.792,98.91z M49.792,12.77   c-20.564,0-37.292,16.727-37.292,37.291c0,20.562,16.728,37.29,37.292,37.29c20.562,0,37.29-16.728,37.29-37.29   C87.082,29.497,70.354,12.77,49.792,12.77z"
+   id="path114"
+   style="fill:#adadae;fill-opacity:1" />
+	<g
+   id="g116">
+		<ellipse
+   cx="37.961"
+   cy="36.526"
+   rx="6.873"
+   ry="9.282"
+   id="ellipse118"
+   style="fill:#adadae;fill-opacity:1" />
+		<path
+   d="M68.492,36.526c0,5.125-3.076,9.282-6.874,9.282c-3.793,0-6.868-4.157-6.868-9.282c0-5.125,3.075-9.28,6.868-9.28    C65.416,27.247,68.492,31.401,68.492,36.526z"
+   id="path120"
+   style="fill:#adadae;fill-opacity:1" />
+	</g>
+	<path
+   d="M49.755,76.921c-15.869,0-22.736-11.05-23.021-11.521c-1.616-2.671-0.761-6.146,1.911-7.763   c2.647-1.599,6.093-0.775,7.725,1.852c0.237,0.364,4.172,6.129,13.386,6.129c9.365,0,13.423-6.075,13.462-6.14   c1.654-2.646,5.145-3.45,7.788-1.799c2.649,1.657,3.452,5.145,1.799,7.791C72.512,65.936,65.47,76.921,49.755,76.921z"
+   id="path122"
+   style="fill:#adadae;fill-opacity:1" />
+</g>
+</svg>
