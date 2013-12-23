@@ -775,7 +775,7 @@ function Knwl() {
             for (var j = 0; j < word.length; j++) {
             	var temp = word[j].replace(new RegExp(/[()!]/g), ""); // replaces every bracket ')' or '(' and every '!' with an empty character 
 	            temp = braid.replace(temp,",@wa@");
-	            if (/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/.test(temp)) {
+	            if (/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/i.test(temp)) {
 	                emails.push([temp,that.preview(i,words)]);
 	            }
             }
