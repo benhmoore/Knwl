@@ -1,12 +1,8 @@
 var x = new Knwl();
 var scan = function() {
-    document.getElementById('sectionContainer1').innerHTML = ""; //phones
-    document.getElementById('sectionContainer2').innerHTML = ""; //dates
-    document.getElementById('sectionContainer3').innerHTML = ""; //times
-    document.getElementById('sectionContainer4').innerHTML = ""; //links
-    document.getElementById('sectionContainer5').innerHTML = ""; //emails
-    document.getElementById('sectionContainer6').innerHTML = ""; //emotion
-    document.getElementById('sectionContainer7').innerHTML = ""; //places
+    for (var i = 1; i < 8; i++) {
+        document.getElementById('sectionContainer'+i).innerHTML = ""; // Reset the output tags
+    }
     
     var input = document.getElementById('input').value;
     x.init(input); //initiate knwl on string
