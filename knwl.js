@@ -34,10 +34,10 @@ function Knwl() {
             } else if (label === "spam") {
                 return that.text.data.spam;
             } else {
-                alert("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails','places'");
+                console.error("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails','places'");
             }
         } else {
-            alert("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails','places'");
+            console.error("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails','places'");
         }
 
     };
