@@ -317,6 +317,14 @@ function Knwl() {
         for (var i = 0; i < words.length; i++) {
             var testTime = words[i].split(":");
             if (testTime.length === 2) {
+                var daynight = false;
+                if (braid.search('am',testTime[1],true) !== false) {
+                    testTime[1] = testTime[1].slice(0,testTime[1].length - 2);
+                    daynight = 'AM';
+                } else if (braid.search('pm',testTime[1],true) !== false) {
+                    testTime[1] = testTime[1].slice(0,testTime[1].length - 2);
+                    daynight = 'PM';
+                }
                 if (!isNaN(testTime[0]) && !isNaN(testTime[1])) {
                     if (testTime[0] > 0 && testTime[0] < 13) {
                         if (testTime[1] >= 0 && testTime[1] < 61) {
@@ -326,12 +334,51 @@ function Knwl() {
                             } else if (words[i + 1] === "am") {
                                 time = [testTime[0],testTime[1], "AM",that.preview(i,words)]; 
                                 times.push(time);
-                            } 
+                            } else {
+                                if (daynight !== false) {
+                                    time = [testTime[0],testTime[1], daynight,that.preview(i,words)]; 
+                                    times.push(time);
+                                }
+                            }
                         }
                     }
                 }
             }
         
+        }
+        var time = [];
+        for (var i = 0; i < words.length; i++) {
+            if (words[i].split(":").length === 1) {
+            if (isNaN(words[i]) !== true) {//is a number
+                var temp = parseInt(words[i]);
+                if (temp > 0 && temp < 13) {
+                    if (words[i + 1] === "am" || words[i + 1] === "pm") {
+                        time = [temp,'00',words[i + 1].toUpperCase(),that.preview(i,words)];
+                        times.push(time);
+                    }
+                }
+            } else if (braid.search('am',words[i],true) !== false) {
+                var temp = words[i];
+                temp = temp.slice(0,temp.length - 2);
+                temp = parseInt(temp);
+                if (isNaN(temp) !== true) {
+                    if (temp > 0 && temp < 13) {
+                        time = [temp,'00','AM',that.preview(i,words)];
+                        times.push(time);
+                    }
+                }
+            } else if (braid.search('pm', words[i], true)  !== false) {
+                var temp = words[i];
+                temp = temp.slice(0,temp.length - 2);
+                temp = parseInt(temp);
+                if (isNaN(temp) !== true) {
+                    if (temp > 0 && temp < 13) {
+                        time = [temp,'00','PM',that.preview(i,words)];
+                        times.push(time);
+                    }
+                }
+            }
+            }
         }
         return times;
     };
@@ -793,7 +840,7 @@ function Knwl() {
     
     
     this.places = {};
-    this.places.falsePlaces = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    this.places.falsePlaces = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "His","Hers","Who","Whom","Whose"];
     this.places.findPlaces = function(words) {
         var places = [];
         
@@ -809,7 +856,9 @@ function Knwl() {
                 while(words[i + j] !== 'at' && words[i + j] !== 'in' && words[i + j] !== 'near' && !/^.*(\.|\,|\?|\!)+$/.test(words[i + j -1]) && i + j < words.length) {
                     var temp = words[i + j].replace(/[\,\.]/,'');
                     if (/^[A-Z](.*)$/.test(temp)) {
-                        word.push(temp);
+                        if (i + 4 > (i + j)) {
+                            word.push(temp);
+                        }
                     }
                     j++;
                 }
