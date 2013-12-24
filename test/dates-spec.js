@@ -42,35 +42,35 @@ describe("dates", function () {
     expect(output[0]).toBe(2);
   });
 
-  
+
   it("should detect worded march", function () {
     x.init(" the 28th of march.");
     var output = x.get("dates")[0]
     expect(output[0]).toBe(3);
   });
 
-  
+
   it("should detect worded mar", function () {
     x.init(" the 28th of mar.");
     var output = x.get("dates")[0]
     expect(output[0]).toBe(3);
   });
 
-  
+
   it("should detect worded april", function () {
     x.init(" the 28th of april.");
     var output = x.get("dates")[0]
     expect(output[0]).toBe(4);
   });
 
-  
+
   it("should detect worded apr", function () {
     x.init(" the 28th of apr.");
     var output = x.get("dates")[0]
     expect(output[0]).toBe(4);
   });
 
-  
+
   it("should detect worded may", function () {
     x.init(" the 28th of may.");
     var output = x.get("dates")[0]
@@ -84,14 +84,14 @@ describe("dates", function () {
     expect(output[0]).toBe(6);
   });
 
-  
+
   it("should detect worded july", function () {
     x.init(" the 28th of july.");
     var output = x.get("dates")[0]
     expect(output[0]).toBe(7);
   });
 
-  
+
   it("should detect worded august", function () {
     x.init(" the 28th of august.");
     var output = x.get("dates")[0]
@@ -103,7 +103,7 @@ describe("dates", function () {
     var output = x.get("dates")[0]
     expect(output[0]).toBe(8);
   });
-  
+
   it("should detect worded september", function () {
     x.init(" the 28th of september.");
     var output = x.get("dates")[0]
@@ -164,5 +164,10 @@ describe("dates", function () {
     expect(output[0] + "/" + output[1] + "/" + output[2]).toBe("12/15/2014");
   });
 
+  it("should detect UTC datetimes like 2014-12-15T10:45:00", function () {
+    x.init("The launch is scheduled for 2014-12-25T10:45:00");
+    var output = x.get("dates")[0];
+    expect(output[0] + "/" + output[1] + "/" + output[2]).toBe("12/25/2014");
+  });
 
 });
