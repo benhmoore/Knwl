@@ -50,7 +50,7 @@ function Knwl() {
      * @param  {[string]} str [the string to esacpe]
      * @return {[string]}     [the escaped string]
      */
-    this.escapeRegExp = function(str) {
+     this.escapeRegExp = function(str) {
         return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     };
 
@@ -62,7 +62,7 @@ function Knwl() {
      * @param  {[string]} str  [the string the characters should be removed from]
      * @return {[string]}       [the str without the specified characters]
      */
-    this.removeCharacters = function(charArray, str) {
+     this.removeCharacters = function(charArray, str) {
         for (var i = 0; i < charArray.length; i++) {
             str = str.replace(new RegExp(that.escapeRegExp(charArray[i]), "g"), "");
         }
@@ -74,7 +74,6 @@ function Knwl() {
     //****************************************************************************************************************************************
     
     this.text.readingTime = function(wordCount) { //returns MINUTES
-        
         var secounds = wordCount * 0.312;
         return secounds / 60;
     };
@@ -85,7 +84,7 @@ function Knwl() {
     
     this.date = {};
     this.date.days = ['1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th','11th','12th','13th','14th','15th','16th','17th','18th','19th','20th','21st','22nd','23rd',
-                    '24th','25th','26th','27th','28th','29th','30th','31st'];
+    '24th','25th','26th','27th','28th','29th','30th','31st'];
     this.date.months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
     this.date.monthAbbrs = ['jan','feb','mar','apr','may','jun','jul','aug','sept','oct','nov','dec'];
     this.date.holidays = [['thanksgiving'],['christmas'],['new','years'],['july','4th']];
@@ -103,10 +102,10 @@ function Knwl() {
             if (that.date.days[i] === word) {   
                 return i + 1;
             }
-          }
         }
-    };
-    
+    }
+};
+
     //used with .findDates()
     this.date.getMonth = function(word,type) {
         if (!isNaN(word) && type === 'mdy') {
@@ -116,18 +115,18 @@ function Knwl() {
             if (that.date.months[i] === word) {   
                 return i + 1;
             }
-          }
-            for (var i = 0; i < that.date.monthAbbrs.length; i++) {
-                if (that.date.monthAbbrs[i] === word) {   
-                    return i + 1;
-                }
+        }
+        for (var i = 0; i < that.date.monthAbbrs.length; i++) {
+            if (that.date.monthAbbrs[i] === word) {   
+                return i + 1;
             }
         }
-    };
-    
+    }
+};
+
     this.date.findDates = function(words,wordsWithPunc) { //returns "july 16th 1999" as "[7,16,1999, "preview"]"
-        var dates = [];
-        
+    var dates = [];
+    
         for (var i = 0; i < words.length; i++) {//cleanup
             words[i] = words[i].split(/[.,!?]+/);
             words[i] = words[i][0];   
@@ -171,7 +170,7 @@ function Knwl() {
                     }
                 }
                 if (isAllNums === 3) {
-                
+                    
                     var month = that.date.getMonth(testDate[0],'mdy');
                     var day = that.date.getDay(testDate[1]);
                     var year = parseInt(testDate[2]);
@@ -187,10 +186,10 @@ function Knwl() {
         for (var i = 0; i < words.length; i++) {
             if (words[i + 1] === "of") {
                 if (words[i + 2] !== undefined) {
-                var day = that.date.getDay(words[i]);
-                
-                var month = that.date.getMonth(words[i + 2]); 
-                var year = that.date.dateObj.getFullYear();
+                    var day = that.date.getDay(words[i]);
+                    
+                    var month = that.date.getMonth(words[i + 2]); 
+                    var year = that.date.dateObj.getFullYear();
                 if (month !== undefined && day !== undefined) {//make sure month and day defined
                 if (words[i + 3] !== undefined) {//words[i + 3] === years
                     if (!isNaN(words[i + 3])) {
@@ -199,11 +198,11 @@ function Knwl() {
                         }
                     } else if (words[i + 3] === "on" || words[i + 3] === "in") {
                         if (words[i + 4] !== undefined) {
-                        if (!isNaN(words[i + 4])) {
-                            if (words[i + 4] > 32 && words[i + 4] < 10000) {
-                                year = words[i + 4];
-                            } 
-                        }
+                            if (!isNaN(words[i + 4])) {
+                                if (words[i + 4] > 32 && words[i + 4] < 10000) {
+                                    year = words[i + 4];
+                                } 
+                            }
                         }
                     } else {
                         for (var v = i; v > 0; v--) {
@@ -233,7 +232,7 @@ function Knwl() {
                 }
                 date = [month,day,year,that.preview(i,words)];
                 dates.push(date);
-                }
+            }
                 }//finish check if month and day defined
             }
         }//end for
@@ -247,20 +246,20 @@ function Knwl() {
                 var curHol = that.date.holidays[e];
                 var pos = i;
                 if (words[pos] === curHol[0]) {
-                for (var x = 0; x < curHol.length; x++) {
-                if (words[pos] === curHol[x]) {
-                    if (x === curHol.length - 1) {
-                        if (that.date.dateObj.getMonth() <= that.date.holidaysD[e][1] + 1) {
-                            date = [that.date.holidaysD[e][1],that.date.holidaysD[e][0],that.date.dateObj.getFullYear(),that.preview(i,words)];        
-                        } else {
-                            date = [that.date.holidaysD[e][1],that.date.holidaysD[e][0],that.date.dateObj.getFullYear() + 1,that.preview(i,words)]; 
+                    for (var x = 0; x < curHol.length; x++) {
+                        if (words[pos] === curHol[x]) {
+                            if (x === curHol.length - 1) {
+                                if (that.date.dateObj.getMonth() <= that.date.holidaysD[e][1] + 1) {
+                                    date = [that.date.holidaysD[e][1],that.date.holidaysD[e][0],that.date.dateObj.getFullYear(),that.preview(i,words)];        
+                                } else {
+                                    date = [that.date.holidaysD[e][1],that.date.holidaysD[e][0],that.date.dateObj.getFullYear() + 1,that.preview(i,words)]; 
+                                }
+                                
+                                dates.push(date);
+                            }
                         }
-                        
-                        dates.push(date);
+                        pos++;
                     }
-                }
-                pos++;
-                }
                 }
                 
             }
@@ -275,7 +274,7 @@ function Knwl() {
                 for (var x = 0; x < temp.length; x++) {
                     if (isNaN(temp[x])===false) {
                         numSets++;
-                       
+                        
                     }
                 }
                 if (numSets === 3) { 
@@ -344,7 +343,7 @@ function Knwl() {
                     }
                 }
             }
-        
+            
         }
         var time = [];
         for (var i = 0; i < words.length; i++) {
@@ -378,18 +377,18 @@ function Knwl() {
                     }
                 }
             }
-            }
         }
-        return times;
-    };
-    
+    }
+    return times;
+};
+
     //****************************************************************************************************************************************
     //***************************************************EMOTIONS*****************************************************************************
     //****************************************************************************************************************************************
     this.emotion = {};
     
     this.emotion.negativeWords = ['terrible','horrible','evil','die','dick','bitch','fucked','stupid','idiot','dumb','noob','shit','vain','n00b','dickhead','cocksucker','disgusting','slut'];
-     this.emotion.negativeWordsB = ['fuck','shit','kill','rape','hate','hating'];
+    this.emotion.negativeWordsB = ['fuck','shit','kill','rape','hate','hating'];
     this.emotion.positiveWords = ['happy','good','great','amazing','awesome','wonderful','brilliant','smart'];
     this.emotion.positiveWordsB = ['love','like','want',"<3",'kiss'];
     this.emotion.subjects = ["she's","you","him","her","it","this","he's","shes","hes","your","you're","ur","they're","their","theyre"];
@@ -413,18 +412,18 @@ function Knwl() {
             for (var e = 0; e < that.emotion.negativeWords.length; e++) {
                 var negWord = that.emotion.negativeWords[e];
                 if (words[i].search(negWord) !== -1) {//word [i] === negativeword
-                        for (var z = 0; z < that.emotion.subjects.length; z++) {
-                            if (words[i - 1] !== undefined) {
+                    for (var z = 0; z < that.emotion.subjects.length; z++) {
+                        if (words[i - 1] !== undefined) {
                             if (words[i - 1] === that.emotion.subjects[z]) {
                                 negative++;   
                             }
-                            }
-                            if (words[i - 2] !== undefined) {
+                        }
+                        if (words[i - 2] !== undefined) {
                             if (words[i - 2] === that.emotion.subjects[z]) {
                                 negative++;   
                             }
-                            }
                         }
+                    }
                 }
             }
         }
@@ -432,18 +431,18 @@ function Knwl() {
             for (var e = 0; e < that.emotion.negativeWordsB.length; e++) {
                 var negWord = that.emotion.negativeWordsB[e];
                 if (words[i].search(negWord) !== -1) {//word [i] === negativeword
-                        for (var z = 0; z < that.emotion.subjects.length; z++) {
-                            if (words[i + 1] !== undefined) {
+                    for (var z = 0; z < that.emotion.subjects.length; z++) {
+                        if (words[i + 1] !== undefined) {
                             if (words[i + 1] === that.emotion.subjects[z]) {
                                 negative++;   
                             }
-                            }
-                            if (words[i + 2] !== undefined) {
+                        }
+                        if (words[i + 2] !== undefined) {
                             if (words[i + 2] === that.emotion.subjects[z]) {
                                 negative++;   
                             }
-                            }
                         }
+                    }
                 }
             }
         }
@@ -454,18 +453,18 @@ function Knwl() {
             for (var e = 0; e < that.emotion.positiveWords.length; e++) {
                 var posWord = that.emotion.positiveWords[e];
                 if (words[i].search(posWord) !== -1) {//word [i] === negativeword
-                        for (var z = 0; z < that.emotion.subjects.length; z++) {
-                            if (words[i - 1] !== undefined) {
+                    for (var z = 0; z < that.emotion.subjects.length; z++) {
+                        if (words[i - 1] !== undefined) {
                             if (words[i - 1] === that.emotion.subjects[z]) {
                                 positive++;   
                             }
-                            }
-                            if (words[i - 2] !== undefined) {
+                        }
+                        if (words[i - 2] !== undefined) {
                             if (words[i - 2] === that.emotion.subjects[z]) {
                                 positive++;   
                             }
-                            }
                         }
+                    }
                 }
             }
         }
@@ -474,18 +473,18 @@ function Knwl() {
             for (var e = 0; e < that.emotion.positiveWordsB.length; e++) {
                 var posWord = that.emotion.positiveWordsB[e];
                 if (words[i].search(posWord) !== -1) {//word [i] === negativeword
-                        for (var z = 0; z < that.emotion.subjects.length; z++) {
-                            if (words[i + 1] !== undefined) {
+                    for (var z = 0; z < that.emotion.subjects.length; z++) {
+                        if (words[i + 1] !== undefined) {
                             if (words[i + 1] === that.emotion.subjects[z]) {
                                 positive++;   
                             }
-                            }
-                            if (words[i + 2] !== undefined) {
+                        }
+                        if (words[i + 2] !== undefined) {
                             if (words[i + 2] === that.emotion.subjects[z]) {
                                 positive++;   
                             }
-                            }
                         }
+                    }
                 }
             }
         }
@@ -580,27 +579,27 @@ function Knwl() {
     // IMPORTANT: This function makes the assumption that there is always 3 digits in an area code
     this.phone.formatPhoneNumber = function(number) {
         var formattedNumber = number.slice(number.length - 7, number.length - 4) + "-" +
-                                number.slice(number.length - 4, number.length);
+        number.slice(number.length - 4, number.length);
 
         formattedNumber = "(" + number.slice(number.length - (that.phone.areaCodeLength + 7), number.length - 7) + ") " + 
-                                formattedNumber;
+        formattedNumber;
 
         if (number.length > (that.phone.areaCodeLength + 7)) {
             formattedNumber = "+" + number.slice(0, number.length - (that.phone.areaCodeLength + 7)) +
-                                " " + formattedNumber;
+            " " + formattedNumber;
         }
         return formattedNumber;
     };
 
     this.phone.findPhones = function(words) {
         var phones = [],
-            currWord = null;
+        currWord = null;
 
         /* Phone Numbers can be as little as 7 digits per word, 
            and as large as 13 if the word contains country code & area code & phone number
            note: this applies to North American area codes assuming 3 digits 
            and is not applicable globally */
-        var phoneRegexp = /^\d{7,13}$/;
+           var phoneRegexp = /^\d{7,13}$/;
         // North American Area Code's always have 3 digits
         // To make this universal, could use a dictionary keyed on Country
         var areaCodeRegExp = /^\d{3}$/;
@@ -614,7 +613,7 @@ function Knwl() {
                 /* At this point the word is thought to be a phone number.
                    If the current word is only of length 7 it's required that the previous word 
                    is the area code, assuming there is a previous word. */
-                if (i > 0 && currWord.length === 7) {
+                   if (i > 0 && currWord.length === 7) {
                     var areaCode = that.removeCharacters(["(",")"], words[i-1]);
                     if (areaCodeRegExp.test(areaCode)) {
                         currWord = areaCode + currWord;
@@ -622,7 +621,7 @@ function Knwl() {
                         /* At this point the current word and previous word make up the area code
                            and phone number.
                            Check whether the 2 words back represents the country code */
-                        if (i > 1) {
+                           if (i > 1) {
                             var countryCode = that.removeCharacters("+", words[i-2]);
                             if (countryCodeRegExp.test(countryCode)) {
                                 currWord = countryCode + currWord;
@@ -632,18 +631,18 @@ function Knwl() {
                 /* If the current word is not length 7, it's possible that the current word contains
                    both the phone number and area code and the previous word is the country code.
                    Once again, this is assuming that the areaCode length is 3 */
-                } else if (i > 0 && currWord.length === (that.phone.areaCodeLength + 7)) {
-                    var countryCode = that.removeCharacters("+", words[i-1]);
-                    if (countryCodeRegExp.test(countryCode)) {
-                        currWord = countryCode + currWord;
-                    }
+               } else if (i > 0 && currWord.length === (that.phone.areaCodeLength + 7)) {
+                var countryCode = that.removeCharacters("+", words[i-1]);
+                if (countryCodeRegExp.test(countryCode)) {
+                    currWord = countryCode + currWord;
                 }
+            }
 
                 /* We needed the phoneRegex to accept a minimum of 7 digits in case the preceding words
                    made up the area code and possibly the country code, but if at this point there is
                    not at least 7 digits plus the areaCodeLength in the currWord then it is not likely 
                    a phone number */
-                if (currWord.length >= (7 + that.phone.areaCodeLength)) {
+                   if (currWord.length >= (7 + that.phone.areaCodeLength)) {
                     phones.push([that.phone.formatPhoneNumber(currWord),that.preview(i,words)]);    
                 }
             }
@@ -699,18 +698,18 @@ function Knwl() {
         
         var giveortake = conCount / 7;
         if (words.length > 3) {
-        if (vowelCount + giveortake >= (conCount / 1.9) && vowelCount - giveortake <= (conCount / 1.9)) {} else {
-            spam = true;   
-        }
+            if (vowelCount + giveortake >= (conCount / 1.9) && vowelCount - giveortake <= (conCount / 1.9)) {} else {
+                spam = true;   
+            }
         } else if (words.length > 2) {
-        if (vowelCount + giveortake >= (conCount / 1.4) && vowelCount - giveortake <= (conCount / 1.4)) {} else {
-            spam = true;   
-        }
+            if (vowelCount + giveortake >= (conCount / 1.4) && vowelCount - giveortake <= (conCount / 1.4)) {} else {
+                spam = true;   
+            }
         } else {
-        giveortake = conCount / 3;
-        if (vowelCount + giveortake >= (conCount) && vowelCount - giveortake <= (conCount)) {} else {
-            spam = true;   
-        }
+            giveortake = conCount / 3;
+            if (vowelCount + giveortake >= (conCount) && vowelCount - giveortake <= (conCount)) {} else {
+                spam = true;   
+            }
         }
         var chars = [];
         for (var i = 0; i < words.length; i++) {
@@ -728,7 +727,7 @@ function Knwl() {
                 }
                 
             } 
-        
+            
         }
         
         var uniquechars = chars.length;
@@ -743,36 +742,36 @@ function Knwl() {
             word = word[0];
             var currentLoc = 0;
             while(currentLoc < word.length - 2) {
-            for (var e = currentLoc + 1; e < word.length; e++) {
-                var isunuseable = true;
-                for (var a = 0; a < useablechars.length; a++) {
-                if (word[currentLoc] === useablechars[a]) {
-                    isunuseable = false;
-                }
-                }
-                
-                if (isunuseable === false) {
-                if (word[e] === word[currentLoc]) {
-                    if (word[e + 1] === word[currentLoc + 1]) {
-                        if (word[e + 2] === word[currentLoc + 2]) {
-                            spam = true;
+                for (var e = currentLoc + 1; e < word.length; e++) {
+                    var isunuseable = true;
+                    for (var a = 0; a < useablechars.length; a++) {
+                        if (word[currentLoc] === useablechars[a]) {
+                            isunuseable = false;
                         }
                     }
+                    
+                    if (isunuseable === false) {
+                        if (word[e] === word[currentLoc]) {
+                            if (word[e + 1] === word[currentLoc + 1]) {
+                                if (word[e + 2] === word[currentLoc + 2]) {
+                                    spam = true;
+                                }
+                            }
+                        }
+                    } else {
+                        break;
+                    }
+                    
                 }
-                } else {
-                    break;
-                }
+                currentLoc++;
+            }
             
-            }
-            currentLoc++;
-            }
-        
-        
+            
         }
         
         
         return spam;
-    
+        
     };
     
     
@@ -797,16 +796,16 @@ function Knwl() {
         for (var i = 0; i < links.length; i++) {
             if (links[i][0][links[i][0].length - 1] === "." || links[i][0][links[i][0].length - 1] === "?") {
                finalArray.push( [ links[i][0].slice(0, (links[i][0].length - 1) ), links[i][1] ] );//removes . and ? 
-            } else {
-                finalArray.push(links[i]);
-            }
+           } else {
+            finalArray.push(links[i]);
         }
-        
-        return finalArray;
-        
-    };
+    }
     
+    return finalArray;
     
+};
+
+
     //****************************************************************************************************************************************
     //***************************************************EMAILS*******************************************************************************
     //****************************************************************************************************************************************
@@ -821,18 +820,18 @@ function Knwl() {
             var word = words[i].split(/[\,\|\(\)\?]/g);
             for (var j = 0; j < word.length; j++) {
             	var temp = word[j].replace(new RegExp(/[()!]/g), ""); // replaces every bracket ')' or '(' and every '!' with an empty character 
-	            temp = braid.replace(temp,",@wa@");
-	            if (/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/.test(temp)) {
-	                emails.push([temp,that.preview(i,words)]);
-	            }
-            }
-        }
-        
-        return emails;
-        
-    };
-    
-    
+               temp = braid.replace(temp,",@wa@");
+               if (/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/.test(temp)) {
+                   emails.push([temp,that.preview(i,words)]);
+               }
+           }
+       }
+       
+       return emails;
+       
+   };
+   
+   
     //****************************************************************************************************************************************
     //***************************************************PLACES*******************************************************************************
     //****************************************************************************************************************************************
@@ -868,13 +867,13 @@ function Knwl() {
                     
                     //make sure place is not an invalid location
                     for (var y = 0; y < word.length; y++) {
-                    for (var x = 0; x < that.places.falsePlaces.length; x++) {
-                        if (word[y] === that.places.falsePlaces[x]) {
-                            isFalsePlace = true;    
-                        } else if (word[y].length < 2) {
-                            isFalsePlace = true;
+                        for (var x = 0; x < that.places.falsePlaces.length; x++) {
+                            if (word[y] === that.places.falsePlaces[x]) {
+                                isFalsePlace = true;    
+                            } else if (word[y].length < 2) {
+                                isFalsePlace = true;
+                            }
                         }
-                    }
                     }
                     if (isFalsePlace === false) {
                         places.push([word.join(' '),that.preview(i,words)]);
