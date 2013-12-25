@@ -165,9 +165,12 @@ describe("dates", function () {
   });
 
   it("should detect UTC datetimes like 2014-12-15T10:45:00", function () {
-    x.init("The launch is scheduled for 2014-12-25T10:45:00");
+    x.init("The launch is scheduled for 2014-12-25T10:45:00. Tomorrow is 2014-12-26T10:45:00");
     var output = x.get("dates")[0];
-    expect(output[0] + "/" + output[1] + "/" + output[2]).toBe("12/25/2014");
+    expect(output[0] + "/" + output[1] + "/" + output[2]).toBe("12/26/2014");
+    var tomorrow = x.get("dates")[1];
+    expect(tomorrow[0]+ "/" + tomorrow[1] + "/" + tomorrow[2]).toBe("12/25/2014")
   });
+
 
 });

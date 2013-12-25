@@ -300,13 +300,15 @@ function Knwl() {
         // }
 
         // for dates like "2013-12-25T10:45:00" This logic makes the above method for checking dates redundant. Remove above block after checking with Author
-        var date = [];
+        var date = [],temp;
         if (UTC_DATE_TIME_RGX.test(words)) {
 
-            for (var i = words.length - 1; i >= 0 && UTC_DATE_TIME_RGX.test(words[i]); i--) {
-                var temp = words[i].match(UTC_DATE_TIME_RGX);
-                date = [temp[2], temp[3], temp[1]]; // MM/DD/YYYY
-                dates.push(date);
+            for (var i = words.length - 1; i >= 0 ; i--) {
+                temp = words[i].match(UTC_DATE_TIME_RGX);
+                if(temp) {
+                    date = [temp[2], temp[3], temp[1]]; // MM/DD/YYYY
+                    dates.push(date);
+                }
             };
         }
 
