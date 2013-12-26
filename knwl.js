@@ -267,39 +267,7 @@ function Knwl() {
             }
         }
 
-        //for dates like "2013-12-15" (YMD)
-        // var date = [];
-        // for (var i = 0; i < words.length; i++) {
-        //     var temp = words[i].split(/[-]+/);
-        //     if (temp.length === 3) {
-        //         var numSets = 0;
-        //         for (var x = 0; x < temp.length; x++) {
-        //             if (isNaN(temp[x])===false) {
-        //                 numSets++;
-
-        //             }
-        //         }
-        //         if (numSets === 3) {
-        //             if (temp[0].length === 4 && (temp[1].length === 2 || temp[1].length === 1) && (temp[2].length === 2 || temp[2].length === 1)) {
-        //                 for (var x = 0; x < temp.length; x++) {
-        //                     temp[x] = parseInt(temp[x]);
-        //                 }
-        //                 if (temp[1] > 0 && temp[1] < 13) {
-        //                     if (temp[2] > 0 && temp[2] < 32) {
-        //                         if (temp[0] > 0) {
-        //                             date = [temp[1],temp[2], temp[0],that.preview(i,words)];
-        //                             dates.push(date);
-        //                         }
-        //                     }
-        //                 }
-
-        //             }
-        //         }
-
-        //     }
-        // }
-
-        // for dates like "2013-12-25T10:45:00" This logic makes the above method for checking dates redundant. Remove above block after checking with Author
+        // for parsing UTC dates
         var date = [],temp;
         if (UTC_DATE_TIME_RGX.test(words)) {
 
