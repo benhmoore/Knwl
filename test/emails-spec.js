@@ -38,14 +38,19 @@ describe("email", function() {
     };
 
     // Uncomment me when issue #35 is solved
-    // for (var i = ValidEmails.length - 1; i >= 0; i--) {
-    //     var ve = ValidEmails[i];
-    //     it("should detect the valid email of " + ve + " that ends in a full stop", function() {
-    //         x.init("You can reach me on " + ve + ".");
-    //         var output = x.get("emails")
-    //         expect(output[0][0]).toBe(ve);
-    //     });
-    // };
+    for (var i = ValidEmails.length - 1; i >= 0; i--) {
+        var ve = ValidEmails[i];
+
+        var testEmail = function(email){
+            it("should detect the valid email of " + email + " that ends in a full stop", function() {
+                x.init("You can reach me on " + email + ".");
+                var output = x.get("emails");
+                expect(output[0][0]).toBe(email);
+            });
+                // console.log("EMAIL : ", email);
+        };
+        testEmail(ve);
+    };
 
     for (var i = InvalidEmails.length - 1; i >= 0; i--) {
         var ie = InvalidEmails[i];
@@ -64,10 +69,6 @@ describe("email", function() {
     it("Testing all valid emails in one string", function() {
         x.init("You can reach me on " + mailchain);
         var output = x.get("emails")
-            console.log("MESSAGE :")
-            console.log("You can reach me on " + mailchain);
-            console.log("EMAILS :");
-            console.log(output);
         expect(output.length).toBe(ValidEmails.length);
     });
 
