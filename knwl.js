@@ -3,6 +3,8 @@ var braid={};braid.vnumber=.02;braid.version=function(){console.log(braid.vnumbe
 
 function Knwl() {
 
+    var UTC_DATE_TIME_RGX = /\b([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])(T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?)?\b/i
+    var EMAIL_RGX = /\b[A-Z0-9._%+-]+@([A-Z0-9.-]+\.[A-Z]{2,4}|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\b/i
     this.text = {};
     this.text.data = {};
 
@@ -620,9 +622,9 @@ function Knwl() {
         var phones = [],
             currWord = null;
 
-        /* Phone Numbers can be as little as 7 digits per word, 
+        /* Phone Numbers can be as little as 7 digits per word,
            and as large as 13 if the word contains country code & area code & phone number
-           note: this applies to North American area codes assuming 3 digits 
+           note: this applies to North American area codes assuming 3 digits
            and is not applicable globally */
         var phoneRegexp = /^\d{7,13}$/;
         // North American Area Code's always have 3 digits
@@ -636,7 +638,7 @@ function Knwl() {
 
             if (phoneRegexp.test(currWord)) {
                 /* At this point the word is thought to be a phone number.
-                   If the current word is only of length 7 it's required that the previous word 
+                   If the current word is only of length 7 it's required that the previous word
                    is the area code, assuming there is a previous word. */
                 if (i > 0 && currWord.length === 7) {
                     var areaCode = that.removeCharacters(["(", ")"], words[i - 1]);
@@ -665,7 +667,7 @@ function Knwl() {
 
                 /* We needed the phoneRegex to accept a minimum of 7 digits in case the preceding words
                    made up the area code and possibly the country code, but if at this point there is
-                   not at least 7 digits plus the areaCodeLength in the currWord then it is not likely 
+                   not at least 7 digits plus the areaCodeLength in the currWord then it is not likely
                    a phone number */
                 if (currWord.length >= (7 + that.phone.areaCodeLength)) {
                     phones.push([that.phone.formatPhoneNumber(currWord), that.preview(i, words)]);
@@ -820,7 +822,7 @@ function Knwl() {
         var finalArray = [];
         for (var i = 0; i < links.length; i++) {
             if (links[i][0][links[i][0].length - 1] === "." || links[i][0][links[i][0].length - 1] === "?") {
-                finalArray.push([links[i][0].slice(0, (links[i][0].length - 1)), links[i][1]]); //removes . and ? 
+                finalArray.push([links[i][0].slice(0, (links[i][0].length - 1)), links[i][1]]); //removes . and ?
             } else {
                 finalArray.push(links[i]);
             }
@@ -839,16 +841,17 @@ function Knwl() {
 
     this.email = {};
     this.email.findEmails = function(words) {
-        var emails = [];
+        var emails = [], match = "";
 
         for (var i = 0; i < words.length; i++) {
             var word = words[i].split(/[\,\|\(\)\?]/g);
             for (var j = 0; j < word.length; j++) {
-                var temp = word[j].replace(new RegExp(/[()!]/g), ""); // replaces every bracket ')' or '(' and every '!' with an empty character 
-                temp = braid.replace(temp, ",@wa@");
-                if (/^(?:[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+\.)*[\w\!\#\$\%\&\'\*\+\-\/\=\?\^\`\{\|\}\~]+@(?:(?:(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!\.)){0,61}[a-zA-Z0-9]?\.)+[a-zA-Z0-9](?:[a-zA-Z0-9\-](?!$)){0,61}[a-zA-Z0-9]?)|(?:\[(?:(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d{1,2}|2[0-4]\d|25[0-5])\]))$/.test(temp)) {
-                    emails.push([temp, that.preview(i, words)]);
-                }
+            	var temp = word[j].replace(new RegExp(/[()!]/g), ""); // replaces every bracket ')' or '(' and every '!' with an empty character
+	            temp = braid.replace(temp,",@wa@");
+	               if (EMAIL_RGX.test(temp)) {
+                    match = temp.match(EMAIL_RGX)[0];
+                    emails.push([match, that.preview(i,words)]);
+	            }
             }
         }
 
