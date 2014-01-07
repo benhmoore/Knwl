@@ -3,6 +3,8 @@ var braid={};braid.vnumber=.02;braid.version=function(){console.log(braid.vnumbe
 
 function Knwl() {
 
+    var UTC_DATE_TIME_RGX = /\b([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])(T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?)?\b/i
+    var EMAIL_RGX = /\b[A-Z0-9._%+-]+@([A-Z0-9.-]+\.[A-Z]{2,4}|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\b/i
     this.text = {};
     this.text.data = {};
 
@@ -846,8 +848,8 @@ function Knwl() {
             for (var j = 0; j < word.length; j++) {
             	var temp = word[j].replace(new RegExp(/[()!]/g), ""); // replaces every bracket ')' or '(' and every '!' with an empty character
 	            temp = braid.replace(temp,",@wa@");
-	               if (/\b[A-Z0-9._%+-]+@([A-Z0-9.-]+\.[A-Z]{2,4}|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\b/i.test(temp)) {
-                    match = temp.match(/\b[A-Z0-9._%+-]+@([A-Z0-9.-]+\.[A-Z]{2,4}|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\b/i)[0];
+	               if (EMAIL_RGX.test(temp)) {
+                    match = temp.match(EMAIL_RGX)[0];
                     emails.push([match, that.preview(i,words)]);
 	            }
             }
