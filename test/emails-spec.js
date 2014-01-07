@@ -37,7 +37,6 @@ describe("email", function() {
         });
     };
 
-    // Uncomment me when issue #35 is solved
     for (var i = ValidEmails.length - 1; i >= 0; i--) {
         var ve = ValidEmails[i];
 
@@ -46,8 +45,6 @@ describe("email", function() {
                 x.init("You can reach me on " + email + ".");
                 var output = x.get("emails");
                 expect(output[0][0]).toBe(email);
-                    // console.log("OUTPUT : ");
-                    // console.log(output);
             });
         };
         testEmail(ve);
