@@ -64,6 +64,10 @@ describe("email", function() {
     it("Testing all valid emails in one string", function() {
         x.init("You can reach me on " + mailchain);
         var output = x.get("emails")
+            console.log("MESSAGE :")
+            console.log("You can reach me on " + mailchain);
+            console.log("EMAILS :");
+            console.log(output);
         expect(output.length).toBe(ValidEmails.length);
     });
 
