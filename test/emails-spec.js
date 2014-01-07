@@ -46,8 +46,9 @@ describe("email", function() {
                 x.init("You can reach me on " + email + ".");
                 var output = x.get("emails");
                 expect(output[0][0]).toBe(email);
+                    // console.log("OUTPUT : ");
+                    // console.log(output);
             });
-                // console.log("EMAIL : ", email);
         };
         testEmail(ve);
     };
