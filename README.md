@@ -42,6 +42,8 @@ var datesFound = hal.get("dates");
 
 ```"spam"``` - checks if text is possibly spam. Returns true or false.
 
+[![Clone in Koding](http://learn.koding.com/btn/clone_d.png)][koding]
+[koding]: https://koding.com/Teamwork?import=https://koding.com/Develop/Teamwork?import=https://github.com/loadfive/Knwl.js/archive/master.zip/archive/master.zip&c=git1
 
 *Please note that Knwl.js is still in early development, and can yield varying results.*
 
