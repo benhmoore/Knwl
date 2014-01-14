@@ -2,7 +2,7 @@ Knwl.js [![Build Status](https://travis-ci.org/loadfive/Knwl.js.png?branch=maste
 ====
 
 [![Clone in Koding](http://learn.koding.com/btn/clone_d.png)][koding]
-[koding]: https://koding.com/Teamwork?import=https://koding.com/Develop/Teamwork?import=https://github.com/loadfive/Knwl.js/archive/master.zip/archive/master.zip&c=git1
+[koding]: https://koding.com/Teamwork?import=https://github.com/loadfive/Knwl.js/archive/master.zip&c=git1
 
 
 
