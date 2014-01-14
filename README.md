@@ -1,6 +1,10 @@
 Knwl.js [![Build Status](https://travis-ci.org/loadfive/Knwl.js.png?branch=master)](https://travis-ci.org/loadfive/Knwl.js)
 ====
 
+[![Clone in Koding](http://learn.koding.com/btn/clone_d.png)][koding]
+[koding]: https://koding.com/Teamwork?import=https://koding.com/Develop/Teamwork?import=https://github.com/loadfive/Knwl.js/archive/master.zip/archive/master.zip&c=git1
+
+
 
 Knwl.js is a Natural Language Processor built with JavaScript, put simply, **Knwl.js scans through text, user data, or just about anything for data of interest**, phone numbers, dates, locations, emails, times, and more. Even check if the string may be spam, or get the overall emotion. 
 
@@ -42,8 +46,6 @@ var datesFound = hal.get("dates");
 
 ```"spam"``` - checks if text is possibly spam. Returns true or false.
 
-[![Clone in Koding](http://learn.koding.com/btn/clone_d.png)][koding]
-[koding]: https://koding.com/Teamwork?import=https://koding.com/Develop/Teamwork?import=https://github.com/loadfive/Knwl.js/archive/master.zip/archive/master.zip&c=git1
 
 *Please note that Knwl.js is still in early development, and can yield varying results.*
 
