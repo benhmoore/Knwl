@@ -5,6 +5,7 @@ function Knwl() {
 
     var UTC_DATE_TIME_RGX = /\b([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])(T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?)?\b/i
     var EMAIL_RGX = /\b[A-Z0-9._%+-]+@([A-Z0-9.-]+\.[A-Z]{2,4}|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\b/i
+    
     this.text = {};
     this.text.data = {};
 
@@ -33,13 +34,17 @@ function Knwl() {
                 return that.text.data.emails;
             } else if (label === "places") {
                 return that.text.data.places;
+            } else if (label === "hashtags") {
+                return that.text.data.hashtags;
+            } else if (label === "aliases") {
+                return that.text.data.aliases;
             } else if (label === "spam") {
                 return that.text.data.spam;
             } else {
-                console.error("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails','places'");
+                console.error("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails','places','hashtags','aliases'");
             }
         } else {
-            console.error("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails','places'");
+            console.error("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails','places','hashtags','aliases'");
         }
 
     };
@@ -848,7 +853,7 @@ function Knwl() {
             for (var j = 0; j < word.length; j++) {
             	var temp = word[j].replace(new RegExp(/[()!]/g), ""); // replaces every bracket ')' or '(' and every '!' with an empty character
 	            temp = braid.replace(temp,",@wa@");
-	               if (EMAIL_RGX.test(temp)) {
+	            if (EMAIL_RGX.test(temp)) {
                     match = temp.match(EMAIL_RGX)[0];
                     emails.push([match, that.preview(i,words)]);
 	            }
@@ -857,6 +862,48 @@ function Knwl() {
 
         return emails;
 
+    };
+
+
+    //****************************************************************************************************************************************
+    //***************************************************HASHTAGS*****************************************************************************
+    //****************************************************************************************************************************************
+
+
+
+    this.hashtags = {};
+    this.hashtags.findHashtags = function(words) {
+        var hashtags = [], match = "";
+
+        for (var i = 0; i < words.length; i++) {
+        	if (/(#[a-z0-9][a-z0-9\-_]*)\b/i.test(words[i])) {
+        		match = words[i].match(/^(#[a-z0-9][a-z0-9\-_]*)\b/i)[0];
+                hashtags.push([match, that.preview(i,words)]);
+	        }
+        }
+
+        return hashtags;
+    };
+
+
+    //****************************************************************************************************************************************
+    //***************************************************ALIASES******************************************************************************
+    //****************************************************************************************************************************************
+
+
+
+    this.aliases = {};
+    this.aliases.findAliases = function(words) {
+        var aliases = [], match = "";
+
+        for (var i = 0; i < words.length; i++) {
+        	if (/^(@[a-z0-9][a-z0-9\-_]*)\b/i.test(words[i])) {
+        		match = words[i].match(/^(@[a-z0-9][a-z0-9\-_]*)\b/i)[0];
+                aliases.push([match, that.preview(i,words)]);
+	        }
+        }
+
+        return aliases;
     };
 
 
@@ -970,6 +1017,16 @@ function Knwl() {
         var places = that.places.findPlaces(linkWordsCasesensitive);
         if (places !== []) {
             that.addToObj(places, "places");
+        }
+
+        var hashtags = that.hashtags.findHashtags(linkWordsCasesensitive);
+        if (hashtags !== []) {
+            that.addToObj(hashtags, "hashtags");
+        }
+
+        var aliases = that.aliases.findAliases(linkWordsCasesensitive);
+        if (aliases !== []) {
+            that.addToObj(aliases, "aliases");
         }
 
         var spam = that.spam.isSpam(words);

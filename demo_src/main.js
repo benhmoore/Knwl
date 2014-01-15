@@ -1,6 +1,6 @@
 var x = new Knwl();
 var scan = function() {
-    for (var i = 1; i < 8; i++) {
+    for (var i = 1; i <= 9; i++) {
         document.getElementById('sectionContainer'+i).innerHTML = ""; // Reset the output tags
     }
     
@@ -39,6 +39,16 @@ var scan = function() {
     var places = x.get('places');
     for (var i = 0; i < places.length; i++) {
         document.getElementById('sectionContainer7').innerHTML+="<p class = 'sectionItem'>" + places[i][0] + "</p>";
+    }
+
+    var hashtags = x.get('hashtags');
+    for (var i = 0; i < hashtags.length; i++) {
+        document.getElementById('sectionContainer8').innerHTML+="<p class = 'sectionItem'>" + hashtags[i][0] + "</p>";
+    }
+
+    var aliases = x.get('aliases');
+    for (var i = 0; i < aliases.length; i++) {
+        document.getElementById('sectionContainer9').innerHTML+="<p class = 'sectionItem'>" + aliases[i][0] + "</p>";
     }
     
     

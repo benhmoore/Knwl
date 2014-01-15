@@ -40,6 +40,10 @@ var datesFound = hal.get("dates");
 
 ```"places"``` - locations found in string.
 
+```"hashtags"``` - hashtags found in string like #hash.
+
+```"aliases"``` - aliases found in string like @user.
+
 ```"readingTime"``` - estimated reading time of string.
 
 ```"emotion"``` - estimated emotion, works best with shorter strings (comments, etc).
