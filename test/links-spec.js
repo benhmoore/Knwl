@@ -46,4 +46,16 @@ describe("email", function () {
     expect(output.length).toBe(0);
   });
 
+  it("should detect common TLDs", function () {
+    x.init("Take a look at this link facebook.com");
+    var output = x.get("links")
+    expect(output[0][0]).toBe("facebook.com");
+  });
+
+  it("shouldn't detect emails containing common TLDs", function () {
+    x.init("Take a look at this link mail@gmail.com");
+    var output = x.get("links")
+    expect(output.length).toBe(0);
+  });
+
 });
