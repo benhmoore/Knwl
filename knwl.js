@@ -885,8 +885,8 @@ function Knwl() {
         var hashtags = [], match = "";
 
         for (var i = 0; i < words.length; i++) {
-        	if (/(#[a-z0-9][a-z0-9\-_]*)\b/i.test(words[i])) {
-        		match = words[i].match(/^(#[a-z0-9][a-z0-9\-_]*)\b/i)[0];
+        	if (/^#([a-z0-9][a-z0-9\-_]*)\b/i.test(words[i])) {
+        		match = words[i].match(/^#([a-z0-9][a-z0-9\-_]*)\b/i)[0];
                 hashtags.push([match, that.preview(i,words)]);
 	        }
         }
