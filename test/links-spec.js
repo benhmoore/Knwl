@@ -3,7 +3,7 @@ eval(fs.readFileSync('../knwl.js')+'');
 
 var x = new Knwl();
 
-describe("email", function () {
+describe("link", function () {
   it("should detect normal links", function () {
     x.init("Follow me on twitter at http://twitter.com/twitter");
     var output = x.get("links")
@@ -42,6 +42,18 @@ describe("email", function () {
 
   it("should not detect very strange URI's", function () {
     x.init("Take a look at this link goqsdttg://www.facebook.com");
+    var output = x.get("links")
+    expect(output.length).toBe(0);
+  });
+
+  it("should detect common TLDs", function () {
+    x.init("Take a look at this link facebook.com");
+    var output = x.get("links")
+    expect(output[0][0]).toBe("facebook.com");
+  });
+
+  it("shouldn't detect emails containing common TLDs", function () {
+    x.init("Take a look at this link mail@gmail.com");
     var output = x.get("links")
     expect(output.length).toBe(0);
   });

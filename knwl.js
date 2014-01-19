@@ -6,6 +6,8 @@ function Knwl() {
     var UTC_DATE_TIME_RGX = /\b([0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])(T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?)?\b/i
     var EMAIL_RGX = /\b[A-Z0-9._%+-]+@([A-Z0-9.-]+\.[A-Z]{2,4}|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\b/i
     
+    var TLDS = ["ac","ad","ae","aero","af","ag","ai","al","am","an","ao","aq","ar","arpa","as","asia","at","au","aw","ax","az","ba","bb","be","bf","bg","bh","bi","biz","bj","bm","bo","br","bs","bt","bv","bw","by","bz","ca","cat","cc","cd","cf","cg","ch","ci","cl","cm","cn","co","com","coop","cr","cu","cv","cw","cx","cz","de","dj","dk","dm","do","dz","ec","edu","ee","eg","es","eu","fi","fm","fo","fr","ga","gb","gd","ge","gf","gg","gh","gi","gl","gm","gn","gov","gp","gq","gr","gs","gt","gw","gy","hk","hm","hn","hr","ht","hu","id","ie","im","in","info","int","io","iq","ir","is","it","je","jo","jobs","jp","kg","ki","km","kn","kp","kr","ky","kz","la","lb","lc","li","lk","lr","ls","lt","lu","lv","ly","ma","mc","md","me","mg","mh","mil","mk","ml","mn","mo","mobi","mp","mq","mr","ms","mt","mu","museum","mv","mw","mx","my","na","name","nc","ne","net","nf","ng","nl","no","nr","nu","om","org","pa","pe","pf","ph","pk","pl","pm","pn","post","pr","pro","ps","pt","pw","py","qa","re","ro","rs","ru","rw","sa","sb","sc","sd","se","sg","sh","si","sj","sk","sl","sm","sn","so","sr","st","su","sv","sx","sy","sz","tc","td","tel","tf","tg","th","tj","tk","tl","tm","tn","to","tp","travel","tt","tv","tw","tz","ua","ug","us","uy","uz","va","vc","ve","vg","vi","vn","vu","wf","ws","yt","امارات","বাংলা","中国","中國","الجزائر","مصر","გე","香港","भारत","بھارت","భారత్","ભારત","ਭਾਰਤ","ভারত","இந்தியா","ایران","ايران","الاردن","한국","қаз","ලංකා","இலங்கை","المغرب","мон","مليسيا","عمان","فلسطين","срб","рф","قطر","السعودية","السعودیة","السعودیۃ","السعوديه","سورية","سوريا","新加坡","சிங்கப்பூர்","ไทย","تونس","台灣","台湾","臺灣","укр","اليمن","xxx","онлайн","сайт","شبكة","游戏","企业","camera","clothing","lighting","singles","ventures","voyage","guru","holdings","equipment","bike","estate","tattoo","在线","中文网","land","plumbing","contractors","sexy","menu","世界","uno","gallery","technology","集团","reviews","guide","我爱你","graphics","construction","onl","みんな","diamonds","kiwi","enterprises","today","futbol","photography","tips","directory","kitchen","移动","kim","삼성","monash","wed","pink","ruhr","buzz","careers","shoes","موقع","career","otsuka","中信","gift","recipes","coffee","luxury","domains","photos","limo","viajes","wang","democrat","mango","cab","support","dance","nagoya","computer","wien","berlin","codes","email","بازار","repair","holiday","center","systems","wiki","ceo","international","solar","company","education","training","academy","marketing","florist","solutions","build","institute","builders","red","blue","ninja","business","gal","social","house","camp","immobilien","moda","glass","management","kaufen","farm","公益","政务","club","voting","TOKYO","moe"];
+    
     this.text = {};
     this.text.data = {};
 
@@ -821,6 +823,13 @@ function Knwl() {
             var word = words[i].replace(new RegExp(/[()!]/g), ""); // replaces every bracket ')' or '(' and every '!' with an empty character
             if (/^(https?|ftp):\/\/(-\.)?([^\s\/?\.#-]+\.?)+(\/[^\s]*)?$/i.test(word)) {
                 links.push([word, that.preview(i, words)]);
+            } else if (word.indexOf('@') == -1 && word.indexOf('://') == -1) {
+                for (var j = 0; j < TLDS.length; j++) {
+                    if (word.indexOf('.' + TLDS[j]) != -1) {
+                        links.push([word, that.preview(i, words)]);
+                        break;
+                    }
+                }
             }
         }
 
