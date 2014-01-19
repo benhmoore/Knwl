@@ -3,7 +3,7 @@ eval(fs.readFileSync('../knwl.js')+'');
 
 var x = new Knwl();
 
-describe("email", function () {
+describe("link", function () {
   it("should detect normal links", function () {
     x.init("Follow me on twitter at http://twitter.com/twitter");
     var output = x.get("links")

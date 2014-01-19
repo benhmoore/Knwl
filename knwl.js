@@ -823,7 +823,7 @@ function Knwl() {
             var word = words[i].replace(new RegExp(/[()!]/g), ""); // replaces every bracket ')' or '(' and every '!' with an empty character
             if (/^(https?|ftp):\/\/(-\.)?([^\s\/?\.#-]+\.?)+(\/[^\s]*)?$/i.test(word)) {
                 links.push([word, that.preview(i, words)]);
-            } else if (word.indexOf('@') == -1) {
+            } else if (word.indexOf('@') == -1 && word.indexOf('://') == -1) {
                 for (var j = 0; j < TLDS.length; j++) {
                     if (word.indexOf('.' + TLDS[j]) != -1) {
                         links.push([word, that.preview(i, words)]);
