@@ -22,6 +22,12 @@ describe("link", function () {
     expect(output[0][0]).toBe("http://twitter.co.uk/twitter");
   });
 
+  it("should detect normal links with a port, a get-value and a hash", function () {
+    x.init("Check this out! http://coolevent.com:80/test?a=b#url");
+    var output = x.get("links")
+    expect(output[0][0]).toBe("http://coolevent.com:80/test?a=b#url");
+  });
+
   it("should detect HTTPS links", function () {
     x.init("Follow me on twitter at https://twitter.com/twitter");
     var output = x.get("links")
@@ -57,5 +63,4 @@ describe("link", function () {
     var output = x.get("links")
     expect(output.length).toBe(0);
   });
-
 });
