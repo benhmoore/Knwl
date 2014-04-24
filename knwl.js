@@ -442,8 +442,6 @@ function Knwl() {
         var negative = 0;
         var positive = 0;
         for (var i = 0; i < words.length; i++) {
-            // words[i] = words[i].split(/[.,!?]+/);
-            // words[i] = words[i][0];
             for (var e = 0; e < that.emotion.negativeWords.length; e++) {
                 var negWord = that.emotion.negativeWords[e];
                 if (words[i].search(negWord) !== -1) { //word [i] === negativeword
@@ -472,7 +470,7 @@ function Knwl() {
                         for (var s = i; s < words.length; s++) { //go back through words
                             var test = words[s].split(/[.,!?]+/);
                             if (words[s] !== undefined) {
-                                if (words[s] === that.emotion.subjects[z] || words[s].substring(0,words[s].length - 1) === that.emotion.subjects[z]) {
+                                if (words[s] === that.emotion.subjects[z] || words[s].replace(/[.,!?]+/g,"") === that.emotion.subjects[z]) {
                                     negative++;
                                 }
                             }
@@ -487,20 +485,20 @@ function Knwl() {
         }
 
         for (var i = 0; i < words.length; i++) {
-            words[i] = words[i].split(/[.,!?]+/);
-            words[i] = words[i][0];
             for (var e = 0; e < that.emotion.positiveWords.length; e++) {
                 var posWord = that.emotion.positiveWords[e];
                 if (words[i].search(posWord) !== -1) { //word [i] === negativeword
                     for (var z = 0; z < that.emotion.subjects.length; z++) {
-                        if (words[i - 1] !== undefined) {
-                            if (words[i - 1] === that.emotion.subjects[z]) {
-                                positive++;
+                        for (var s = i - 1; s > -1; s--) { //go back through words
+                            var test = words[s].split(/[.,!?]+/);
+                            console.log(test);
+                            if (words[s] !== undefined) {
+                                if (words[s] === that.emotion.subjects[z]) {
+                                    positive++;
+                                }
                             }
-                        }
-                        if (words[i - 2] !== undefined) {
-                            if (words[i - 2] === that.emotion.subjects[z]) {
-                                positive++;
+                            if (test.length !== 1) { //make sure that it has not reached a prev sentence.
+                                break;
                             }
                         }
                     }
@@ -513,15 +511,17 @@ function Knwl() {
                 var posWord = that.emotion.positiveWordsB[e];
                 if (words[i].search(posWord) !== -1) { //word [i] === negativeword
                     for (var z = 0; z < that.emotion.subjects.length; z++) {
-                        if (words[i + 1] !== undefined) {
-                            if (words[i + 1] === that.emotion.subjects[z]) {
-                                positive++;
+                        for (var s = i; s < words.length; s++) { //go back through words
+                            var test = words[s].split(/[.,!?]+/);
+                            if (words[s] !== undefined) {
+                                if (words[s] === that.emotion.subjects[z] || words[s].replace(/[.,!?]+/g,"") === that.emotion.subjects[z]) {
+                                    positive++;
+                                }
                             }
-                        }
-                        if (words[i + 2] !== undefined) {
-                            if (words[i + 2] === that.emotion.subjects[z]) {
-                                positive++;
+                            if (test.length !== 1) { //make sure that it has not reached a prev sentence.
+                                break;
                             }
+
                         }
                     }
                 }
@@ -984,6 +984,7 @@ function Knwl() {
         that.text.wordCount = lowercaseData.split(/[ ]+/).length - 1;
 
         var linkWords = lowercaseData.split(/[ \n]+/); //for link finding and (third part of date)
+        var emotionWords = linkWords;
         var linkWordsCasesensitive = data.split(/[ \n]+/);
 
         lowercaseData = lowercaseData.split(/[\n ]+/);
@@ -998,6 +999,11 @@ function Knwl() {
 
         //go
 
+        var emotions = that.emotion.findEmotions(words);
+        if (emotions !== []) {
+            that.addToObj(emotions, "emotions");
+        }
+
         var dates = that.date.findDates(words, linkWords);
         if (dates !== []) {
             that.addToObj(dates, "dates");
@@ -1011,11 +1017,6 @@ function Knwl() {
         var phones = that.phone.findPhones(words);
         if (phones !== []) {
             that.addToObj(phones, "phones");
-        }
-
-        var emotions = that.emotion.findEmotions(linkWords);
-        if (emotions !== []) {
-            that.addToObj(emotions, "emotions");
         }
 
         var links = that.link.findLinks(linkWords);
