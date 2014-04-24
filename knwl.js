@@ -46,7 +46,7 @@ function Knwl() {
                 console.error("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails','places','hashtags','aliases'");
             }
         } else {
-            console.error("KNWL ERROR: Data type not correct, correct types: 'emotion','phones','dates','times','links','emails','places','hashtags','aliases'");
+            return that.text.data;
         }
 
     };
@@ -59,7 +59,7 @@ function Knwl() {
      * @param  {[string]} str [the string to esacpe]
      * @return {[string]}     [the escaped string]
      */
-    this.escapeRegExp = function(str) {
+     this.escapeRegExp = function(str) {
         return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     };
 
@@ -71,7 +71,7 @@ function Knwl() {
      * @param  {[string]} str  [the string the characters should be removed from]
      * @return {[string]}       [the str without the specified characters]
      */
-    this.removeCharacters = function(charArray, str) {
+     this.removeCharacters = function(charArray, str) {
         for (var i = 0; i < charArray.length; i++) {
             str = str.replace(new RegExp(that.escapeRegExp(charArray[i]), "g"), "");
         }
@@ -93,21 +93,21 @@ function Knwl() {
 
     this.date = {};
     this.date.days = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', '11th', '12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th', '20th', '21st', '22nd', '23rd',
-        '24th', '25th', '26th', '27th', '28th', '29th', '30th', '31st'
+    '24th', '25th', '26th', '27th', '28th', '29th', '30th', '31st'
     ];
     this.date.months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
     this.date.monthAbbrs = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sept', 'oct', 'nov', 'dec'];
     this.date.holidays = [
-        ['thanksgiving'],
-        ['christmas'],
-        ['new', 'years'],
-        ['july', '4th']
+    ['thanksgiving'],
+    ['christmas'],
+    ['new', 'years'],
+    ['july', '4th']
     ];
     this.date.holidaysD = [
-        [28, 11],
-        [25, 12],
-        [1, 1],
-        [4, 7]
+    [28, 11],
+    [25, 12],
+    [1, 1],
+    [4, 7]
     ];
     this.date.dateObj = new Date();
 
@@ -145,7 +145,7 @@ function Knwl() {
     };
 
     this.date.findDates = function(words, wordsWithPunc) { //returns "july 16th 1999" as "[7,16,1999, "preview"]"
-        var dates = [];
+    var dates = [];
 
         for (var i = 0; i < words.length; i++) { //cleanup
             words[i] = words[i].split(/[.,!?]+/);
@@ -407,54 +407,57 @@ function Knwl() {
     //****************************************************************************************************************************************
     this.emotion = {};
 
-    this.emotion.negativeWords = ['terrible', 'horrible', 'evil', 'die', 'dick', 'bitch', 'fucked', 'stupid', 'idiot', 'dumb', 'noob', 'shit', 'vain', 'n00b', 'dickhead', 'cocksucker', 'disgusting', 'slut'];
+    this.emotion.negativeWords = ['terrible', 'horrible', 'evil', 'die', 'dick', 'bitch', 'fucked', 'stupid', 'idiot', 'dumb', 'noob', 'shit', 'vain', 'n00b', 'dickhead', 'cocksucker', 'disgusting', 'slut','upset'];
     this.emotion.negativeWordsB = ['fuck', 'shit', 'kill', 'rape', 'hate', 'hating'];
-    this.emotion.positiveWords = ['happy', 'good', 'great', 'amazing', 'awesome', 'wonderful', 'brilliant', 'smart'];
+    this.emotion.positiveWords = ['happy', 'good', 'great', 'amazing', 'awesome', 'wonderful', 'brilliant', 'smart','epic'];
     this.emotion.positiveWordsB = ['love', 'like', 'want', "<3", 'kiss'];
-    this.emotion.subjects = ["she's", "you", "him", "her", "it", "this", "he's", "shes", "hes", "your", "you're", "ur", "they're", "their", "theyre"];
+    this.emotion.subjects = ["she's", "you", "him", "her", "it", "this", "he's", "shes", "hes", "your", "you're", "ur", "they're", "their", "theyre", "i","i'm"];
 
     //these are negative phrases
     this.emotion.negComb = [
-        ['fuck', 'off'],
-        ['go', 'away'],
-        ['go', 'cry'],
-        ['go', 'and']
+    ['fuck', 'off'],
+    ['go', 'away'],
+    ['go', 'cry'],
+    ['go', 'and']
     ];
     //that can be seperated by
     this.emotion.negCombSep = ['and', 'it', '&'];
 
     //these are positive phrases
     this.emotion.posComb = [
-        ['thank', 'you'],
-        ['thanks', 'a', 'million'],
-        ['happy', 'birthday'],
-        ['happy', 'thanksgiving'],
-        ['merry', 'christmas'],
-        ['happy', 'holidays'],
-        ['good', 'day'],
-        ['oh', 'cool']
+    ['thank', 'you'],
+    ['thanks', 'a', 'million'],
+    ['happy', 'birthday'],
+    ['happy', 'thanksgiving'],
+    ['merry', 'christmas'],
+    ['happy', 'holidays'],
+    ['good', 'day'],
+    ['oh', 'cool']
     ];
     //that can be seperated by
     this.emotion.posCombSep = ['for', 'and', '&'];
 
     this.emotion.findEmotions = function(words) {
+        console.log(words);
         var negative = 0;
         var positive = 0;
         for (var i = 0; i < words.length; i++) {
-            words[i] = words[i].split(/[.,!?]+/);
-            words[i] = words[i][0];
+            // words[i] = words[i].split(/[.,!?]+/);
+            // words[i] = words[i][0];
             for (var e = 0; e < that.emotion.negativeWords.length; e++) {
                 var negWord = that.emotion.negativeWords[e];
                 if (words[i].search(negWord) !== -1) { //word [i] === negativeword
                     for (var z = 0; z < that.emotion.subjects.length; z++) {
-                        if (words[i - 1] !== undefined) {
-                            if (words[i - 1] === that.emotion.subjects[z]) {
-                                negative++;
+                        for (var s = i - 1; s > -1; s--) { //go back through words
+                            var test = words[s].split(/[.,!?]+/);
+                            console.log(test);
+                            if (words[s] !== undefined) {
+                                if (words[s] === that.emotion.subjects[z]) {
+                                    negative++;
+                                }
                             }
-                        }
-                        if (words[i - 2] !== undefined) {
-                            if (words[i - 2] === that.emotion.subjects[z]) {
-                                negative++;
+                            if (test.length !== 1) { //make sure that it has not reached a prev sentence.
+                                break;
                             }
                         }
                     }
@@ -466,15 +469,17 @@ function Knwl() {
                 var negWord = that.emotion.negativeWordsB[e];
                 if (words[i].search(negWord) !== -1) { //word [i] === negativeword
                     for (var z = 0; z < that.emotion.subjects.length; z++) {
-                        if (words[i + 1] !== undefined) {
-                            if (words[i + 1] === that.emotion.subjects[z]) {
-                                negative++;
+                        for (var s = i; s < words.length; s++) { //go back through words
+                            var test = words[s].split(/[.,!?]+/);
+                            if (words[s] !== undefined) {
+                                if (words[s] === that.emotion.subjects[z] || words[s].substring(0,words[s].length - 1) === that.emotion.subjects[z]) {
+                                    negative++;
+                                }
                             }
-                        }
-                        if (words[i + 2] !== undefined) {
-                            if (words[i + 2] === that.emotion.subjects[z]) {
-                                negative++;
+                            if (test.length !== 1) { //make sure that it has not reached a prev sentence.
+                                break;
                             }
+
                         }
                     }
                 }
@@ -575,7 +580,7 @@ function Knwl() {
                 }
             }
         }
-
+        console.log(positive);
         if (negative === positive) {
             return "neutral or unknown";
         } else if (negative > positive) {
@@ -613,27 +618,27 @@ function Knwl() {
     // IMPORTANT: This function makes the assumption that there is always 3 digits in an area code
     this.phone.formatPhoneNumber = function(number) {
         var formattedNumber = number.slice(number.length - 7, number.length - 4) + "-" +
-            number.slice(number.length - 4, number.length);
+        number.slice(number.length - 4, number.length);
 
         formattedNumber = "(" + number.slice(number.length - (that.phone.areaCodeLength + 7), number.length - 7) + ") " +
-            formattedNumber;
+        formattedNumber;
 
         if (number.length > (that.phone.areaCodeLength + 7)) {
             formattedNumber = "+" + number.slice(0, number.length - (that.phone.areaCodeLength + 7)) +
-                " " + formattedNumber;
+            " " + formattedNumber;
         }
         return formattedNumber;
     };
 
     this.phone.findPhones = function(words) {
         var phones = [],
-            currWord = null;
+        currWord = null;
 
         /* Phone Numbers can be as little as 7 digits per word,
            and as large as 13 if the word contains country code & area code & phone number
            note: this applies to North American area codes assuming 3 digits
            and is not applicable globally */
-        var phoneRegexp = /^\d{7,13}$/;
+           var phoneRegexp = /^\d{7,13}$/;
         // North American Area Code's always have 3 digits
         // To make this universal, could use a dictionary keyed on Country
         var areaCodeRegExp = /^\d{3}$/;
@@ -647,7 +652,7 @@ function Knwl() {
                 /* At this point the word is thought to be a phone number.
                    If the current word is only of length 7 it's required that the previous word
                    is the area code, assuming there is a previous word. */
-                if (i > 0 && currWord.length === 7) {
+                   if (i > 0 && currWord.length === 7) {
                     var areaCode = that.removeCharacters(["(", ")"], words[i - 1]);
                     if (areaCodeRegExp.test(areaCode)) {
                         currWord = areaCode + currWord;
@@ -655,7 +660,7 @@ function Knwl() {
                         /* At this point the current word and previous word make up the area code
                            and phone number.
                            Check whether the 2 words back represents the country code */
-                        if (i > 1) {
+                           if (i > 1) {
                             var countryCode = that.removeCharacters("+", words[i - 2]);
                             if (countryCodeRegExp.test(countryCode)) {
                                 currWord = countryCode + currWord;
@@ -665,18 +670,18 @@ function Knwl() {
                     /* If the current word is not length 7, it's possible that the current word contains
                    both the phone number and area code and the previous word is the country code.
                    Once again, this is assuming that the areaCode length is 3 */
-                } else if (i > 0 && currWord.length === (that.phone.areaCodeLength + 7)) {
-                    var countryCode = that.removeCharacters("+", words[i - 1]);
-                    if (countryCodeRegExp.test(countryCode)) {
-                        currWord = countryCode + currWord;
-                    }
+               } else if (i > 0 && currWord.length === (that.phone.areaCodeLength + 7)) {
+                var countryCode = that.removeCharacters("+", words[i - 1]);
+                if (countryCodeRegExp.test(countryCode)) {
+                    currWord = countryCode + currWord;
                 }
+            }
 
                 /* We needed the phoneRegex to accept a minimum of 7 digits in case the preceding words
                    made up the area code and possibly the country code, but if at this point there is
                    not at least 7 digits plus the areaCodeLength in the currWord then it is not likely
                    a phone number */
-                if (currWord.length >= (7 + that.phone.areaCodeLength)) {
+                   if (currWord.length >= (7 + that.phone.areaCodeLength)) {
                     phones.push([that.phone.formatPhoneNumber(currWord), that.preview(i, words)]);
                 }
             }
@@ -861,17 +866,17 @@ function Knwl() {
             var word = words[i].split(/[\,\|\(\)\?]/g);
             for (var j = 0; j < word.length; j++) {
             	var temp = word[j].replace(new RegExp(/[()!]/g), ""); // replaces every bracket ')' or '(' and every '!' with an empty character
-	            temp = braid.replace(temp,",@wa@");
-	            if (EMAIL_RGX.test(temp)) {
-                    match = temp.match(EMAIL_RGX)[0];
-                    emails.push([match, that.preview(i,words)]);
-	            }
+               temp = braid.replace(temp,",@wa@");
+               if (EMAIL_RGX.test(temp)) {
+                match = temp.match(EMAIL_RGX)[0];
+                emails.push([match, that.preview(i,words)]);
             }
         }
+    }
 
-        return emails;
+    return emails;
 
-    };
+};
 
 
     //****************************************************************************************************************************************
@@ -888,7 +893,7 @@ function Knwl() {
         	if (/^#([a-z0-9][a-z0-9\-_]*)\b/i.test(words[i])) {
         		match = words[i].match(/^#([a-z0-9][a-z0-9\-_]*)\b/i)[0];
                 hashtags.push([match, that.preview(i,words)]);
-	        }
+            }
         }
 
         return hashtags;
@@ -909,7 +914,7 @@ function Knwl() {
         	if (/^(@[a-z0-9][a-z0-9\-_]*)\b/i.test(words[i])) {
         		match = words[i].match(/^(@[a-z0-9][a-z0-9\-_]*)\b/i)[0];
                 aliases.push([match, that.preview(i,words)]);
-	        }
+            }
         }
 
         return aliases;
@@ -1008,7 +1013,7 @@ function Knwl() {
             that.addToObj(phones, "phones");
         }
 
-        var emotions = that.emotion.findEmotions(words);
+        var emotions = that.emotion.findEmotions(linkWords);
         if (emotions !== []) {
             that.addToObj(emotions, "emotions");
         }
