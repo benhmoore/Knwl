@@ -1,5 +1,3 @@
-*This project is no longer recieving updates.*
-
 Knwl.js [![Build Status](https://travis-ci.org/loadfive/Knwl.js.png?branch=master)](https://travis-ci.org/loadfive/Knwl.js)
 ====
 
