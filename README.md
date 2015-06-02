@@ -101,7 +101,7 @@ Check out a quick demo: http://loadfive.com/os/knwl/demo
 		
 ### places.js
 
-	knwl.get('places');
+	knwl.get('places')
 	
 		Returns any places found in the String.
 
@@ -114,18 +114,18 @@ In the future, some of these plugins may reach a level of accuracy that promotes
 from experimental status to the default plugins. However, some will merely stay
 as experiments.
 
-	### english.js
-	
-		```knwl.get('english');```
-		
-			Returns the simple parts (verb, subject, etc.) of basic sentences found in the String.
+### english.js
 
-	### units.js
+	knwl.get('english');
 	
-		```knwl.get('units');```
-		
-			Returns any units (grams, pounds, etc.) found in the String.
+		Returns the simple parts (verb, subject, etc.) of basic sentences found in the String.
+
+### units.js
+
+	knwl.get('units');
 	
+		Returns any units (grams, pounds, etc.) found in the String.
+
 ##Developing Parser Plugins
 
 What's awesome about the new version of Knwl.js is that it makes it much easier
