@@ -109,6 +109,10 @@ console.log(results);
 
 ```
 
+## Testing with ./Demo
+
+The demo of Knwl.js can be used to test your plugins. Just add them below ```knwl.js``` in the header of ```index.html```.
+
 ## Standards and Best Practices
 
 There are a few standards we ask (nicely) you keep in mind by to ensure a coherent experience for those wanting to use your plugin.
