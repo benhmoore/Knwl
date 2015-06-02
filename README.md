@@ -75,36 +75,36 @@ Check out a quick demo: http://loadfive.com/os/knwl/demo
 ## Default Plugins
 
 ### contacts.js
-		
-	knwl.get('phones')
-	
-		Returns any phone numbers found in the String.
-		
-	knwl.get('links')
-	
-		Returns any links found in the String.
-			
-	knwl.get('emails')
-		
-		Returns any email addresses found in the String.
+```javascript		
+knwl.get('phones')
 
+	//Returns any phone numbers found in the String.
+	
+knwl.get('links')
+
+	//Returns any links found in the String.
+		
+knwl.get('emails')
+	
+	//Returns any email addresses found in the String.
+```
 
 ### datetime.js
+```javascript
+knwl.get('dates')
 
-	knwl.get('dates')
+	//Returns any dates found in the String.
 	
-		Returns any dates found in the String.
-		
-	knwl.get('times')
-	
-		Returns any times found in the String.
-		
+knwl.get('times')
+
+	//Returns any times found in the String.
+```		
 ### places.js
+```javascript
+knwl.get('places')
 
-	knwl.get('places')
-	
-		Returns any places found in the String.
-
+	//Returns any places found in the String.
+```
 ## Experimental Plugins
 
 These parser plugins are not as accurate as the default plugins. However,
@@ -115,17 +115,17 @@ from experimental status to the default plugins. However, some will merely stay
 as experiments.
 
 ### english.js
+```javascript
+knwl.get('english')
 
-	knwl.get('english');
-	
-		Returns the simple parts (verb, subject, etc.) of basic sentences found in the String.
-
+	//Returns the simple parts (verb, subject, etc.) of basic sentences found in the String.
+```
 ### units.js
-
-	knwl.get('units');
+```javascript
+knwl.get('units')
 	
-		Returns any units (grams, pounds, etc.) found in the String.
-
+	//Returns any units (grams, pounds, etc.) found in the String.
+```
 ##Developing Parser Plugins
 
 What's awesome about the new version of Knwl.js is that it makes it much easier
