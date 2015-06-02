@@ -4,7 +4,11 @@
   "version": "0.0.1",
   "keywords": [
     "data",
-    "tagging"
+    "tagging",
+    "nlp",
+    "natural language processor",
+    "natural language",
+    "parsing"
   ],
   "repository" : {
     "type": "git",

@@ -1,0 +1,58 @@
+<html>
+	<head>
+		<title>KNWL.js Demo</title>
+		
+		<script src = '../knwl.js'></script>
+			
+		<!-- *** Put parser plugins here! *** -->
+		<script src = '../default_plugins/places.js'></script>
+		<script src = '../default_plugins/contacts.js'></script>
+		<script src = '../default_plugins/datetime.js'></script>
+			
+		<!-- Experimental -->
+		<script src = '../experimental_plugins/units.js'></script>
+		<!-- *** --->
+		
+		<link rel="stylesheet" href="src/Dogwood/dogwood.css"/> <!-- Default Styles -->
+		<link rel="stylesheet" href="src/main.css"/>
+		<script src = 'src/main.js'></script>
+	</head>
+	<body>
+		<div class = 'mainspace'></div>
+		<div class = 'main'>
+		<textarea class = 'input' id = 'input'>This is a demo of Knwl.js and just a few of the parser plugins.
+
+I'm sorry, I'm extremely busy right now. I just looked at the clock, and it's 12:54 AM, I've still got a lot of work to do.  Don't worry about the event tomorrow, it's been moved ahead a week, the 28th of December. Remember though, you've got to call to get a ticket soon, their # is 212-323-1239 and their based in Los Angeles, or call the toll free number 1 800 567-4321. Their website says it costs $23 per person. 
+If you've got enough time, they have some more information on their website, http://theevent.com. Also checkout some comments at #coolevent.
+Regards,
+David (david32@gmail.com)</textarea>
+		<div class = 'menu'>
+			<div class = "actions">
+				<p class = 'title'>KNWL.js Demo</p>
+				<button onclick = 'demo.startParse()'>Parse</button>
+				<!-- <p class = 'label' id = 'dOnline'>~ devices active</p> -->
+			</div>
+		</div>
+		</div>
+		<div class = 'results' id = 'results'>
+<!--			<div class = 'resultBox'>
+				<p class = 'title'>Phones</p>
+				<div class = 'result'>
+					<p>601-553-1350</p>
+					<p class = 'preview'>My number is 6015531350.</p>
+				</div>
+			</div>
+			<div class = 'resultBox'>
+				<p class = 'title'>Emails</p>
+				<div class = 'result'>
+					<p>moore.h.ben@gmail.com</p>
+					<p class = 'preview'>My email is moore.h.ben@gmail.com.</p>
+				</div>
+				<div class = 'result'>
+					<p>tobymacquire@gmail.com</p>
+					<p class = 'preview'>His is tobymacquire@gmail.com.</p>
+				</div>
+			</div>-->
+		</div>
+	</body>
+</html>

@@ -1,0 +1,297 @@
+/* 
+# Dogwood
+   LoadFive Default Styles
+
+# Reset.css: 
+   http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('RobotoTTF/Roboto-Thin.ttf');
+    font-weight:100;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('RobotoTTF/Roboto-Light.ttf');
+    font-weight:300;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('RobotoTTF/Roboto-Regular.ttf');
+    font-weight:500;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('RobotoTTF/Roboto-Medium.ttf');
+    font-weight:700;
+}
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+* {
+	transition:0.2s;
+}
+
+body {
+	background-color:rgb(235,235,235);
+	font-family:'Roboto', sans-serif;
+}
+textarea {
+	font-family:'Roboto', sans-serif;
+	font-size:1.2em;
+	font-weight:500;
+	line-height: 1.3;
+}
+footer {
+	background-color:rgba(0,0,0,0.1);
+	padding-top:20px;
+	padding-bottom:40px;
+	position: absolute;
+	bottom:0;
+	width:100%;
+}
+cloudView {
+	padding:20px;
+	display:block;
+}
+cloudView cloud {
+	font-family:'Roboto', sans-serif;
+	font-weight:300;
+	font-size:1em;
+
+	padding:10px;
+	background-color:rgba(0,0,0,0.1);
+	border-radius: 0.35em;
+	/*box-shadow:0px 1px 0px rgb(215,215,215);*/
+	border:1px solid rgba(0,0,0,0);
+	color:rgba(0,0,0,0.45);
+	display:inline-block;
+	margin-left:10px;
+	outline:none;
+	cursor: pointer;
+	transition:0.15s;
+}
+cloudView cloud:hover {
+	font-weight:500;
+}
+
+.center {
+	margin: auto;
+  	position: fixed;
+  	top: 0; left: 0; bottom: 0; right: 0;
+}
+.shadow-sharp {
+	/*box-shadow:0px 2px 0px rgb(215,215,215);*/
+	border:1px solid rgb(215,215,215);
+}
+.shadow-soft {
+	box-shadow:0px 3px 8px -2px rgba(0,0,0,0.1);
+}
+.shadow-overlay {
+	box-shadow:0px 3px 58px -6px rgba(0,0,0,0.5);
+}
+.menu {
+	padding-top:20px;
+	padding-bottom:20px;
+	/*background-color:white;*/
+	/*box-shadow:0px 1.5px 0px rgb(225,225,225);*/
+	z-index:10;
+	position: relative;
+}
+.menu section {
+	padding-left:15px;
+	display:inline-block;
+}
+title {
+	font-family:'Roboto', sans-serif;
+	font-weight:300;
+	font-size:1em;
+	display:inline-block;
+	margin-right:20px;
+	position: relative;
+}
+
+.menu title {
+	font-family:'Roboto', sans-serif;
+	font-weight:300;
+	font-size:1em;
+	margin-left:40px;
+	display:inline-block;
+	margin-right:20px;
+}
+.menu .title {
+	font-family:'Roboto', sans-serif;
+	font-weight:300;
+	font-size:1em;
+	margin-left:40px;
+	display:inline-block;
+	margin-right:20px;
+}
+
+
+
+button {
+	font-family:'Roboto', sans-serif;
+	font-weight:300;
+	font-size:1em;
+
+	padding:10px;
+	background-color:transparent;
+	border-radius: 0.35em;
+	/*box-shadow:0px 1px 0px rgb(215,215,215);*/
+	border:1px solid rgba(0,0,0,0);
+	color:rgba(0,0,0,0.45);
+	display:inline-block;
+	margin-left:10px;
+	outline:none;
+	cursor: pointer;
+	transition:0.15s;
+} button:hover {
+	/*box-shadow:0px 0px 0px rgb(215,215,215);*/
+	/*background-color:rgb(248,248,248);*/
+	color:rgba(0,0,0,0.9);
+}
+
+
+button .right {
+	float:right;
+	position: relative;
+}
+.text {
+	font-family:'Roboto', sans-serif;
+	font-weight:300;
+	font-size:1em;
+
+	padding:10px;
+	background-color:transparent;
+	border-radius: 0.35em;
+	/*box-shadow:0px 1px 0px rgb(215,215,215);*/
+	border:0px;
+	display:inline-block;
+	margin-left:10px;
+	outline:none;
+	transition:0.15s;
+	border:1px solid rgba(215,215,215,1);
+
+	min-width:220px;
+} .text:hover {
+	box-shadow:0px 0px 0px rgb(215,215,215);
+	background-color:rgb(248,248,248);
+}.text:focus {
+	box-shadow:0px 0px 0px rgb(215,215,215);
+	background-color:rgb(248,248,248);
+}
+
+header {
+	font-size:2em;
+	font-weight:300;
+}
+status {
+	font-size:1em;
+	font-weight:300;
+	opacity:0.5;
+	cursor:default;
+}status:hover {
+	opacity:1;
+}
+
+.blocked {
+
+}
+
+.dialog {
+	width:540px;
+	height:520px;
+	background-color:rgba(255,255,255,0.9);
+	border-radius: 0.2em;
+	padding: 20px;
+	/*opacity:0;*/
+	display:none;
+	box-shadow:0px 0px 7px -3px rgba(0,0,0,0.8);
+}
+.dialog .title {
+	font-family:'Roboto';
+	font-weight:300;
+	font-size:1.5em;
+	margin-left:20px;
+	margin-top:15px;
+	margin-bottom:20px;
+}
+.dialog .label {
+	font-family:'Roboto';
+	font-weight:500;
+	color:rgba(0,0,0,0.5);
+	font-size:0.9em;
+	margin-top:10px;
+	margin-left:20px;
+	margin-bottom:20px;
+}
+.dialog > .left {
+	width:210px;
+	/*border:1px solid red;*/
+	float:left;
+}
+.dialog > .right {
+	float:left;
+	width:325px;
+	/*border:1px solid red;*/
+}
+
+.focal {
+	/*background-color:#ef5122;*/
+	border:1px solid #ef5122;
+/*	border:0px;*/
+	transition:0.15s;
+}.focal:hover {
+	/*background-color:#ef5122;*/
+	border:1px solid #ef5122;
+	opacity:0.8;
+}.focal:focus {
+/*	background-color:#aa3918;*/
+	border:1px solid #aa3918;
+	box-shadow:0px 0px 0px rgba(0,0,0,0);
+}
