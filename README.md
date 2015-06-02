@@ -2,6 +2,8 @@
 Knwl.js is a Natural Language Processor built in JavaScript. There are plugins available
 for parsing a String for dates, times, phone numbers, emails, places, and more.
 
+Check out a quick demo: http://loadfive.com/os/knwl/demo
+
 ## Setup
 
 1. Load the ```knwl.js``` script in the header of a page.
