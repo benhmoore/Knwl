@@ -138,11 +138,11 @@ provided some documentation in ```plugin_development.md```.
 ## Community Driven
 
 The further development of this project was possible because of the
-amazing community behind previous versions. Version 1.0 of Knwl.js marks a signifficant
+amazing community behind previous versions. Version 1.0 of Knwl.js marks a significant
 change in the direction of Knwl.js to the very code-base.
 
 We've restructured and rewritten portions of the project to facilitate
-plugin development, but also to drastically increase the performance. **Knwl.js 1.0 is signifficantly
+plugin development, but also to drastically increase the performance. **Knwl.js 1.0 is significantly
  faster and more efficient than the previous iterations.**
 Yet, in the process of the relaunch, certain past features have been put on hold. But
 don't worry, plugins such as spam detection and emotion will return soon!
