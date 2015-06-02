@@ -74,36 +74,36 @@ Check out a quick demo: http://loadfive.com/os/knwl/demo
 
 ## Default Plugins
 
-	### contacts.js
-			
-		```knwl.get('phones');```
-			
-			Returns any phone numbers found in the String.
-			
-		```knwl.get('links');```
-			
-			Returns any links found in the String.
-				
-		```knwl.get('emails');```
-			
-			Returns any email addresses found in the String.
-	
-	
-	### datetime.js
-	
-		```knwl.get('dates');```
+### contacts.js
 		
-			Returns any dates found in the String.
-			
-		```knwl.get('times');```
-		
-			Returns any times found in the String.
-			
-	### places.js
+	knwl.get('phones')
 	
-		```knwl.get('places');```
+		Returns any phone numbers found in the String.
+		
+	knwl.get('links')
+	
+		Returns any links found in the String.
 			
-			Returns any places found in the String.
+	knwl.get('emails')
+		
+		Returns any email addresses found in the String.
+
+
+### datetime.js
+
+	knwl.get('dates')
+	
+		Returns any dates found in the String.
+		
+	knwl.get('times')
+	
+		Returns any times found in the String.
+		
+### places.js
+
+	knwl.get('places');
+	
+		Returns any places found in the String.
 
 ## Experimental Plugins
 
