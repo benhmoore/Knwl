@@ -1,6 +1,6 @@
 # Writing Plugins
 
-Extending the default scope of Knwl.js is done through parser plugins.
+Extending the parsing ability of Knwl.js is done through parser plugins.
 
 Parser plugins are what allow Knwl.js to parse through text. Without them, the ```knwl.js``` file is merely a shell.
 The default plugins provided are likely the most commonly parsers, and include plugins for things like dates, times, and places. There are
@@ -139,3 +139,5 @@ Oh, and if you build something, let us know! We'd love to feature your plugin on
 We'd recommend anyone developing plugins for Knwl.js to look at preexisting plugins first for inspiration.
 
 If you need more granular assistance in developing your plugin, or this documentation doesn't make any sense, no problem! You can reach us at anytime here: knwl@loadfive.com.
+
+We also have a **Google+ Community**, where you can discuss plugins and more: https://plus.google.com/communities/108874785204246812675.
