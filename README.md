@@ -131,7 +131,7 @@ knwl.get('units')
 ##Developing Parser Plugins
 
 What's awesome about the new version of Knwl.js is that it makes it much easier
-for anyone with a little knowlage of JS to build plugins. These plugins offer new
+for anyone with a little knowledge of JS to build plugins. These plugins offer new
 parsing abilities for Knwl.js that otherwise wouldn't exist.
 
 If you want to try your hand at building plugins for Knwl.js, we've
