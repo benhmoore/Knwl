@@ -12,15 +12,15 @@ demo.setup = function() {
 	}
 	demo.resultBoxes = {};
 	demo.input = document.getElementById('input');
-	for (var key in knwl.parserList) {
-		
+	for (var key in knwl.plugins) {
+
 		var resultBox = document.createElement('div');
 		resultBox.setAttribute('class', 'resultBox');
 		resultBox.innerHTML += '<p class = "title">' + key + '</p>';
-		
+
 		demo.resultBoxes[key] = resultBox;
 		resultsDiv.appendChild(resultBox);
-		
+
 	}
 };
 demo.startParse = function() {
@@ -29,7 +29,7 @@ demo.startParse = function() {
 demo.parse = function() {
 	demo.setup();
 	knwl.init(demo.input.value);
-	for (var parser in knwl.parserList) {
+	for (var parser in knwl.plugins) {
 		var data = knwl.get(parser);
 		for (var ii = 0; ii < data.length; ii++) {
 			var resultDiv = document.createElement('div');
