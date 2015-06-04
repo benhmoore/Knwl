@@ -1,2 +1,2 @@
 ### Friendly Notice
-These tests have not been updated for the current version of Knwl.js.
+These tests may not run correctly with the new version of Knwl.js.

@@ -1,7 +1,7 @@
 var fs = require('fs');
 eval(fs.readFileSync('../knwl.js') + '');
+eval(fs.readFileSync('../default_plugins/contacts.js') + '');
 
-var x = new Knwl();
 var ValidEmails = [
     "test@test.com",
     "test@test.co.uk",
@@ -26,14 +26,13 @@ var InvalidEmails = [
     "あいうえお@example.com"
 ];
 
-
 describe("email", function() {
     for (var i = ValidEmails.length - 1; i >= 0; i--) {
         var ve = ValidEmails[i];
         it("should detect the valid email of " + ve, function() {
-            x.init("You can reach me on " + ve);
-            var output = x.get("emails")
-            expect(output[0][0]).toBe(ve);
+            knwl.init("You can reach me on " + ve);
+            var output = knwl.get("emails");
+            expect(output[0].address).toBe(ve);
         });
     };
 
@@ -42,9 +41,9 @@ describe("email", function() {
 
         var testEmail = function(email){
             it("should detect the valid email of " + email + " that ends in a full stop", function() {
-                x.init("You can reach me on " + email + ".");
-                var output = x.get("emails");
-                expect(output[0][0]).toBe(email);
+                knwl.init("You can reach me on " + email + ".");
+                var output = knwl.get("emails");
+                expect(output[0].address).toBe(email);
             });
         };
         testEmail(ve);
@@ -53,8 +52,8 @@ describe("email", function() {
     for (var i = InvalidEmails.length - 1; i >= 0; i--) {
         var ie = InvalidEmails[i];
         it("should not detect the email of " + ie, function() {
-            x.init("You can reach me on " + ie);
-            var output = x.get("emails")
+            knwl.init("You can reach me on " + ie);
+            var output = knwl.get("emails")
             expect(output.length).toBe(0);
         });
     };
@@ -65,20 +64,20 @@ describe("email", function() {
     };
 
     it("Testing all valid emails in one string", function() {
-        x.init("You can reach me on " + mailchain);
-        var output = x.get("emails")
+        knwl.init("You can reach me on " + mailchain);
+        var output = knwl.get("emails")
         expect(output.length).toBe(ValidEmails.length);
     });
 
     it("Testing all valid emails in one string comma seperated", function() {
-        x.init("You can reach me on " + ValidEmails.join());
-        var output = x.get("emails")
+        knwl.init("You can reach me on " + ValidEmails.join());
+        var output = knwl.get("emails")
         expect(output.length).toBe(ValidEmails.length);
     });
 
     it("should detect if there are two emails seperated by commas", function() {
-        x.init("-David (david32@gmail.com),Wilson(example@gmail.com)");
-        var output = x.get("emails")
+        knwl.init("-David (david32@gmail.com),Wilson(example@gmail.com)");
+        var output = knwl.get("emails")
         expect(output.length).toBe(2);
     });
 
