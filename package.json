@@ -1,14 +1,12 @@
 {
-  "name": "knwl.js",
-  "description": "Scan through text for data that may be of interest.",
+  "name": "Knwl.js",
+  "description": "Parse through text for specific information.",
   "version": "0.0.1",
   "keywords": [
     "data",
     "tagging",
-    "nlp",
-    "natural language processor",
-    "natural language",
-    "parsing"
+    "parsing",
+    "language"
   ],
   "repository" : {
     "type": "git",
