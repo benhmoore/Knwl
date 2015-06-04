@@ -103,18 +103,18 @@ knwl.init = function(data) {
         linkWordsCasesensitive: linkWordsCasesensitive
     };
 };
-knwl.parserList = {
+knwl.plugins = {
     //parser plugins should add a refrence to their main function here.
 };
 knwl.register = function (name, plugin) {
-    knwl[name] = knwl.parserList[name] = plugin;
+    knwl.plugins[name] = plugin;
     return knwl;
 };
 knwl.get = function(parser) {
-    if (knwl.parserList[parser] !== undefined) {
+    if (knwl.plugins[parser] !== undefined) {
         try {
             var args = arguments;
-            var data = knwl.parserList[parser].calls(args);
+            var data = knwl.plugins[parser].calls(args);
             return data;
         } catch (error) {
             console.error('Knwl.js Error', 'Error running parser plugin "' + parser + '"', error);
