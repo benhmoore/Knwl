@@ -16,9 +16,6 @@
 
 
 knwl.dates = {};
-knwl.dates.days = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th', '8th', '9th', '10th', '11th', '12th', '13th', '14th', '15th', '16th', '17th', '18th', '19th', '20th', '21st', '22nd', '23rd',
-'24th', '25th', '26th', '27th', '28th', '29th', '30th', '31st'
-];
 knwl.dates.months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
 knwl.dates.monthAbbrs = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sept', 'oct', 'nov', 'dec'];
 knwl.dates.holidays = [
@@ -51,15 +48,9 @@ knwl.dates.constructDateObj = function(year, month, day) {
 
 //used with .findDates()
 knwl.dates.getDay = function(word) {
-    if (!isNaN(word)) {
-        if (word > 0 && word < 32) {
-            return parseInt(word);
-        }
-    } else {
-        for (var i = 0; i < knwl.dates.days.length; i++) {
-            if (knwl.dates.days[i] === word) {
-                return i + 1;
-            }
+if (typeof word !== 'undefined'){
+    if (parseInt(word.replace(/[^0-9\.]+/g, "")) > 0 && parseInt(word.replace(/[^0-9\.]+/g, "")) < 32) {
+        return parseInt(word);
         }
     }
 };
