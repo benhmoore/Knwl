@@ -121,6 +121,7 @@ as experiments.
 knwl.get('english')
 
 	//Returns the simple parts (verb, subject, etc.) of basic sentences found in the String.
+	//WARNING: this is a rigid and simplistic plugin, thus it is merely an experiment.
 ```
 ### units.js
 ```javascript
