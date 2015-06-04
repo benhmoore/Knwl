@@ -11,7 +11,6 @@ knwl.tasks = {};
 knwl.tasks.escapeRegExp = function(str) {
     return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
 };
-
 /**
  * This helper function can be used to remove all characters in the character array
  * provided (charArray) from the specified string (str)
@@ -75,7 +74,6 @@ knwl.tasks.preview = function(pos) { //generates a preview from a word position
     }
     return sentence;
 };
-
 //plugin word database
 knwl.words = {
     words: [], //words of string with most punctuation removed and converted to lowercase
@@ -85,12 +83,9 @@ knwl.words = {
 knwl.init = function(data) {
     //turn into array of words
     var lowercaseData = data.toLowerCase();
-    
     var linkWords = lowercaseData.split(/[ \n]+/);
     var linkWordsCasesensitive = data.split(/[ \n]+/);
-
     lowercaseData = lowercaseData.split(/[\n ]+/);
-
 
     for (var i = 0; i < lowercaseData.length; i++)
         lowercaseData[i] = lowercaseData[i].replace(/[ ,?!]/g, '').replace(/["]/g, "'");
@@ -100,19 +95,15 @@ knwl.init = function(data) {
         words[i] = lowercaseData[i].split(/[.,!?]+/);
         words[i] = words[i][0];
     }
-    
     return knwl.words = {
         linkWords: linkWords,
         words: words,
         linkWordsCasesensitive: linkWordsCasesensitive
     };
-
 };
-
 knwl.parserList = {
     //parser plugins should add a refrence to their main function here.
 };
-
 knwl.get = function(parser) {
     if (knwl.parserList[parser] !== undefined) {
         try {
@@ -120,11 +111,11 @@ knwl.get = function(parser) {
             var data = knwl.parserList[parser].calls(args);
             return data;
         } catch (error) {
-            console.error('KNWL Error', 'Error running parser plugin "' + parser + '"', error);
+            console.error('Knwl.js Error', 'Error running parser plugin "' + parser + '"', error);
             return false;
         }
     } else {
-        console.error('KNWL Error', 'Parser plugin "' + parser + '" not found.');
+        console.error('Knwl.js Error', 'Parser plugin "' + parser + '" not found.');
         return false;
     }
 };

@@ -1,27 +1,4 @@
 knwl.units = {};
-knwl.units.numbers = [
-	'zero',
-	'one',
-	'two',
-	'three',
-	'four',
-	'five',
-	'six',
-	'seven',
-	'eight',
-	'nine',
-	'ten',
-	'eleven',
-	'twelve',
-	'thirteen',
-    'fourteen',
-    'fifteen',
-    'sixteen',
-    'seventeen',
-    'eighteen',
-    'nineteen',
-];
-
 knwl.units.list = {
 	'g': {
 		name: 'grams'
@@ -44,17 +21,11 @@ knwl.units.list = {
 	"°C": {
 		name: 'celcius'
 	},
-	'm': {
-		name: 'meters'
-	},
-	'ft': {
-		name: 'feet'
-	},
 	'mL': {
-		name: 'mL'
+		name: 'milliliter'
 	},
 	'ms': {
-		name: 'miliseconds'
+		name: 'milliseconds'
 	},
 	's': {
 		name: 'seconds'
@@ -76,22 +47,23 @@ knwl.units.list = {
 	},
 	'in': {
 		name: 'inches'
+	},
+	'ft': {
+		name: 'feet'
+	},
+	'm': {
+		name: 'meters'
+	},
+	'cm': {
+		name: 'centimeters'
+	},
+	'mm': {
+		name: 'millimeters'
 	}
 };
-
 knwl.units.findUnits = function() {
 	var units = [];
 	var words = knwl.words.linkWordsCasesensitive;
-	
-	/*
-	# Data Respresentation Format
-	
-	{
-		unit: 'g',
-		value: 20
-	}
-	*/
-	
 	for (var ii = 0; ii < words.length; ii++) {
 		var word = words[ii].replace(/[?!.,\(\)\[\]]/g, '');
 		var shouldAdd = false;
