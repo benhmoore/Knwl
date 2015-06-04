@@ -1,23 +1,24 @@
 # Knwl.js
-Knwl.js is a Natural Language Processor built in JavaScript that parses through text for dates, times, phone numbers, emails, places, and more. 
+Knwl.js is a Javascript library that parses through text for dates, times, phone numbers, emails, places, and more. 
 
-Parser plugins are what make Knwl.js tick and give it new parsing abilities, and there are many already available under ```./default_plugins``` and ```./experimental_plugins```. You can learn how to create your own in ```./plugin_development.md```, and soon, you'll be able to browse community created plugins all on one website (we're still working on this).
+Parser plugins are what make Knwl.js tick and give it new parsing abilities. There are many already available under ```./default_plugins``` and ```./experimental_plugins``` for a number of tasks.
+Soon, you'll be able to browse community created plugins all on one website (we're still working on this). If you're interested in developing plugins for Knwl.js, ```./plugin_development.md``` is a great place to start.
 
 ### Check out a quick demo: http://loadfive.com/os/knwl/demo
-
+##### Google+ Community: https://plus.google.com/communities/108874785204246812675
 
 ## Setup
 
-1. First, load the ```knwl.js``` script in the header of a page.
+1. First, load the ```knwl.js``` script in the ```<head>``` of a page.
 
 	``` html
 		<script src = 'knwl.js'></script>
 	```
 
-	Think of this file as a shell, it provides a standard
+	Think of this script as a shell, it provides a standard
 	API for parser plugins and some basic task functions.
 
-2. Load a Knwl.js parser plugin file.
+2. Next, load a Knwl.js parser plugin file.
 	
 	``` html
 		<script src = 'default_plugins/datetime.js'></script>
@@ -28,7 +29,7 @@ Parser plugins are what make Knwl.js tick and give it new parsing abilities, and
 3. Initiate Knwl.js on a String.
 
 	``` javascript
-		knwl.init("This is a string. This was written on the 2nd of june, of 2015.");
+		knwl.init("This is a string. This was written on the 2nd of June, of 2015.");
 	```
 	
 	This line runs the initial parser functions that
@@ -43,7 +44,7 @@ Parser plugins are what make Knwl.js tick and give it new parsing abilities, and
 	```
 	
 	The first parameter of ```knwl.get()``` is the
-	name of the parser plugin you're trying to access (make sure you've added the plugin's js file to the header of the page).
+	name of the parser plugin you're trying to access (make sure you've added the plugin's .js file to the header of the page).
 	The names of all default parser plugins are provided
 	 towards the end of this document. If you're using
 	plugins other than the defaults, see their respective
@@ -56,7 +57,8 @@ Parser plugins are what make Knwl.js tick and give it new parsing abilities, and
 	var results = [
 		{ //result
 			//plugin-specific properties
-			"preview": "This was written on the 2nd of june of 2015.", //the sentence of rough location of the data from the String
+			"preview": "This was written on the 2nd of June of 2015.", //the sentence of rough location of the data from the String
+			"found": integer //the position (in words) of the result in the String
 		}
 	]
 	```
@@ -69,7 +71,8 @@ Parser plugins are what make Knwl.js tick and give it new parsing abilities, and
 			"year": 2015,
 			"month": 6,
 			"day": 2,
-			"preview": "This was written on the 2nd of june of 2015.",
+			"preview": "This was written on the 2nd of June of 2015.",
+			"found": 5
 		}
 	]
 	```
@@ -152,7 +155,7 @@ don't worry, plugins such as spam detection and emotion will return soon!
 
 We think that overall, this is a step in the right direction.
 
-As always, we invite you to reengineer any part of Knwl.js (including the provided plugins) in an attempt
+As always, we invite you to re-engineer any part of Knwl.js (including the provided plugins) in an attempt
 to make them better. Let's do this together.
 
 You can reach us at knwl@loadfive.com with any questions, comments,
