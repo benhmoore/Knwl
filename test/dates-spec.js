@@ -1,6 +1,4 @@
-var fs = require('fs');
-eval(fs.readFileSync('../knwl.js')+'');
-eval(fs.readFileSync('../default_plugins/datetime.js')+'');
+var knwl = require('../knwl');
 
 describe("dates", function () {
   it("should detect worded dates", function () {
@@ -41,35 +39,35 @@ describe("dates", function () {
     expect(output.month).toBe(2);
   });
 
-  
+
   it("should detect worded march", function () {
     knwl.init(" the 28th of march.");
     var output = knwl.get("dates")[0];
     expect(output.month).toBe(3);
   });
 
-  
+
   it("should detect worded mar", function () {
     knwl.init(" the 28th of mar.");
     var output = knwl.get("dates")[0];
     expect(output.month).toBe(3);
   });
 
-  
+
   it("should detect worded april", function () {
     knwl.init(" the 28th of april.");
     var output = knwl.get("dates")[0];
     expect(output.month).toBe(4);
   });
 
-  
+
   it("should detect worded apr", function () {
     knwl.init(" the 28th of apr.");
     var output = knwl.get("dates")[0];
     expect(output.month).toBe(4);
   });
 
-  
+
   it("should detect worded may", function () {
     knwl.init(" the 28th of may.");
     var output = knwl.get("dates")[0];
@@ -90,7 +88,7 @@ describe("dates", function () {
     expect(output.month).toBe(6);
   });
 
-  
+
   it("should detect worded july", function () {
     knwl.init(" the 28th of july.");
     var output = knwl.get("dates")[0];
@@ -114,7 +112,7 @@ describe("dates", function () {
     var output = knwl.get("dates")[0];
     expect(output.month).toBe(8);
   });
-  
+
   it("should detect worded september", function () {
     knwl.init(" the 28th of september.");
     var output = knwl.get("dates")[0];
