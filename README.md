@@ -1,4 +1,4 @@
-# Knwl.js
+# Knwl.js [![Build Status](https://travis-ci.org/loadfive/Knwl.js.svg?branch=master)](https://travis-ci.org/loadfive/Knwl.js)
 Knwl.js is a Javascript library that parses through text for dates, times, phone numbers, emails, places, and more. 
 
 Parser plugins are what make Knwl.js tick and give it new parsing abilities. There are many already available under ```./default_plugins``` and ```./experimental_plugins``` for a number of tasks.
