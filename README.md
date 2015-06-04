@@ -110,7 +110,7 @@ knwl.get('places')
 ## Experimental Plugins
 
 These parser plugins are not as accurate as the default plugins. However,
-they should be stable (they shouldn't crash the page) to use if you are willing to use them.
+they should be stable (they shouldn't crash the page) to use if you are willing to use them. They are considerably more static and rigid than default plugins.
 
 In the future, some of these plugins may reach a level of accuracy that promotes them
 from experimental status to the default plugins. However, some will merely stay
