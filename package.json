@@ -1,7 +1,7 @@
 {
   "name": "knwl.js",
   "description": "Parse through text for specific information.",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "keywords": [
     "data",
     "tagging",
