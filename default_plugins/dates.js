@@ -16,7 +16,7 @@
 
 var knwl = require('../knwl');
 
-/* Phone Number Parser */
+/* Date Parser */
 var Dates = exports = module.exports;
 
 

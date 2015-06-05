@@ -1,7 +1,7 @@
 
 var knwl = require('../knwl');
 
-/* Phone Number Parser */
+/* Place Parser */
 var Places = exports = module.exports;
 
 Places.countryList = [

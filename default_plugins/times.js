@@ -1,7 +1,7 @@
 
 var knwl = require('../knwl');
 
-/* Phone Number Parser */
+/* Time Parser */
 var Times = exports = module.exports;
 
 Times.calls = function() {
