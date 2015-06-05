@@ -1,6 +1,3 @@
-## Notice
-Node.js support is coming soon. This will slightly change the syntax of plugins. However, it will not be difficult to upgrade plugins to the new standards.
-
 # Writing Plugins
 
 Extending the parsing ability of Knwl.js is done through parser plugins.

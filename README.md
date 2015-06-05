@@ -1,31 +1,52 @@
-# Knwl.js [![Build Status](https://travis-ci.org/loadfive/Knwl.js.svg?branch=master)](https://travis-ci.org/loadfive/Knwl.js)
+# Knwl.js
 Knwl.js is a Javascript library that parses through text for dates, times, phone numbers, emails, places, and more. 
 
-Parser plugins are what make Knwl.js tick and give it new parsing abilities. There are many already available under ```./default_plugins``` and ```./experimental_plugins``` for a number of tasks.
+Parser plugins are what make Knwl.js tick and give it new parsing abilities. There are many already available under ```./default_plugins``` for a number of tasks.
 Soon, you'll be able to browse community created plugins all on one website (we're still working on this). If you're interested in developing plugins for Knwl.js, ```./plugin_development.md``` is a great place to start.
 
 ### Check out a quick demo: http://loadfive.com/os/knwl/demo
-##### Google+ Community: https://plus.google.com/communities/108874785204246812675
+#### Google+ Community: https://plus.google.com/communities/108874785204246812675
 
-## Setup
+## Installation
 
-1. First, load the ```knwl.js``` script in the ```<head>``` of a page.
+Installation instructions are specific to whether you want to run Knwl.js in the browser, or on the server with Node.js.
 
-	``` html
-		<script src = 'knwl.js'></script>
+###For Node.js
+
+1. Load the ```knwl``` module using ```require()```.
+
+	```javascript
+		var knwl = require("./knwl.js");
 	```
 
-	Think of this script as a shell, it provides a standard
-	API for parser plugins and some basic task functions.
+2. Load a parser plugin.
 
-2. Next, load a Knwl.js parser plugin file.
-	
-	``` html
-		<script src = 'default_plugins/datetime.js'></script>
+	```javascript
+		knwl.register('dates', require('./default_plugins/dates'));
 	```
-	You can load as many as you want, they should work together just fine. 
-	Just remember to load parser plugins after ```knwl.js``` and you'll be set.
 	
+	The plugins in the ```./default_plugins``` directory will be loaded automatically.
+
+###For the Browser
+
+These steps require the ```npm``` package.
+
+1. Run ```npm install``` to install dependencies.
+
+2. ```browserify``` may be used to build a Knwl.js project from Node.js for the browser.
+
+	Use the following syntax in the terminal:
+	
+	```console
+		./node_modules/.bin/browserify script.js browser.js > output.js
+	```
+	
+	The ```script.js``` file is the Node.js file you wish to package for the browser. The ```browser.js``` file is included in the Knwl.js parent directory.
+
+## Usage Guide
+
+These steps are the same regardless of whether Knwl.js is running on the server or client.
+
 3. Initiate Knwl.js on a String.
 
 	``` javascript
@@ -79,38 +100,56 @@ Soon, you'll be able to browse community created plugins all on one website (we'
 
 ## Default Plugins
 
-### contacts.js
+These are automatically loaded by default.
+
+###dates.js
+```javascript
+	knwl.get('dates');
+	
+	//Returns any dates found in the String.
+```
+
+###times.js
+```javascript
+	knwl.get('times');
+	
+	//Returns any times found in the String.
+	
+```
+
+###phones.js
 ```javascript		
 knwl.get('phones')
 
 	//Returns any phone numbers found in the String.
-	
+
+```
+
+###links.js
+```javascript
 knwl.get('links')
 
 	//Returns any links found in the String.
-		
+
+```
+
+###emails.js
+```javascript
 knwl.get('emails')
 	
 	//Returns any email addresses found in the String.
 ```
 
-### datetime.js
-```javascript
-knwl.get('dates')
-
-	//Returns any dates found in the String.
-	
-knwl.get('times')
-
-	//Returns any times found in the String.
-```		
 ### places.js
 ```javascript
 knwl.get('places')
 
 	//Returns any places found in the String.
 ```
+
 ## Experimental Plugins
+
+###Notice: These plugins have not been upgraded to the new syntax
 
 These parser plugins are not as accurate as the default plugins. However,
 they should be stable (they shouldn't crash the page) to use if you are willing to use them. They are considerably more static and rigid than default plugins.
@@ -119,14 +158,14 @@ In the future, some of these plugins may reach a level of accuracy that promotes
 from experimental status to the default plugins. However, some will merely stay
 as experiments.
 
-### english.js
+###english.js
 ```javascript
 knwl.get('english')
 
 	//Returns the simple parts (verb, subject, etc.) of basic sentences found in the String.
 	//WARNING: this is a rigid and simplistic plugin, thus it is merely an experiment.
 ```
-### units.js
+###units.js
 ```javascript
 knwl.get('units')
 	
