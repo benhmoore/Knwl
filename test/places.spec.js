@@ -1,6 +1,4 @@
-var fs = require('fs');
-eval(fs.readFileSync('../knwl.js') + '');
-eval(fs.readFileSync('../default_plugins/places.js') + '');
+var knwl = require('../knwl');
 
 //Test Places Detection
 describe("places", function() {

@@ -1,6 +1,4 @@
-var fs = require('fs');
-eval(fs.readFileSync('../knwl.js')+'');
-eval(fs.readFileSync('../default_plugins/contacts.js')+'');
+var knwl = require('../knwl');
 
 //Test Link Detection
 describe("link", function () {

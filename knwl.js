@@ -1,5 +1,7 @@
-var knwl = {};
+var knwl = exports = module.exports;
+
 knwl.tasks = {};
+
 /**
  * In order to remove all characters during the invocation of the removeCharacters function,
  * a Regular Expression is used to find all instances of the character to remove. We need
@@ -47,7 +49,7 @@ knwl.tasks.search = function(termArr, words) {
 knwl.tasks.preview = function(pos) { //generates a preview from a word position
     var words = knwl.words.linkWordsCasesensitive;
     var sentence = '';
-    
+
     var startingPos = pos;
     for (var ii = pos; ii > -1; ii--) {
         startingPos = ii;
@@ -101,14 +103,18 @@ knwl.init = function(data) {
         linkWordsCasesensitive: linkWordsCasesensitive
     };
 };
-knwl.parserList = {
+knwl.plugins = {
     //parser plugins should add a refrence to their main function here.
 };
+knwl.register = function (name, plugin) {
+    knwl.plugins[name] = plugin;
+    return knwl;
+};
 knwl.get = function(parser) {
-    if (knwl.parserList[parser] !== undefined) {
+    if (knwl.plugins[parser] !== undefined) {
         try {
             var args = arguments;
-            var data = knwl.parserList[parser].calls(args);
+            var data = knwl.plugins[parser].calls(args);
             return data;
         } catch (error) {
             console.error('Knwl.js Error', 'Error running parser plugin "' + parser + '"', error);
@@ -119,3 +125,14 @@ knwl.get = function(parser) {
         return false;
     }
 };
+
+
+// load default plugins
+knwl.register('dates', require('./default_plugins/dates'));
+knwl.register('times', require('./default_plugins/times'));
+
+knwl.register('emails', require('./default_plugins/emails'));
+knwl.register('links', require('./default_plugins/links'));
+knwl.register('phones', require('./default_plugins/phones'));
+
+knwl.register('places', require('./default_plugins/places'));

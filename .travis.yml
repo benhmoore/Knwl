@@ -3,8 +3,7 @@ node_js:
   - "0.10"
 
 install:
-  - npm -g install jasmine-node
+  - npm install
 
 script:
-  - cd test
-  - jasmine-node .
+  - npm test
