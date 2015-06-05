@@ -13,6 +13,12 @@ Installation instructions are specific to whether you want to run Knwl.js in the
 
 ###For Node.js
 
+#### Install using ```npm```:
+
+```console
+	npm install knwl.js
+```
+
 1. Load the ```knwl``` module using ```require()```.
 
 	```javascript
