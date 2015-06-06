@@ -56,7 +56,7 @@ These steps are the same regardless of whether Knwl.js is running on the server 
 3. Initiate Knwl.js on a String.
 
 	``` javascript
-		knwl.init("This is a string. This was written on the 2nd of June, of 2015.");
+	knwl.init("This is a string. This was written on the 2nd of June, of 2015.");
 	```
 	
 	This line runs the initial parser functions that
@@ -67,7 +67,7 @@ These steps are the same regardless of whether Knwl.js is running on the server 
 4. Initiate a plugin to parse the String.
 	
 	``` javascript
-		var dates = knwl.get('dates');
+	var dates = knwl.get('dates');
 	```
 	
 	The first parameter of ```knwl.get()``` is the
