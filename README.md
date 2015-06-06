@@ -110,14 +110,14 @@ These are automatically loaded by default.
 
 ###dates.js
 ```javascript
-	knwl.get('dates');
+knwl.get('dates');
 	
 	//Returns any dates found in the String.
 ```
 
 ###times.js
 ```javascript
-	knwl.get('times');
+knwl.get('times');
 	
 	//Returns any times found in the String.
 	
