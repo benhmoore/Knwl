@@ -201,7 +201,7 @@ var results = [];
 
 
 
-    //for dates like "thanksgiving", "chirstmas", or "new years"
+    //for dates like "thanksgiving", "christmas", or "new years"
     var dateObj = {};
     for (var i = 0; i < words.length; i++) {
         for (var e = 0; e < Dates.holidays.length; e++) {
