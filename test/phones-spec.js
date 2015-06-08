@@ -1,4 +1,5 @@
-var knwl = new require('../knwl')();
+var Knwl = require('../knwl');
+var knwl = new Knwl();
 
 // Test Phone Number Detection
 describe("phone number detection", function () {
