@@ -19,19 +19,23 @@ Installation instructions are specific to whether you want to run Knwl.js in the
 	npm install knwl.js
 ```
 
-1. Load the ```knwl``` module using ```require()```.
+1. Load the ```knwl``` module using ```require()``` and create a new Instance.
 
 	```javascript
-		var knwl = require("./knwl.js");
+		var Knwl = require("./knwl.js");
+		
+		var knwlInstance = new Knwl();
 	```
 
 2. Load a parser plugin.
 
 	```javascript
-		knwl.register('dates', require('./default_plugins/dates'));
+		knwlInstance.register('dates', require('./default_plugins/dates'));
 	```
 	
-	The plugins in the ```./default_plugins``` directory will be loaded automatically.
+	The first parameter is the desired label for the plugin. The second parameter is a ```require()``` call to load the plugin.
+	
+	*Note: The plugins in the ```./default_plugins``` directory will be loaded automatically.*
 
 ###For the Browser
 
@@ -56,7 +60,7 @@ These steps are the same regardless of whether Knwl.js is running on the server 
 3. Initiate Knwl.js on a String.
 
 	``` javascript
-	knwl.init("This is a string. This was written on the 2nd of June, of 2015.");
+	knwlInstance.init("This is a string. This was written on the 2nd of June, of 2015.");
 	```
 	
 	This line runs the initial parser functions that
@@ -67,7 +71,7 @@ These steps are the same regardless of whether Knwl.js is running on the server 
 4. Initiate a plugin to parse the String.
 	
 	``` javascript
-	var dates = knwl.get('dates');
+	var dates = knwlInstance.get('dates');
 	```
 	
 	The first parameter of ```knwl.get()``` is the

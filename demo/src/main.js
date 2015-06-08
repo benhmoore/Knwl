@@ -1,3 +1,5 @@
+var knwl = new Knwl();
+
 var demo = {};
 demo.resultBoxes = {};
 demo.input = null;
