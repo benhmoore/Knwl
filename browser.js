@@ -1,7 +1,7 @@
-var knwl = require('./knwl');
+var Knwl = require('./knwl');
 
 if (typeof global.window.define == 'function' && global.window.define.amd) {
-    global.window.define('knwl', function () { return knwl; });
+    global.window.define('Knwl', function () { return Knwl; });
 } else {
-    global.window.knwl = knwl;
+    global.window.Knwl = Knwl;
 }
