@@ -1,11 +1,11 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (global){
-var Knwl = require('./knwl');
+var knwl = require('./knwl');
 
 if (typeof global.window.define == 'function' && global.window.define.amd) {
-    global.window.define('Knwl', function () { return Knwl; });
+    global.window.define('knwl', function () { return knwl; });
 } else {
-    global.window.Knwl = Knwl;
+    global.window.knwl = knwl;
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
@@ -31,9 +31,7 @@ function Dates(knwl) {
         [31, 10],
         [1, 4]
     ];
-    
     this.dateObj = new Date();
-    
     this.constructDateObj = function(year, month, day) {
         return {
             year: year,
@@ -43,7 +41,6 @@ function Dates(knwl) {
         };
     };
     
-    //used with .calls()
     this.getDay = function(word) {
     if (typeof word !== 'undefined'){
         if (parseInt(word.replace(/[^0-9\.]+/g, "")) > 0 && parseInt(word.replace(/[^0-9\.]+/g, "")) < 32) {
@@ -51,7 +48,7 @@ function Dates(knwl) {
             }
         }
     };
-    this.getMonth = function(word, type) { //used with .calls()
+    this.getMonth = function(word, type) {
         if (!isNaN(word) && type === 'mdy') {
             return parseInt(word);
         } else {
@@ -190,10 +187,8 @@ function Dates(knwl) {
                     }
                 } //finish check if month and day defined
             }
-        } //end for
-    
-    
-    
+        }
+        
         //for dates like "thanksgiving", "christmas", or "new years"
         var dateObj = {};
         for (var i = 0; i < words.length; i++) {
@@ -256,13 +251,9 @@ function Dates(knwl) {
     
             }
         }
-    
         return results;
-    
     };
-
     var dates = this;
-
 };
 
 module.exports = Dates;
@@ -278,7 +269,7 @@ function Emails(knwl) {
         for (var i = 0; i < words.length; i++) {
             var word = words[i].split(/[\,\|\(\)\?]/g);
             for (var j = 0; j < word.length; j++) {
-            	var temp = word[j].replace(/[()!]/g, ""); // replaces every bracket ')' or '(' and every '!' with an empty character
+            	var temp = word[j].replace(/[()!]/g, '');
                 temp = temp.replace(/[,]/g, '');
                 if (emails.test.test(temp)) {
                     match = temp.match(emails.test)[0];
@@ -673,16 +664,11 @@ function Places(knwl) {
   this.triggers = [['at'], ['in'], ['near'], ['close', 'to'], ['above'], ['below'], ['almost', 'to'], ['leaving'], ['arriving', 'at']];
   this.calls = function() {
       var words = knwl.words.linkWordsCasesensitive;
-  
-      // console.info('using search', knwl.tasks.search(places.triggers, words));
-  
       var triggers = places.triggers;
       var results = [];
   
       for (var i = 0; i < words.length; i++) {
-  
-          words[i] = words[i].replace(new RegExp(/[()!,]/g), ""); //clean up
-  
+          words[i] = words[i].replace(/[()!,.]/g, ''); //clean up
           var isMatch = false;
           for (var ee = 0; ee < triggers.length; ee++) {
               if (words[i] === triggers[ee][0]) {
@@ -700,10 +686,6 @@ function Places(knwl) {
                   }
               }
           }
-          if (isMatch === true) {
-  //            console.info(isMatch, words[i]);
-          }
-  
           if (isMatch) {
               var word = [];
               var j = 1;
@@ -735,11 +717,24 @@ function Places(knwl) {
                           place: word.join(' '),
                           preview: knwl.tasks.preview(i),
                           found: i
-                      }
+                      };
                       results.push(placeObj);
                   }
               }
               i += j - 1;
+          }
+          
+          if (isMatch === false || isFalsePlace === true) {
+            for (var ee = 0; ee < places.countryList.length; ee++) {
+              if (words[i].replace(/[()!,.]/g, '').toLowerCase() === places.countryList[ee].name.toLowerCase()) {
+                var placeObj = {
+                    place: places.countryList[ee].name,
+                    preview: knwl.tasks.preview(i),
+                    found: i
+                };
+                results.push(placeObj);
+              }
+            }
           }
       }
   
@@ -757,15 +752,10 @@ module.exports = Places;
 function Times(knwl) {
     this.calls = function() {
 
-        var rawWords = knwl.words.words;
-
-        var times = [];
-
-        var words = []; //make a copy of the rawWords array (otherwise, changes will be mirrored to knwl.words prop)
+        var rawWords = knwl.words.words, times = [], words = [];
         for (var i = 0; i < rawWords.length; i++) {
             words[i] = rawWords[i];
         }
-
         for (var i = 0; i < words.length; i++) {
             var timeObj = {};
             var testTime = words[i].split(":");
