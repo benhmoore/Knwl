@@ -251,16 +251,11 @@ function Places(knwl) {
   this.triggers = [['at'], ['in'], ['near'], ['close', 'to'], ['above'], ['below'], ['almost', 'to'], ['leaving'], ['arriving', 'at']];
   this.calls = function() {
       var words = knwl.words.linkWordsCasesensitive;
-  
-      // console.info('using search', knwl.tasks.search(places.triggers, words));
-  
       var triggers = places.triggers;
       var results = [];
   
       for (var i = 0; i < words.length; i++) {
-  
-          words[i] = words[i].replace(new RegExp(/[()!,]/g), ""); //clean up
-  
+          words[i] = words[i].replace(/[()!,.]/g, ''); //clean up
           var isMatch = false;
           for (var ee = 0; ee < triggers.length; ee++) {
               if (words[i] === triggers[ee][0]) {
@@ -278,10 +273,6 @@ function Places(knwl) {
                   }
               }
           }
-          if (isMatch === true) {
-  //            console.info(isMatch, words[i]);
-          }
-  
           if (isMatch) {
               var word = [];
               var j = 1;
@@ -313,11 +304,24 @@ function Places(knwl) {
                           place: word.join(' '),
                           preview: knwl.tasks.preview(i),
                           found: i
-                      }
+                      };
                       results.push(placeObj);
                   }
               }
               i += j - 1;
+          }
+          
+          if (isMatch === false || isFalsePlace === true) {
+            for (var ee = 0; ee < places.countryList.length; ee++) {
+              if (words[i].replace(/[()!,.]/g, '').toLowerCase() === places.countryList[ee].name.toLowerCase()) {
+                var placeObj = {
+                    place: places.countryList[ee].name,
+                    preview: knwl.tasks.preview(i),
+                    found: i
+                };
+                results.push(placeObj);
+              }
+            }
           }
       }
   

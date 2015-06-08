@@ -2,15 +2,10 @@
 function Times(knwl) {
     this.calls = function() {
 
-        var rawWords = knwl.words.words;
-
-        var times = [];
-
-        var words = []; //make a copy of the rawWords array (otherwise, changes will be mirrored to knwl.words prop)
+        var rawWords = knwl.words.words, times = [], words = [];
         for (var i = 0; i < rawWords.length; i++) {
             words[i] = rawWords[i];
         }
-
         for (var i = 0; i < words.length; i++) {
             var timeObj = {};
             var testTime = words[i].split(":");

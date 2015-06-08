@@ -9,7 +9,7 @@ function Emails(knwl) {
         for (var i = 0; i < words.length; i++) {
             var word = words[i].split(/[\,\|\(\)\?]/g);
             for (var j = 0; j < word.length; j++) {
-            	var temp = word[j].replace(/[()!]/g, ""); // replaces every bracket ')' or '(' and every '!' with an empty character
+            	var temp = word[j].replace(/[()!]/g, '');
                 temp = temp.replace(/[,]/g, '');
                 if (emails.test.test(temp)) {
                     match = temp.match(emails.test)[0];

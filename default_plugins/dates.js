@@ -19,9 +19,7 @@ function Dates(knwl) {
         [31, 10],
         [1, 4]
     ];
-    
     this.dateObj = new Date();
-    
     this.constructDateObj = function(year, month, day) {
         return {
             year: year,
@@ -31,7 +29,6 @@ function Dates(knwl) {
         };
     };
     
-    //used with .calls()
     this.getDay = function(word) {
     if (typeof word !== 'undefined'){
         if (parseInt(word.replace(/[^0-9\.]+/g, "")) > 0 && parseInt(word.replace(/[^0-9\.]+/g, "")) < 32) {
@@ -39,7 +36,7 @@ function Dates(knwl) {
             }
         }
     };
-    this.getMonth = function(word, type) { //used with .calls()
+    this.getMonth = function(word, type) {
         if (!isNaN(word) && type === 'mdy') {
             return parseInt(word);
         } else {
@@ -178,10 +175,8 @@ function Dates(knwl) {
                     }
                 } //finish check if month and day defined
             }
-        } //end for
-    
-    
-    
+        }
+        
         //for dates like "thanksgiving", "christmas", or "new years"
         var dateObj = {};
         for (var i = 0; i < words.length; i++) {
@@ -244,13 +239,9 @@ function Dates(knwl) {
     
             }
         }
-    
         return results;
-    
     };
-
     var dates = this;
-
 };
 
 module.exports = Dates;
