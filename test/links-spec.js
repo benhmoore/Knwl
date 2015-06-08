@@ -1,4 +1,4 @@
-var knwl = require('../knwl');
+var knwl = new require('../knwl')();
 
 //Test Link Detection
 describe("link", function () {

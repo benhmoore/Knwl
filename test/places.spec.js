@@ -1,4 +1,4 @@
-var knwl = require('../knwl');
+var knwl = new require('../knwl')();
 
 //Test Places Detection
 describe("places", function() {

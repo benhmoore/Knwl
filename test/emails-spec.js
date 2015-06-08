@@ -1,4 +1,4 @@
-var knwl = require('../knwl');
+var knwl = new require('../knwl')();
 
 var ValidEmails = [
     "test@test.com",

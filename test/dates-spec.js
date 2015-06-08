@@ -1,4 +1,5 @@
-var knwl = require('../knwl');
+var knwl = new require('../knwl')();
+
 
 describe("dates", function () {
   it("should detect worded dates", function () {
