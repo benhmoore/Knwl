@@ -2,10 +2,7 @@
 function Times(knwl) {
     this.calls = function() {
 
-        var rawWords = knwl.words.words, times = [], words = [];
-        for (var i = 0; i < rawWords.length; i++) {
-            words[i] = rawWords[i];
-        }
+        var words = knwl.words.words.concat([]), times = [], words = [];
         for (var i = 0; i < words.length; i++) {
             var timeObj = {};
             var testTime = words[i].split(":");

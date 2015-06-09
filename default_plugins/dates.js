@@ -54,14 +54,9 @@ function Dates(knwl) {
     };
     this.calls = function() {
     
-    var rawWords = knwl.words.words;
+    var words = knwl.words.words.concat([]);
     var wordsWithPunc = knwl.words.linkWords;
     var results = [];
-    
-        var words = []; //make a copy of the rawWords array (otherwise, changes will be mirrored to knwl.words prop)
-        for (var i = 0; i < rawWords.length; i++) {
-            words[i] = rawWords[i];
-        }
     
         //for dates like "july 16th 1999" one
         var dateObj = {};

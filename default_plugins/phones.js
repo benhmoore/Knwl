@@ -20,13 +20,9 @@ function Phones(knwl) {
     
     this.calls = function() {
         var results = [];
-        var rawWords = knwl.words.words;
+        var words = knwl.words.words.concat([]);
         var currWord = null;
-    
-        var words = []; //make a copy of the rawWords array (otherwise, changes will be mirrored to knwl.words prop)
-        for (var i = 0; i < rawWords.length; i++) {
-            words[i] = rawWords[i];
-        }
+        
         /* Phone Numbers can be as little as 7 digits per word,
            and as large as 13 if the word contains country code & area code & phone number
            note: this applies to North American area codes assuming 3 digits
