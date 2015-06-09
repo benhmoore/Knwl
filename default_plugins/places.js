@@ -1,6 +1,10 @@
 /* Place Parser */
 function Places(knwl) {
   
+  this.languages = {
+    'english': true,
+  };
+  
   this.countryList = [
     {name: 'Afghanistan', code: 'AF'},
     {name: 'Ã…land Islands', code: 'AX'},
@@ -250,7 +254,7 @@ function Places(knwl) {
   this.falsePlaces = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'His', 'He', 'Her', 'Hers', 'Who', 'Whom', 'Whose', 'PM', 'AM', 'The'];
   this.triggers = [['at'], ['in'], ['near'], ['close', 'to'], ['above'], ['below'], ['almost', 'to'], ['leaving'], ['arriving', 'at']];
   this.calls = function() {
-      var words = knwl.words.linkWordsCasesensitive;
+      var words = knwl.words.get('linkWordsCasesensitive');
       var triggers = places.triggers;
       var results = [];
   

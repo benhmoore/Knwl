@@ -1,5 +1,9 @@
 /* Phone Number Parser */
 function Phones(knwl) {
+    
+    this.languages = {
+        'english': true,
+    };
 
     this.areaCodeLength = 3; // Hard code this assumption for now
     
@@ -20,7 +24,8 @@ function Phones(knwl) {
     
     this.calls = function() {
         var results = [];
-        var words = knwl.words.words.concat([]);
+        
+        var words = knwl.words.get('words');
         var currWord = null;
         
         /* Phone Numbers can be as little as 7 digits per word,

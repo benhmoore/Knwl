@@ -16,9 +16,14 @@ Here's a basic template for a parser plugin:
 ```javascript
 
 	function PluginName(knwlInstance) {
+		
+		this.languages = { //supported languages
+			english: true	
+		};
+		
 		this.calls = function() {
 			
-			var words = knwlInstance.words.words; //get the String as an array of words
+			var words = knwlInstance.words.get('words'); //get the String as an array of words
 			var resultsArray = [];
 			
 			/*
@@ -41,22 +46,29 @@ Here's a basic template for a parser plugin:
 	```javascript
 		function PluginName(knwlInstance) {
 	```
+2. Your plugin should specify the languages it supports by their full names in an object ```languages```.
+	```javascript
+		this.languages = { //supported languages
+			english: true,
+			spanish: true
+		}
+	```
 
-2. A ```.calls()``` method must be provided for ```knwl.get()``` to call your plugin.
+3. A ```.calls()``` method must be provided for ```knwl.get()``` to call your plugin.
 	```javascript
 		this.calls = function() {
 	```
 	
-3. Your parser plugin should use the database of words provided by the Knwl.js Instance to parse.
+4. Your parser plugin should use the database of words provided by the Knwl.js Instance to parse.
 	```javascript
-		var words = knwlInstance.words.words;
+		var words = knwlInstance.words.get('words');
 	```
-	The ```Knwl.words{}``` database contains three versions of the String data.
-	1. ```Knwl.words.words[]``` contains the String broken into words with punctuation removed and in lowercase.
-	2. ```Knwl.words.linkWords[]``` words in lowercase with punctuation intact.
-	3. ```Knwl.words.linkWordsCasesensitive[]``` words with punctuation and in original case.
+	```Knwl.words.get()``` may be used to retrieve one of three different versions of the String data.
+	1. ```"words"``` an array containing the String broken into words with punctuation removed and in lowercase.
+	2. ```"linkWords"``` an array of the words in lowercase with punctuation intact.
+	3. ```"linkWordsCasesensitive"``` an array of the words with punctuation intact and in original case.
 	
-4. Your plugin should expect to find multiple results when parsing. Thus, your plugin should return an array that contains the results.
+5. Your plugin should expect to find multiple results when parsing. Thus, your plugin should return an array that contains the results.
 	```javascript
 		return results;
 	```

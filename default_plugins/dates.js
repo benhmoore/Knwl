@@ -1,6 +1,10 @@
 /* Date Parser */
 function Dates(knwl) {
     
+    this.languages = {
+        'english': true,
+    };
+    
     this.months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     this.monthAbbrs = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sept', 'oct', 'nov', 'dec'];
     this.holidays = [
@@ -54,8 +58,8 @@ function Dates(knwl) {
     };
     this.calls = function() {
     
-    var words = knwl.words.words.concat([]);
-    var wordsWithPunc = knwl.words.linkWords;
+    var words = knwl.words.get('words');
+    var wordsWithPunc = knwl.words.get('linkWords');
     var results = [];
     
         //for dates like "july 16th 1999" one

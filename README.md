@@ -24,8 +24,10 @@ Installation instructions are specific to whether you want to run Knwl.js in the
 	```javascript
 		var Knwl = require("./knwl.js");
 		
-		var knwlInstance = new Knwl();
+		var knwlInstance = new Knwl('english');
 	```
+	
+	You can optionally specify a language in the first parameter. This helps plugins identify and better suit particular languages.
 
 2. Load a parser plugin.
 

@@ -1,8 +1,13 @@
 /* Time Parser */
 function Times(knwl) {
+    
+    this.languages = {
+        'english': true,
+    };
+    
     this.calls = function() {
 
-        var words = knwl.words.words.concat([]), times = [], words = [];
+        var words = knwl.words.get('words'), times = [];
         for (var i = 0; i < words.length; i++) {
             var timeObj = {};
             var testTime = words[i].split(":");

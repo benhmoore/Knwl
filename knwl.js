@@ -1,35 +1,25 @@
-function Knwl() {
-    
-    this.tasks = {};
-    /**
-     * In order to remove all characters during the invocation of the removeCharacters function,
-     * a Regular Expression is used to find all instances of the character to remove. We need
-     * to escape any special characters that Regular Expression would otherwise use.
-     *
-     * @param  {[string]} str [the string to esacpe]
-     * @return {[string]}     [the escaped string]
-     */
-    this.tasks.escapeRegExp = function(str) {
-        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
-    };
-    /**
-     * This helper function can be used to remove all characters in the character array
-     * provided (charArray) from the specified string (str)
-     *
-     * @param  {[array]} charArray [an array of characters to remove from the word]
-     * @param  {[string]} str  [the string the characters should be removed from]
-     * @return {[string]}       [the str without the specified characters]
-     */
-    this.tasks.removeCharacters = function(charArray, str) {
-        for (var ii = 0; ii < charArray.length; ii++)
+function Knwl(language) {
+	this.language = 'unknown';
+	if (language !== undefined)
+		this.language = language;
+	
+	this.tasks = {};
+	
+	this.tasks.escapeRegExp = function(str) {
+		return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+	};
+	
+	this.tasks.removeCharacters = function(charArray, str) {
+		for (var ii = 0; ii < charArray.length; ii++)
             str = str.replace(new RegExp(knwl.tasks.escapeRegExp(charArray[ii]), 'g'), '');
         return str;
-    };
-    this.tasks.search = function(termArr, words) {
-        var results = [];
+	};
+	
+	this.tasks.search = function(terms, words) {
+		var results = [];
         for (var i = 0; i < words.length; i++) {
-            for (var e = 0; e < termArr.length; e++) {
-                var curHol = termArr[e];
+            for (var e = 0; e < terms.length; e++) {
+                var curHol = terms[e];
                 var pos = i;
                 if (words[pos] === curHol[0]) {
                     for (var x = 0; x < curHol.length; x++) {
@@ -44,73 +34,73 @@ function Knwl() {
             }
         }
         return results;
-    };
-    this.tasks.preview = function(pos) { //generates a preview from a word position
-        var words = knwl.words.linkWordsCasesensitive;
-        var sentence = '';
-    
-        var startingPos = pos;
-        for (var ii = pos; ii > -1; ii--) {
-            startingPos = ii;
-            if (words[ii][words[ii].length - 1] !== undefined) {
-                if (words[ii][words[ii].length - 1].search(/[?!.]/g) !== -1) {
-                    startingPos++;
-                    break;
-                } else if (pos - startingPos > 20) {
-                    break;
-                }
-            } else {
-                break;
-            }
+	};
+	
+	this.tasks.preview = function(position) {
+		var words = knwl.words.linkWordsCasesensitive;
+		var sentence = '';
+		
+		var startPos = position;
+		var endPos = position;
+		
+		for (var ii = position; ii > 0; ii--) {
+			startPos = ii;
+			if (words[ii][words[ii].length - 1].search(/[?!.]/g) !== -1) {
+				if (position - startPos > 0)
+					startPos = ii + 1;
+				break;
+			} else if (position - startPos > 10) {
+				break;
+			}
+		}
+		
+		for (var ii = position; ii < words.length; ii++) {
+			endPos = ii;
+			if (words[ii][words[ii].length - 1].search(/[?!.]/g) !== -1) {
+				break;
+			} else if (endPos - position > 10) {
+				break;
+			}
+		}
+		
+		sentence += words[startPos];
+		for (var ii = startPos; ii <= endPos; ii++) {
+			sentence += ' ' + words[ii];
+		}
+		return sentence;
+	};
+	
+	this.words = {
+		words: [],
+		linkWords: [],
+		linkWordsCasesensitive: []
+	};
+	this.words.get = function(typeStr) { //retrieve words from database
+        if (knwl.words[typeStr] !== undefined) {
+            return knwl.words[typeStr].concat([]);
         }
-        sentence+= words[startingPos];
-        for (var ii = startingPos + 1; ii < words.length; ii++) {
-            sentence += ' ' + words[ii];
-            if (words[ii].search(/[?!.]/g) !== -1) {
-                break;
-            } else if (ii - pos > 20) {
-                sentence+= '...';
-                break;
-            }
-        }
-        return sentence;
     };
-    //plugin word database
-    this.words = {
-        words: [], //words of string with most punctuation removed and converted to lowercase
-        linkWords: [], //words with punctuation intact and converted to lowercase
-        linkWordsCasesensitive: [] //words with punctuation but not converted to lowercase
-    };
-    this.init = function(data) {
-        //turn into array of words
-        var lowercaseData = data.toLowerCase();
-        var linkWords = lowercaseData.split(/[ \n]+/);
-        var linkWordsCasesensitive = data.split(/[ \n]+/);
-        lowercaseData = lowercaseData.split(/[\n ]+/);
-    
-        for (var i = 0; i < lowercaseData.length; i++)
-            lowercaseData[i] = lowercaseData[i].replace(/[ ,?!]/g, '').replace(/["]/g, "'");
-    
-        var words = [];
-        for (var i = 0; i < lowercaseData.length; i++) { //cleanup
-            words[i] = lowercaseData[i].split(/[.,!?]+/);
-            words[i] = words[i][0];
-        }
-        return knwl.words = {
-            linkWords: linkWords,
-            words: words,
-            linkWordsCasesensitive: linkWordsCasesensitive
-        };
-    };
-    this.plugins = {
-        //parser plugins should add a refrence to their main function here.
-    };
-    this.register = function (name, plugin) {
-        knwl.plugins[name] = new plugin(knwl);
-        return knwl;
-    };
-    this.get = function(parser) {
-        if (this.plugins[parser] !== undefined) {
+	
+	this.init = function(str) {
+		var lowercase = str.toLowerCase();
+		var linkWords = lowercase.split(/[ \n]+/);
+		var linkWordsCaseSensitive = str.split(/[ \n]+/);
+		lowercase = lowercase.split(/[\n ]+/);
+		
+		for (var ii = 0; ii < lowercase.length; ii++)
+			lowercase[ii] = lowercase[ii].replace(/[ ,?!]/g, '').replace(/["]/g, "'");
+		
+		var words = [];
+		for (var ii = 0; ii < lowercase.length; ii++)
+			words[ii] = lowercase[ii].split(/[.,!?]+/)[0];
+		
+		knwl.words.linkWordsCasesensitive = linkWordsCaseSensitive;
+		knwl.words.linkWords = linkWords;
+		knwl.words.words = words;
+		return knwl.words;
+	};
+	this.get = function(parser) {
+		if (this.plugins[parser] !== undefined) {
             try {
                 var args = arguments;
                 var data = knwl.plugins[parser].calls(args);
@@ -123,11 +113,22 @@ function Knwl() {
             console.error('Knwl.js Error', 'Parser plugin "' + parser + '" not found.');
             return false;
         }
+	};
+	
+	this.plugins = {};
+	this.register = function (name, Plugin) {
+        knwl.plugins[name] = new Plugin(knwl);
+        if (knwl.plugins[name].languages !== undefined && knwl.language !== 'unspecified') {
+            if (knwl.plugins[name].languages[knwl.language] === undefined || knwl.plugins[name].languages[knwl.language] === false) {
+                return {'Knwl.js Error': 'Parser plugin does not seem to support the specified language.'};
+            }
+        }
+        return knwl;  
     };
-    
-    var knwl = this;
-     
-    // load default plugins
+	
+	var knwl = this;
+	
+	// load default plugins
     this.register('dates', require('./default_plugins/dates'));
     this.register('times', require('./default_plugins/times'));
     
@@ -136,7 +137,6 @@ function Knwl() {
     this.register('phones', require('./default_plugins/phones'));
     
     this.register('places', require('./default_plugins/places'));
-
 };
 
 module.exports = Knwl;

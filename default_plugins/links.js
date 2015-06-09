@@ -1,9 +1,13 @@
 /* Link Parser */
 function Links(knwl) {
+    
+    this.languages = {
+        'english': true,
+    };
 
     this.calls = function() {
         var results = [];
-        var words = knwl.words.linkWords;
+        var words = knwl.words.get('linkWords');
 
         for (var i = 0; i < words.length; i++) {
             var word = words[i].replace(/[\(\)!]/g, ""); // replaces every bracket ')' or '(' and every '!' with an empty character
