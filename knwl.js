@@ -36,14 +36,14 @@ function Knwl(language) {
         return results;
 	};
 	
-	this.tasks.preview = function(position) {
+	this.tasks.preview = function(position) { // used to get the entire sentence or a portion of it (depending on size), in a human-readable format, from a position
 		var words = knwl.words.linkWordsCasesensitive;
 		var sentence = '';
 		
 		var startPos = position;
 		var endPos = position;
 		
-		for (var ii = position; ii > 0; ii--) {
+		for (var ii = position; ii > -1; ii--) {
 			startPos = ii;
 			if (words[ii][words[ii].length - 1].search(/[?!.]/g) !== -1) {
 				if (position - startPos > 0)
@@ -64,7 +64,7 @@ function Knwl(language) {
 		}
 		
 		sentence += words[startPos];
-		for (var ii = startPos; ii <= endPos; ii++) {
+		for (var ii = startPos + 1; ii <= endPos; ii++) {
 			sentence += ' ' + words[ii];
 		}
 		return sentence;
@@ -80,6 +80,33 @@ function Knwl(language) {
             return knwl.words[typeStr].concat([]);
         }
     };
+	this.words.getSentence = function(pos, typeStr) { //used to get the entire sentence a position occurs in, in a specific format
+		var fullWords = knwl.words.get('linkWordsCasesensitive');
+		var typeWords = knwl.words.get(typeStr);
+		
+		var startPos = pos;
+		var begin = 0;
+		var sentence = [];
+		for (var ii = startPos; ii > -1; ii--) {
+			if (fullWords[ii][fullWords[ii].length - 1].search(/[?!.]/g) !== -1) {
+				if (startPos - begin > 0)
+					begin = ii + 1;
+				break;
+			}
+		}
+		var end = 0;
+		for (var ii = startPos; ii < fullWords.length; ii++) {
+			end = ii;
+			if (fullWords[ii][fullWords[ii].length - 1].search(/[?!.]/g) !== -1) {
+				break;
+			}
+		}
+		
+		for (var ii = begin; ii <= end; ii++) {
+			sentence.push(typeWords[ii]);
+		}
+		console.log(sentence);
+	};
 	
 	this.init = function(str) {
 		var lowercase = str.toLowerCase();
@@ -118,7 +145,7 @@ function Knwl(language) {
 	this.plugins = {};
 	this.register = function (name, Plugin) {
         knwl.plugins[name] = new Plugin(knwl);
-        if (knwl.plugins[name].languages !== undefined && knwl.language !== 'unspecified') {
+        if (knwl.plugins[name].languages !== undefined && knwl.language !== 'unknown') {
             if (knwl.plugins[name].languages[knwl.language] === undefined || knwl.plugins[name].languages[knwl.language] === false) {
                 return {'Knwl.js Error': 'Parser plugin does not seem to support the specified language.'};
             }

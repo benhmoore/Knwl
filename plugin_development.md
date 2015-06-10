@@ -53,6 +53,8 @@ Here's a basic template for a parser plugin:
 			spanish: true
 		}
 	```
+	Your plugin can check the language of the Knwl.js instance with the property ```Knwl.language```. If the instance of Knwl.js does not have a specified language,
+	this property will have a value of ```unknown```.
 
 3. A ```.calls()``` method must be provided for ```knwl.get()``` to call your plugin.
 	```javascript
