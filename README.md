@@ -41,6 +41,8 @@ Installation instructions are specific to whether you want to run Knwl.js in the
 
 ###For the Browser
 
+**Note: A packaged version of Knwl.js for the browser with default plugins is available in the ```./dist``` directory.**
+
 These steps require the ```npm``` package.
 
 1. Run ```npm install``` to install dependencies.
@@ -50,10 +52,10 @@ These steps require the ```npm``` package.
 	Use the following syntax in the terminal:
 	
 	```console
-		./node_modules/.bin/browserify script.js browser.js > output.js
+		./node_modules/.bin/browserify script.js knwl.js > output.js
 	```
 	
-	The ```script.js``` file is the Node.js file you wish to package for the browser. The ```browser.js``` file is included in the Knwl.js parent directory.
+	The ```script.js``` file is the Node.js file you wish to package for the browser.
 
 ## Usage Guide
 
