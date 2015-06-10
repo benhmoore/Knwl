@@ -13,6 +13,10 @@ if (typeof global.window.define == 'function' && global.window.define.amd) {
 /* Date Parser */
 function Dates(knwl) {
     
+    this.languages = {
+        'english': true,
+    };
+    
     this.months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     this.monthAbbrs = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sept', 'oct', 'nov', 'dec'];
     this.holidays = [
@@ -66,14 +70,9 @@ function Dates(knwl) {
     };
     this.calls = function() {
     
-    var rawWords = knwl.words.words;
-    var wordsWithPunc = knwl.words.linkWords;
+    var words = knwl.words.get('words');
+    var wordsWithPunc = knwl.words.get('linkWords');
     var results = [];
-    
-        var words = []; //make a copy of the rawWords array (otherwise, changes will be mirrored to knwl.words prop)
-        for (var i = 0; i < rawWords.length; i++) {
-            words[i] = rawWords[i];
-        }
     
         //for dates like "july 16th 1999" one
         var dateObj = {};
@@ -260,12 +259,16 @@ module.exports = Dates;
 },{}],3:[function(require,module,exports){
 /* Email Parser */
 function Emails(knwl) {
+    
+    this.languages = {
+        'english': true,
+    };
 
     this.test = /\b[A-Z0-9._%+-]+@([A-Z0-9.-]+\.[A-Z]{2,4}|(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\b/i;
 
     this.calls = function() {
         var results = [], match = "";
-        var words = knwl.words.linkWordsCasesensitive;
+        var words = knwl.words.get('linkWordsCasesensitive');
         for (var i = 0; i < words.length; i++) {
             var word = words[i].split(/[\,\|\(\)\?]/g);
             for (var j = 0; j < word.length; j++) {
@@ -290,10 +293,14 @@ module.exports = Emails;
 },{}],4:[function(require,module,exports){
 /* Link Parser */
 function Links(knwl) {
+    
+    this.languages = {
+        'english': true,
+    };
 
     this.calls = function() {
         var results = [];
-        var words = knwl.words.linkWords;
+        var words = knwl.words.get('linkWords');
 
         for (var i = 0; i < words.length; i++) {
             var word = words[i].replace(/[\(\)!]/g, ""); // replaces every bracket ')' or '(' and every '!' with an empty character
@@ -319,6 +326,10 @@ module.exports = Links;
 },{}],5:[function(require,module,exports){
 /* Phone Number Parser */
 function Phones(knwl) {
+    
+    this.languages = {
+        'english': true,
+    };
 
     this.areaCodeLength = 3; // Hard code this assumption for now
     
@@ -339,13 +350,10 @@ function Phones(knwl) {
     
     this.calls = function() {
         var results = [];
-        var rawWords = knwl.words.words;
+        
+        var words = knwl.words.get('words');
         var currWord = null;
-    
-        var words = []; //make a copy of the rawWords array (otherwise, changes will be mirrored to knwl.words prop)
-        for (var i = 0; i < rawWords.length; i++) {
-            words[i] = rawWords[i];
-        }
+        
         /* Phone Numbers can be as little as 7 digits per word,
            and as large as 13 if the word contains country code & area code & phone number
            note: this applies to North American area codes assuming 3 digits
@@ -413,6 +421,10 @@ module.exports = Phones;
 },{}],6:[function(require,module,exports){
 /* Place Parser */
 function Places(knwl) {
+  
+  this.languages = {
+    'english': true,
+  };
   
   this.countryList = [
     {name: 'Afghanistan', code: 'AF'},
@@ -661,9 +673,9 @@ function Places(knwl) {
   ];
   
   this.falsePlaces = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'His', 'He', 'Her', 'Hers', 'Who', 'Whom', 'Whose', 'PM', 'AM', 'The'];
-  this.triggers = [['at'], ['in'], ['near'], ['close', 'to'], ['above'], ['below'], ['almost', 'to'], ['leaving'], ['arriving', 'at']];
+  this.triggers = [['at'], ['in'], ['near'], ['close', 'to'], ['above'], ['below'], ['almost', 'to'], ['leaving'], ['arriving', 'at'],['from']];
   this.calls = function() {
-      var words = knwl.words.linkWordsCasesensitive;
+      var words = knwl.words.get('linkWordsCasesensitive');
       var triggers = places.triggers;
       var results = [];
   
@@ -726,13 +738,30 @@ function Places(knwl) {
           
           if (isMatch === false || isFalsePlace === true) {
             for (var ee = 0; ee < places.countryList.length; ee++) {
-              if (words[i].replace(/[()!,.]/g, '').toLowerCase() === places.countryList[ee].name.toLowerCase()) {
-                var placeObj = {
-                    place: places.countryList[ee].name,
-                    preview: knwl.tasks.preview(i),
-                    found: i
-                };
-                results.push(placeObj);
+              var country = places.countryList[ee].name.split(' ');
+              if (country[0].toLowerCase() === words[i].replace(/[()!,.]/g, '').toLowerCase()) {
+                var isCountry = true;
+                for (var zz = 0; zz < country.length; zz++) {
+                  if (country[zz].length === 0) {
+                    break;
+                  }
+                  if (words[i + zz] === undefined) {
+                    isCountry = false;
+                    break;
+                  }
+                  if (country[zz].toLowerCase() !== words[i + zz].replace(/[()!,.]/g, '').toLowerCase()) {
+                    isCountry = false;
+                    break;
+                  }
+                }
+                if (isCountry) {
+                  var placeObj = {
+                      place: places.countryList[ee].name,
+                      preview: knwl.tasks.preview(i),
+                      found: i
+                  };
+                  results.push(placeObj);
+                }
               }
             }
           }
@@ -750,12 +779,14 @@ module.exports = Places;
 },{}],7:[function(require,module,exports){
 /* Time Parser */
 function Times(knwl) {
+    
+    this.languages = {
+        'english': true,
+    };
+    
     this.calls = function() {
 
-        var rawWords = knwl.words.words, times = [], words = [];
-        for (var i = 0; i < rawWords.length; i++) {
-            words[i] = rawWords[i];
-        }
+        var words = knwl.words.get('words'), times = [];
         for (var i = 0; i < words.length; i++) {
             var timeObj = {};
             var testTime = words[i].split(":");
@@ -853,38 +884,28 @@ function Times(knwl) {
 module.exports = Times;
 
 },{}],8:[function(require,module,exports){
-function Knwl() {
-    
-    this.tasks = {};
-    /**
-     * In order to remove all characters during the invocation of the removeCharacters function,
-     * a Regular Expression is used to find all instances of the character to remove. We need
-     * to escape any special characters that Regular Expression would otherwise use.
-     *
-     * @param  {[string]} str [the string to esacpe]
-     * @return {[string]}     [the escaped string]
-     */
-    this.tasks.escapeRegExp = function(str) {
-        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
-    };
-    /**
-     * This helper function can be used to remove all characters in the character array
-     * provided (charArray) from the specified string (str)
-     *
-     * @param  {[array]} charArray [an array of characters to remove from the word]
-     * @param  {[string]} str  [the string the characters should be removed from]
-     * @return {[string]}       [the str without the specified characters]
-     */
-    this.tasks.removeCharacters = function(charArray, str) {
-        for (var ii = 0; ii < charArray.length; ii++)
+function Knwl(language) {
+	this.language = 'unknown';
+	if (language !== undefined)
+		this.language = language;
+	
+	this.tasks = {};
+	
+	this.tasks.escapeRegExp = function(str) {
+		return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
+	};
+	
+	this.tasks.removeCharacters = function(charArray, str) {
+		for (var ii = 0; ii < charArray.length; ii++)
             str = str.replace(new RegExp(knwl.tasks.escapeRegExp(charArray[ii]), 'g'), '');
         return str;
-    };
-    this.tasks.search = function(termArr, words) {
-        var results = [];
+	};
+	
+	this.tasks.search = function(terms, words) {
+		var results = [];
         for (var i = 0; i < words.length; i++) {
-            for (var e = 0; e < termArr.length; e++) {
-                var curHol = termArr[e];
+            for (var e = 0; e < terms.length; e++) {
+                var curHol = terms[e];
                 var pos = i;
                 if (words[pos] === curHol[0]) {
                     for (var x = 0; x < curHol.length; x++) {
@@ -899,73 +920,100 @@ function Knwl() {
             }
         }
         return results;
-    };
-    this.tasks.preview = function(pos) { //generates a preview from a word position
-        var words = knwl.words.linkWordsCasesensitive;
-        var sentence = '';
-    
-        var startingPos = pos;
-        for (var ii = pos; ii > -1; ii--) {
-            startingPos = ii;
-            if (words[ii][words[ii].length - 1] !== undefined) {
-                if (words[ii][words[ii].length - 1].search(/[?!.]/g) !== -1) {
-                    startingPos++;
-                    break;
-                } else if (pos - startingPos > 20) {
-                    break;
-                }
-            } else {
-                break;
-            }
+	};
+	
+	this.tasks.preview = function(position) { // used to get the entire sentence or a portion of it (depending on size), in a human-readable format, from a position
+		var words = knwl.words.linkWordsCasesensitive;
+		var sentence = '';
+		
+		var startPos = position;
+		var endPos = position;
+		
+		for (var ii = position; ii > -1; ii--) {
+			startPos = ii;
+			if (words[ii][words[ii].length - 1].search(/[?!.]/g) !== -1) {
+				if (position - startPos > 0)
+					startPos = ii + 1;
+				break;
+			} else if (position - startPos > 10) {
+				break;
+			}
+		}
+		
+		for (var ii = position; ii < words.length; ii++) {
+			endPos = ii;
+			if (words[ii][words[ii].length - 1].search(/[?!.]/g) !== -1) {
+				break;
+			} else if (endPos - position > 10) {
+				break;
+			}
+		}
+		
+		sentence += words[startPos];
+		for (var ii = startPos + 1; ii <= endPos; ii++) {
+			sentence += ' ' + words[ii];
+		}
+		return sentence;
+	};
+	
+	this.words = {
+		words: [],
+		linkWords: [],
+		linkWordsCasesensitive: []
+	};
+	this.words.get = function(typeStr) { //retrieve words from database
+        if (knwl.words[typeStr] !== undefined) {
+            return knwl.words[typeStr].concat([]);
         }
-        sentence+= words[startingPos];
-        for (var ii = startingPos + 1; ii < words.length; ii++) {
-            sentence += ' ' + words[ii];
-            if (words[ii].search(/[?!.]/g) !== -1) {
-                break;
-            } else if (ii - pos > 20) {
-                sentence+= '...';
-                break;
-            }
-        }
-        return sentence;
     };
-    //plugin word database
-    this.words = {
-        words: [], //words of string with most punctuation removed and converted to lowercase
-        linkWords: [], //words with punctuation intact and converted to lowercase
-        linkWordsCasesensitive: [] //words with punctuation but not converted to lowercase
-    };
-    this.init = function(data) {
-        //turn into array of words
-        var lowercaseData = data.toLowerCase();
-        var linkWords = lowercaseData.split(/[ \n]+/);
-        var linkWordsCasesensitive = data.split(/[ \n]+/);
-        lowercaseData = lowercaseData.split(/[\n ]+/);
-    
-        for (var i = 0; i < lowercaseData.length; i++)
-            lowercaseData[i] = lowercaseData[i].replace(/[ ,?!]/g, '').replace(/["]/g, "'");
-    
-        var words = [];
-        for (var i = 0; i < lowercaseData.length; i++) { //cleanup
-            words[i] = lowercaseData[i].split(/[.,!?]+/);
-            words[i] = words[i][0];
-        }
-        return knwl.words = {
-            linkWords: linkWords,
-            words: words,
-            linkWordsCasesensitive: linkWordsCasesensitive
-        };
-    };
-    this.plugins = {
-        //parser plugins should add a refrence to their main function here.
-    };
-    this.register = function (name, plugin) {
-        knwl.plugins[name] = new plugin(knwl);
-        return knwl;
-    };
-    this.get = function(parser) {
-        if (this.plugins[parser] !== undefined) {
+	this.words.getSentence = function(pos, typeStr) { //used to get the entire sentence a position occurs in, in a specific format
+		var fullWords = knwl.words.get('linkWordsCasesensitive');
+		var typeWords = knwl.words.get(typeStr);
+		
+		var startPos = pos;
+		var begin = 0;
+		var sentence = [];
+		for (var ii = startPos; ii > -1; ii--) {
+			if (fullWords[ii][fullWords[ii].length - 1].search(/[?!.]/g) !== -1) {
+				if (startPos - begin > 0)
+					begin = ii + 1;
+				break;
+			}
+		}
+		var end = 0;
+		for (var ii = startPos; ii < fullWords.length; ii++) {
+			end = ii;
+			if (fullWords[ii][fullWords[ii].length - 1].search(/[?!.]/g) !== -1) {
+				break;
+			}
+		}
+		
+		for (var ii = begin; ii <= end; ii++) {
+			sentence.push(typeWords[ii]);
+		}
+		console.log(sentence);
+	};
+	
+	this.init = function(str) {
+		var lowercase = str.toLowerCase();
+		var linkWords = lowercase.split(/[ \n]+/);
+		var linkWordsCaseSensitive = str.split(/[ \n]+/);
+		lowercase = lowercase.split(/[\n ]+/);
+		
+		for (var ii = 0; ii < lowercase.length; ii++)
+			lowercase[ii] = lowercase[ii].replace(/[ ,?!]/g, '').replace(/["]/g, "'");
+		
+		var words = [];
+		for (var ii = 0; ii < lowercase.length; ii++)
+			words[ii] = lowercase[ii].split(/[.,!?]+/)[0];
+		
+		knwl.words.linkWordsCasesensitive = linkWordsCaseSensitive;
+		knwl.words.linkWords = linkWords;
+		knwl.words.words = words;
+		return knwl.words;
+	};
+	this.get = function(parser) {
+		if (this.plugins[parser] !== undefined) {
             try {
                 var args = arguments;
                 var data = knwl.plugins[parser].calls(args);
@@ -978,11 +1026,22 @@ function Knwl() {
             console.error('Knwl.js Error', 'Parser plugin "' + parser + '" not found.');
             return false;
         }
+	};
+	
+	this.plugins = {};
+	this.register = function (name, Plugin) {
+        knwl.plugins[name] = new Plugin(knwl);
+        if (knwl.plugins[name].languages !== undefined && knwl.language !== 'unknown') {
+            if (knwl.plugins[name].languages[knwl.language] === undefined || knwl.plugins[name].languages[knwl.language] === false) {
+                return {'Knwl.js Error': 'Parser plugin does not seem to support the specified language.'};
+            }
+        }
+        return knwl;  
     };
-    
-    var knwl = this;
-     
-    // load default plugins
+	
+	var knwl = this;
+	
+	// load default plugins
     this.register('dates', require('./default_plugins/dates'));
     this.register('times', require('./default_plugins/times'));
     
@@ -991,7 +1050,6 @@ function Knwl() {
     this.register('phones', require('./default_plugins/phones'));
     
     this.register('places', require('./default_plugins/places'));
-
 };
 
 module.exports = Knwl;

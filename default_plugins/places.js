@@ -252,7 +252,7 @@ function Places(knwl) {
   ];
   
   this.falsePlaces = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'His', 'He', 'Her', 'Hers', 'Who', 'Whom', 'Whose', 'PM', 'AM', 'The'];
-  this.triggers = [['at'], ['in'], ['near'], ['close', 'to'], ['above'], ['below'], ['almost', 'to'], ['leaving'], ['arriving', 'at']];
+  this.triggers = [['at'], ['in'], ['near'], ['close', 'to'], ['above'], ['below'], ['almost', 'to'], ['leaving'], ['arriving', 'at'],['from']];
   this.calls = function() {
       var words = knwl.words.get('linkWordsCasesensitive');
       var triggers = places.triggers;
@@ -317,13 +317,30 @@ function Places(knwl) {
           
           if (isMatch === false || isFalsePlace === true) {
             for (var ee = 0; ee < places.countryList.length; ee++) {
-              if (words[i].replace(/[()!,.]/g, '').toLowerCase() === places.countryList[ee].name.toLowerCase()) {
-                var placeObj = {
-                    place: places.countryList[ee].name,
-                    preview: knwl.tasks.preview(i),
-                    found: i
-                };
-                results.push(placeObj);
+              var country = places.countryList[ee].name.split(' ');
+              if (country[0].toLowerCase() === words[i].replace(/[()!,.]/g, '').toLowerCase()) {
+                var isCountry = true;
+                for (var zz = 0; zz < country.length; zz++) {
+                  if (country[zz].length === 0) {
+                    break;
+                  }
+                  if (words[i + zz] === undefined) {
+                    isCountry = false;
+                    break;
+                  }
+                  if (country[zz].toLowerCase() !== words[i + zz].replace(/[()!,.]/g, '').toLowerCase()) {
+                    isCountry = false;
+                    break;
+                  }
+                }
+                if (isCountry) {
+                  var placeObj = {
+                      place: places.countryList[ee].name,
+                      preview: knwl.tasks.preview(i),
+                      found: i
+                  };
+                  results.push(placeObj);
+                }
               }
             }
           }
