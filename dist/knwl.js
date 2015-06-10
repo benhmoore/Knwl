@@ -1,15 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function (global){
-var Knwl = require('./knwl');
-
-if (typeof global.window.define == 'function' && global.window.define.amd) {
-    global.window.define('Knwl', function () { return Knwl; });
-} else {
-    global.window.Knwl = Knwl;
-}
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./knwl":8}],2:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.Knwl = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /* Date Parser */
 function Dates(knwl) {
     
@@ -256,7 +245,7 @@ function Dates(knwl) {
 };
 
 module.exports = Dates;
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 /* Email Parser */
 function Emails(knwl) {
     
@@ -290,7 +279,7 @@ function Emails(knwl) {
     var emails = this;
 };
 module.exports = Emails;
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 /* Link Parser */
 function Links(knwl) {
     
@@ -323,7 +312,7 @@ function Links(knwl) {
 };
 
 module.exports = Links;
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /* Phone Number Parser */
 function Phones(knwl) {
     
@@ -418,7 +407,7 @@ function Phones(knwl) {
 
 module.exports = Phones;
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /* Place Parser */
 function Places(knwl) {
   
@@ -776,7 +765,7 @@ function Places(knwl) {
 };
 module.exports = Places;
 
-},{}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /* Time Parser */
 function Times(knwl) {
     
@@ -883,7 +872,7 @@ function Times(knwl) {
 };
 module.exports = Times;
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 function Knwl(language) {
 	this.language = 'unknown';
 	if (language !== undefined)
@@ -1053,4 +1042,5 @@ function Knwl(language) {
 };
 
 module.exports = Knwl;
-},{"./default_plugins/dates":2,"./default_plugins/emails":3,"./default_plugins/links":4,"./default_plugins/phones":5,"./default_plugins/places":6,"./default_plugins/times":7}]},{},[1]);
+},{"./default_plugins/dates":1,"./default_plugins/emails":2,"./default_plugins/links":3,"./default_plugins/phones":4,"./default_plugins/places":5,"./default_plugins/times":6}]},{},[7])(7)
+});
