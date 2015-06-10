@@ -920,21 +920,25 @@ function Knwl(language) {
 		
 		for (var ii = position; ii > -1; ii--) {
 			startPos = ii;
-			if (words[ii][words[ii].length - 1].search(/[?!.]/g) !== -1) {
-				if (position - startPos > 0)
-					startPos = ii + 1;
-				break;
-			} else if (position - startPos > 10) {
-				break;
+			if (words[ii][words[ii].length - 1] !== undefined) {
+				if (words[ii][words[ii].length - 1].search(/[?!.]/g) !== -1) {
+					if (position - startPos > 0)
+						startPos = ii + 1;
+					break;
+				} else if (position - startPos > 10) {
+					break;
+				}
 			}
 		}
 		
 		for (var ii = position; ii < words.length; ii++) {
 			endPos = ii;
-			if (words[ii][words[ii].length - 1].search(/[?!.]/g) !== -1) {
-				break;
-			} else if (endPos - position > 10) {
-				break;
+			if (words[ii][words[ii].length - 1] !== undefined) {
+				if (words[ii][words[ii].length - 1].search(/[?!.]/g) !== -1) {
+					break;
+				} else if (endPos - position > 10) {
+					break;
+				}
 			}
 		}
 		
