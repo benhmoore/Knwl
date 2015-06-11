@@ -252,7 +252,7 @@ function Places(knwl) {
   ];
   
   this.falsePlaces = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'His', 'He', 'Her', 'Hers', 'Who', 'Whom', 'Whose', 'PM', 'AM', 'The'];
-  this.triggers = [['at'], ['in'], ['near'], ['close', 'to'], ['above'], ['below'], ['almost', 'to'], ['leaving'], ['arriving', 'at'],['from']];
+  this.triggers = [['at'], ['near'], ['close', 'to'], ['above'], ['below'], ['to'], ['leaving'], ['arriving', 'at']];
   this.calls = function() {
       var words = knwl.words.get('linkWordsCasesensitive');
       var triggers = places.triggers;

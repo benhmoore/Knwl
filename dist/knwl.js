@@ -6,6 +6,78 @@ function Dates(knwl) {
         'english': true,
     };
     
+    this.year = {};
+    this.year.lookForYear = function(pos) {
+        
+        /*
+            Attempts to find year in string through ranking:
+            1. Proximity to trigger source
+            2. Punctuation syntax
+        */
+        
+        var potential = [];
+        
+        var fall = 1.0; //ranking fall
+        
+        
+        for (var ee = pos; ee > pos - 20; ee--) {
+            if (dates.db.wordsWithPunc[ee] === undefined) {
+                break;
+            }
+            if (dates.db.wordsWithPunc[ee].search(/[,;:]/g) !== -1) { //rank lower if comma seperates results
+                fall += 4;
+            } else if (dates.db.wordsWithPunc[ee].search(/[.?!]/g) !== -1) { //rank much lower if in another sentence
+                fall += 72;
+            }
+            var curWord = dates.db.wordsWithPunc[ee].replace(/[.,!?\(\)]/g, ''); //cleanup
+            if (isNaN(parseInt(curWord)) === false) {
+                var parsedWord = parseInt(curWord);
+                if (parsedWord.toString().length === 4) {
+                    potential.push({
+                        offset: (pos - ee) * fall,
+                        year: parseInt(curWord)
+                    });
+                    break;
+                }
+            }
+        };
+        
+        fall = 1.0; //reset ranking fall
+        
+        for (var ee = pos; ee < pos + 20; ee++) {
+            if (dates.db.wordsWithPunc[ee] === undefined) {
+                break;
+            }
+            var curWord = dates.db.wordsWithPunc[ee].replace(/[.,!?\(\)]/g, ''); //cleanup
+            if (isNaN(parseInt(curWord)) === false) {
+                var parsedWord = parseInt(curWord);
+                if (parsedWord.toString().length === 4) {
+                    potential.push({
+                        offset: (ee - pos) * fall,
+                        year: parseInt(curWord)
+                    });
+                    break;
+                }
+            }
+            if (dates.db.wordsWithPunc[ee].search(/[,;:]/g) !== -1) { //rank lower if comma seperates results
+                fall += 4;
+            } else if (dates.db.wordsWithPunc[ee].search(/[.?!]/g) !== -1) { //rank much lower if in another sentence
+                fall += 72;
+            }
+        }
+        if (potential.length > 0) {
+            var sortedByPotential = potential.sort(function(a,b) {
+                return a.offset - b.offset;
+            });
+            return sortedByPotential[0].year;
+        } else {
+            return "unknown";
+        }
+    };
+    
+    this.day = {};
+    this.day.prefix = ['twenty', 'thirty'];
+    this.day.suffix = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'nineth', 'tenth','eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth', 'sixteenth', 'seventeenth', 'eighteenth', 'nineteenth'];
     this.months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
     this.monthAbbrs = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sept', 'oct', 'nov', 'dec'];
     this.holidays = [
@@ -16,6 +88,7 @@ function Dates(knwl) {
         ['halloween'],
         ['april', 'fools']
     ];
+    
     this.holidaysD = [
         [28, 11],
         [25, 12],
@@ -35,14 +108,130 @@ function Dates(knwl) {
     };
     
     this.getDay = function(word) {
-    if (typeof word !== 'undefined'){
-        if (parseInt(word.replace(/[^0-9\.]+/g, "")) > 0 && parseInt(word.replace(/[^0-9\.]+/g, "")) < 32) {
-            return parseInt(word);
+        if (word === undefined) {
+            return "unknown";
+        }
+        //word (twenty-first)
+        var pieces = word.toLowerCase().split('-');
+        var numberStr = '';
+        for (var ii = 0; ii < pieces.length; ii++) {
+            var foundPrefix = false;
+            if (ii === 0) {
+                for (var ee = 0; ee < dates.day.prefix.length; ee++) {
+                    if (pieces[ii] === dates.day.prefix[ee]) {
+                        if (dates.day.prefix[ee] === 'twenty') {
+                            numberStr += "2";   
+                        } else if (dates.day.prefix[ee] === 'thirty') {
+                            numberStr += "3";
+                        }
+                        foundPrefix = true;
+                        break;
+                    }
+                }
+                if (foundPrefix === false) {
+                    for (var ee = 0; ee < dates.day.suffix.length; ee++) {
+                        if (pieces[ii] === dates.day.suffix[ee]) {
+                            numberStr += ee + 1;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            } else {
+                for (var ee = 0; ee < dates.day.suffix.length; ee++) {
+                    if (pieces[ii] === dates.day.suffix[ee]) {
+                        numberStr += ee + 1;
+                        break;
+                    }
+                }    
             }
         }
+        
+        if (numberStr.length > 0) {
+            return parseInt(numberStr);
+        }
+        //number (21st)
+        if (parseInt(word.replace(/[^0-9\.]+/g, "")) > 0 && parseInt(word.replace(/[^0-9\.]+/g, "")) < 32) {
+            var parsed = parseInt(word);
+            if (isNaN(parsed) === true) {
+                return "unknown";
+            }
+            return parsed;
+        }
     };
-    this.getMonth = function(word, type) {
-        if (!isNaN(word) && type === 'mdy') {
+    this.day.lookForDay = function(pos) {
+        
+         /*
+            Attempts to find day in string through ranking:
+            1. Proximity to trigger source
+            2. Punctuation syntax
+        */
+        
+        var potential = [];
+        var fall = 1.0; //ranking fall
+        for (var ee = pos; ee > pos - 10; ee--) {
+            if (dates.db.wordsWithPunc[ee] === undefined) {
+                break;
+            }
+            if (dates.db.wordsWithPunc[ee].search(/[?!.]/g) !== -1) { //if reached end of previous sentence
+                break;
+            }
+            if (dates.db.wordsWithPunc[ee].search(/[,;:]/g) !== -1) { //rank lower if comma seperates results
+                fall += 4;
+            }
+            var curWord = dates.db.wordsWithPunc[ee].replace(/[.,!?\(\)]/g, ''); //cleanup
+            if (curWord.length - curWord.replace(/[^0-9\.]+/g, "").length === 2) {
+                var testDay = dates.getDay(curWord);
+                if (testDay !== "unknown" && testDay !== undefined) {
+                    potential.push({
+                        offset: (pos - ee) * fall,
+                        day: testDay
+                    });
+                    break;
+                }
+            }
+        };
+        
+        fall = 1.0; //reset ranking fall
+        
+        for (var ee = pos; ee < pos + 10; ee++) {
+            if (dates.db.wordsWithPunc[ee] === undefined) {
+                break;
+            }
+            var shouldBreak = false;
+            if (dates.db.wordsWithPunc[ee].search(/[?!.]/g) !== -1) { //if reached end of previous sentence
+                shouldBreak = true;
+            }
+            var curWord = dates.db.wordsWithPunc[ee].replace(/[.,!?\(\)]/g, ''); //cleanup
+            if (curWord.length - curWord.replace(/[^0-9\.]+/g, "").length === 2) {
+                var testDay = dates.getDay(curWord);
+                if (testDay !== "unknown" && testDay !== undefined) {
+                    potential.push({
+                        offset: (ee - pos) * fall,
+                        day: testDay
+                    });
+                    break;
+                }
+            }
+            if (shouldBreak) {
+                break;
+            }
+            if (dates.db.wordsWithPunc[ee].search(/[,;:]/g) !== -1) { //rank lower if comma seperates results
+                fall += 4;
+            }
+        }
+        if (potential.length > 0) {
+            var sortedByPotential = potential.sort(function(a,b) {
+                return a.offset - b.offset;
+            });
+            return sortedByPotential[0].day;
+        } else {
+            return "unknown";
+//            return dates.dateObj.getFullYear();
+        }
+    };
+    this.getMonth = function(word, typeD) {
+        if (!isNaN(word) && typeD === 'mdy') {
             return parseInt(word);
         } else {
             for (var i = 0; i < dates.months.length; i++) {
@@ -57,10 +246,18 @@ function Dates(knwl) {
             }
         }
     };
+    
+    this.db = {};
+    this.db.words = [];
+    this.db.wordsWithPunc = [];
     this.calls = function() {
     
     var words = knwl.words.get('words');
     var wordsWithPunc = knwl.words.get('linkWords');
+    
+    dates.db.words = words;
+    dates.db.wordsWithPunc = wordsWithPunc;
+    
     var results = [];
     
         //for dates like "july 16th 1999" one
@@ -69,22 +266,22 @@ function Dates(knwl) {
     
             var month = dates.getMonth(words[i]);
             if (month !== undefined) {
-                var day = dates.getDay(words[i + 1]);
-                if (day !== undefined) {
-                    if (day > 0 && day < 32) {
-                        if (!isNaN(words[i + 2]) && words[i + 2] !== "") {
-                            var year = parseInt(words[i + 2]);
-                            if (year > 32 && year < 10000) {
-                                dateObj = dates.constructDateObj(year, month, day);
-                                dateObj.preview = knwl.tasks.preview(i);
-                                dateObj.found = i;
-                            }
-                        } else {
-                            dateObj = dates.constructDateObj(dates.dateObj.getFullYear(), month, day);
-                            dateObj.preview = knwl.tasks.preview(i);
-                            dateObj.found = i;
-                        }
+                day = dates.getDay(words[i + 1]);
+                if (day === undefined) {
+                    day = dates.day.lookForDay(i);
+                }
+                var shouldContinue = true;
+                if (day === undefined || day === "unknown") {
+                    if (month === undefined || year === undefined) {
+                        shouldContinue = false;
                     }
+                    shouldContinue = false;
+                }
+                if (shouldContinue === true) {
+                    var year = dates.year.lookForYear(i);
+                    dateObj = dates.constructDateObj(year, month, day);
+                    dateObj.preview = knwl.tasks.preview(i);
+                    dateObj.found = i;
                     results.push(dateObj);
                 }
             }
@@ -105,10 +302,12 @@ function Dates(knwl) {
                     }
                 }
                 if (isAllNums === 3) {
-    
                     var month = dates.getMonth(testDate[0], 'mdy');
                     var day = dates.getDay(testDate[1]);
                     var year = parseInt(testDate[2]);
+                    if (month > 12) { //month cannot be over 12
+                        break;
+                    }
                     dateObj = dates.constructDateObj(year, month, day);
                     dateObj.preview = knwl.tasks.preview(i);
                     dateObj.found = i;
@@ -117,7 +316,6 @@ function Dates(knwl) {
             }
     
         }
-    
         //for dates like "24th of december" three
         var dateObj = {};
         for (var i = 0; i < words.length; i++) {
@@ -129,45 +327,7 @@ function Dates(knwl) {
                     var year = dates.dateObj.getFullYear();
     
                     if (month !== undefined && day !== undefined) { //make sure month and day defined
-                        if (words[i + 3] !== undefined) { //words[i + 3] === years
-                            if (!isNaN(words[i + 3])) {
-                                if (words[i + 3] > 32 && words[i + 3] < 10000) {
-                                    year = words[i + 3];
-                                }
-                            } else if (words[i + 3] === "on" || words[i + 3] === "in") {
-                                if (words[i + 4] !== undefined) {
-                                    if (!isNaN(words[i + 4])) {
-                                        if (words[i + 4] > 32 && words[i + 4] < 10000) {
-                                            year = words[i + 4];
-                                        }
-                                    }
-                                }
-                            } else {
-                                for (var v = i; v > 0; v--) {
-    
-                                    if (!isNaN(words[v])) {
-                                        if (words[v] > 32 && words[v] < 10000) {
-                                            year = parseInt(words[v]);
-                                            break;
-                                        }
-                                    } else if (wordsWithPunc[v - 1][wordsWithPunc[v - 1].length - 1] === "." || wordsWithPunc[v - 1][wordsWithPunc[v - 1].length - 1] === "?" || wordsWithPunc[v - 1][wordsWithPunc[v - 1].length - 1] === "!" || wordsWithPunc[v - 1][wordsWithPunc[v - 1].length - 1] === ";") {
-                                        break;
-                                    }
-                                }
-                            }
-                        } else {
-                            for (var v = i; v > 0; v--) {
-    
-                                if (!isNaN(words[v])) {
-                                    if (words[v] > 32 && words[v] < 10000) {
-                                        year = parseInt(words[v]);
-                                        break;
-                                    }
-                                } else if (wordsWithPunc[v - 1][wordsWithPunc[v - 1].length - 1] === "." || wordsWithPunc[v - 1][wordsWithPunc[v - 1].length - 1] === "?" || wordsWithPunc[v - 1][wordsWithPunc[v - 1].length - 1] === "!" || wordsWithPunc[v - 1][wordsWithPunc[v - 1].length - 1] === ";") {
-                                    break;
-                                }
-                            }
-                        }
+                        year = dates.year.lookForYear(i);
                         dateObj = dates.constructDateObj(year, month, day);
                         dateObj.preview =  knwl.tasks.preview(i);
                         dateObj.found = i;
@@ -188,16 +348,19 @@ function Dates(knwl) {
                         if (words[pos] === curHol[x]) {
                             if (x === curHol.length - 1) {
                                 if (dates.dateObj.getMonth() <= dates.holidaysD[e][1] + 1) {
-                                    dateObj = dates.constructDateObj(dates.dateObj.getFullYear(), dates.holidaysD[e][1], dates.holidaysD[e][0]);
+                                    
+                                    dateObj = dates.constructDateObj(dates.year.lookForYear(i), dates.holidaysD[e][1], dates.holidaysD[e][0]);
                                     dateObj.preview = knwl.tasks.preview(i);
                                     dateObj.found = i;
                                 } else {
-                                    dateObj = dates.constructDateObj(dates.dateObj.getFullYear() + 1, dates.holidaysD[e][1], dates.holidaysD[e][0]);
+                                    dateObj = dates.constructDateObj(dates.year.lookForYear(i), dates.holidaysD[e][1], dates.holidaysD[e][0]);
                                     dateObj.preview = knwl.tasks.preview(i);
                                     dateObj.found = i;
                                 }
                                 results.push(dateObj);
                             }
+                        } else {
+                            break;
                         }
                         pos++;
                     }
@@ -662,7 +825,7 @@ function Places(knwl) {
   ];
   
   this.falsePlaces = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'His', 'He', 'Her', 'Hers', 'Who', 'Whom', 'Whose', 'PM', 'AM', 'The'];
-  this.triggers = [['at'], ['in'], ['near'], ['close', 'to'], ['above'], ['below'], ['almost', 'to'], ['leaving'], ['arriving', 'at'],['from']];
+  this.triggers = [['at'], ['near'], ['close', 'to'], ['above'], ['below'], ['to'], ['leaving'], ['arriving', 'at']];
   this.calls = function() {
       var words = knwl.words.get('linkWordsCasesensitive');
       var triggers = places.triggers;

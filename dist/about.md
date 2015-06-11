@@ -1,0 +1,1 @@
+These are versions of Knwl.js packaged for the browser.
