@@ -3,7 +3,7 @@ var knwl = new Knwl();
 
 //Test Places Detection
 describe("places", function() {
-    
+
     it("should detect places formatted like 'at .' ", function() {
         knwl.init("They live at Los Angeles");
         var output = knwl.get("places");
