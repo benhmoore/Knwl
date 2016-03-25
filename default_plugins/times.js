@@ -41,7 +41,7 @@ function Times(knwl) {
                                 if (daynight !== false) {
                                     timeObj.hour = testTime[0];
                                     timeObj.minute = testTime[1];
-                                    timeObj.daynight = "Unknown",
+                                    timeObj.daynight = "unknown",
                                     timeObj.preview = knwl.tasks.preview(i);
                                     timeObj.found = i;
                                     times.push(timeObj);
