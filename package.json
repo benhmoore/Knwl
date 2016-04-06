@@ -28,5 +28,8 @@
   "scripts": {
     "build": "scripts/build.sh",
     "test": "scripts/test.sh"
+  },
+  "dependencies": {
+    "phoneformat.js": "^1.0.3"
   }
 }
