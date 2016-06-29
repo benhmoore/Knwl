@@ -126,7 +126,7 @@ console.log(results);
 
 ## Standards and Best Practices
 
-There are a few standards we ask (nicely) you keep in mind by to ensure a coherent experience for those wanting to use your plugin.
+There are a few standards you should keep in mind to ensure a coherent experience for those wanting to use your plugin.
 
 1. Parser plugins should be contained within one file.
 
@@ -140,20 +140,14 @@ not access the originally intended data, but instead, the changes your plugin ma
 
 4. Make something awesome.
 
-Oh, and if you build something, let us know! We'd love to feature your plugin on the Knwl.js website one day soon: knwl@loadfive.com
-
 ## Publishing
 
 If you intend on releasing your parser plugin publicly, the best and most approachable way is to create a GitHub Repository for the plugin.
-In the near future, we plan to release a website for browsing community plugins created for Knwl.js, and to do so, plugins will need
-to be hosted.
-
-We'll be updating everyone on the status of the website on the G+ community (https://plus.google.com/communities/108874785204246812675).
 
 ## Further Help
 
-We'd recommend anyone developing plugins for Knwl.js to look at preexisting plugins first for inspiration.
+ It's recommended that anyone developing plugins for Knwl.js look at preexisting plugins first for inspiration.
 
-If you need more granular assistance in developing your plugin, or this documentation doesn't make any sense, no problem! You can reach us at anytime here: knwl@loadfive.com.
+If you need more granular assistance in developing your plugin, or this documentation doesn't make any sense, no problem! You can reach me personally at anytime here: moore.h.ben@gmail.com.
 
-We also have a **Google+ Community**, where you can discuss plugins and more: https://plus.google.com/communities/108874785204246812675.
+There is also a **Google+ Community**, where you can discuss plugins and more: https://plus.google.com/communities/108874785204246812675.
