@@ -2,9 +2,8 @@
 Knwl.js is a Javascript library that parses through text for dates, times, phone numbers, emails, places, and more. 
 
 Parser plugins are what make Knwl.js tick and give it new parsing abilities. There are many already available under ```./default_plugins``` for a number of tasks.
-Soon, you'll be able to browse community created plugins all on one website (we're still working on this). If you're interested in developing plugins for Knwl.js, ```./plugin_development.md``` is a great place to start.
+If you're interested in developing plugins for Knwl.js, ```./plugin_development.md``` is a great place to start.
 
-### Check out a quick demo: http://loadfive.com/os/knwl/demo
 #### Google+ Community: https://plus.google.com/communities/108874785204246812675
 
 ## Installation
@@ -163,7 +162,7 @@ knwl.get('places')
 
 ## Experimental Plugins
 
-###Notice: These plugins have not been upgraded to the new syntax
+###Notice: These plugins have not been upgraded to the new syntax.
 
 These parser plugins are not as accurate as the default plugins. However,
 they should be stable (they shouldn't crash the page) to use if you are willing to use them. They are considerably more static and rigid than default plugins.
@@ -191,27 +190,8 @@ What's awesome about the new version of Knwl.js is that it makes it much easier
 for anyone with a little knowledge of JS to build plugins. These plugins offer new
 parsing abilities for Knwl.js that otherwise wouldn't exist.
 
-If you want to try your hand at building plugins for Knwl.js, we've
-provided some documentation in ```plugin_development.md```.
+If you want to try your hand at building plugins for Knwl.js, there's documentation available in ```plugin_development.md```.
 
-## Community Driven
+----
 
-The further development of this project was possible because of the
-amazing community behind previous versions. Version 1.0 of Knwl.js marks a significant
-change in the direction of Knwl.js to the very code-base.
-
-We've restructured and rewritten portions of the project to facilitate
-plugin development, but also to drastically increase the performance. **Knwl.js 1.0 is significantly
- faster and more efficient than the previous iterations.**
-Yet, in the process of the relaunch, certain past features have been put on hold. But
-don't worry, plugins such as spam detection and emotion will return soon!
-
-We think that overall, this is a step in the right direction.
-
-As always, we invite you to re-engineer any part of Knwl.js (including the provided plugins) in an attempt
-to make them better. Let's do this together.
-
-You can reach us at knwl@loadfive.com with any questions, comments,
-or raging complaints.
-
-http://loadfive.com/os/knwl
+You can reach me personally with any questions or comments at moore.h.ben@gmail.com.
