@@ -7,7 +7,7 @@ function Links(knwl) {
 
     this.calls = function() {
         var results = [];
-        var words = knwl.words.get('linkWords');
+        var words = knwl.words.get('linkWordsCasesensitive');
 
         for (var i = 0; i < words.length; i++) {
             var word = words[i].replace(/[\(\)!]/g, ""); // replaces every bracket ')' or '(' and every '!' with an empty character
