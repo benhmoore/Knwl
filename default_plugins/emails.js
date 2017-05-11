@@ -1,6 +1,6 @@
 /* Email Parser */
 function Emails(knwl) {
-    
+
     this.languages = {
         'english': true,
     };
@@ -18,9 +18,7 @@ function Emails(knwl) {
                 if (emails.test.test(temp)) {
                     match = temp.match(emails.test)[0];
                     var emailObj = {
-                        address: match,
-                        preview: knwl.tasks.preview(i),
-                        found: i
+                        address: match
                     };
                     results.push(emailObj);
                }
