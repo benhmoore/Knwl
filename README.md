@@ -2,7 +2,7 @@
 Knwl.js is a Javascript library that parses through text for dates, times, phone numbers, emails, places, and more. 
 
 ____
-##Project Future
+## Project Future
 **The future of the Knwl.js project**: https://github.com/loadfive/Knwl.js/issues/97
 ____
 Parser plugins are what make Knwl.js tick and give it new parsing abilities. There are many already available under ```./default_plugins``` for a number of tasks.
@@ -14,7 +14,7 @@ If you're interested in developing plugins for Knwl.js, ```./plugin_development.
 
 Installation instructions are specific to whether you want to run Knwl.js in the browser, or on the server with Node.js.
 
-###For Node.js
+### For Node.js
 
 #### Install using ```npm```:
 
@@ -42,7 +42,7 @@ Installation instructions are specific to whether you want to run Knwl.js in the
 	
 	*Note: The plugins in the ```./default_plugins``` directory will be loaded automatically.*
 
-###For the Browser
+### For the Browser
 
 **Note: A packaged version of Knwl.js for the browser with default plugins is available in the ```./dist``` directory.**
 
@@ -119,14 +119,14 @@ These steps are the same regardless of whether Knwl.js is running on the server 
 
 These are automatically loaded by default.
 
-###dates.js
+### dates.js
 ```javascript
 knwl.get('dates');
 	
 	//Returns any dates found in the String.
 ```
 
-###times.js
+### times.js
 ```javascript
 knwl.get('times');
 	
@@ -134,7 +134,7 @@ knwl.get('times');
 	
 ```
 
-###phones.js
+### phones.js
 ```javascript		
 knwl.get('phones')
 
@@ -142,7 +142,7 @@ knwl.get('phones')
 
 ```
 
-###links.js
+### links.js
 ```javascript
 knwl.get('links')
 
@@ -150,7 +150,7 @@ knwl.get('links')
 
 ```
 
-###emails.js
+### emails.js
 ```javascript
 knwl.get('emails')
 	
@@ -166,7 +166,7 @@ knwl.get('places')
 
 ## Experimental Plugins
 
-###Notice: These plugins have not been upgraded to the new syntax.
+### Notice: These plugins have not been upgraded to the new syntax.
 
 These parser plugins are not as accurate as the default plugins. However,
 they should be stable (they shouldn't crash the page) to use if you are willing to use them. They are considerably more static and rigid than default plugins.
@@ -175,20 +175,20 @@ In the future, some of these plugins may reach a level of accuracy that promotes
 from experimental status to the default plugins. However, some will merely stay
 as experiments.
 
-###english.js
+### english.js
 ```javascript
 knwl.get('english')
 
 	//Returns the simple parts (verb, subject, etc.) of basic sentences found in the String.
 	//WARNING: this is a rigid and simplistic plugin, thus it is merely an experiment.
 ```
-###units.js
+### units.js
 ```javascript
 knwl.get('units')
 	
 	//Returns any units (grams, pounds, etc.) found in the String.
 ```
-##Developing Parser Plugins
+## Developing Parser Plugins
 
 What's awesome about the new version of Knwl.js is that it makes it much easier
 for anyone with a little knowledge of JS to build plugins. These plugins offer new
