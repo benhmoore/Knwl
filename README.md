@@ -8,8 +8,6 @@ ____
 Parser plugins are what make Knwl.js tick and give it new parsing abilities. There are many already available under ```./default_plugins``` for a number of tasks.
 If you're interested in developing plugins for Knwl.js, ```./plugin_development.md``` is a great place to start.
 
-#### Google+ Community: https://plus.google.com/communities/108874785204246812675
-
 ## Installation
 
 Installation instructions are specific to whether you want to run Knwl.js in the browser, or on the server with Node.js.
@@ -195,7 +193,3 @@ for anyone with a little knowledge of JS to build plugins. These plugins offer n
 parsing abilities for Knwl.js that otherwise wouldn't exist.
 
 If you want to try your hand at building plugins for Knwl.js, there's documentation available in ```plugin_development.md```.
-
-----
-
-You can reach me personally with any questions or comments at moore.h.ben@gmail.com.
